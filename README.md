@@ -1,0 +1,2 @@
+# akuntansi
+akuntansi gain profit
