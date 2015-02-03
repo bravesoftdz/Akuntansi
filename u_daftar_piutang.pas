@@ -44,13 +44,6 @@ type
     ds_return: TDataSource;
     ds_bayar_hutang: TDataSource;
     ds_hutang: TDataSource;
-    t_data3kd_return_jual: TcxGridDBColumn;
-    t_data3kd_barang: TcxGridDBColumn;
-    t_data3n_barang: TcxGridDBColumn;
-    t_data3tgl_return: TcxGridDBColumn;
-    t_data3jam_return: TcxGridDBColumn;
-    t_data3total_return: TcxGridDBColumn;
-    t_data3user: TcxGridDBColumn;
     Q_return_kirim: TmySQLQuery;
     ds_return_kirim: TDataSource;
     l_data4: TcxGridLevel;
@@ -59,6 +52,11 @@ type
     t_data4tgl_return_kirim: TcxGridDBColumn;
     t_data4nilai_faktur: TcxGridDBColumn;
     t_data4pengguna: TcxGridDBColumn;
+    t_data3kd_return_jual: TcxGridDBColumn;
+    t_data3nilai_faktur: TcxGridDBColumn;
+    t_data3pengguna: TcxGridDBColumn;
+    t_data3pengawas: TcxGridDBColumn;
+    t_data3simpan_pada: TcxGridDBColumn;
     procedure segarkan;
     procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE);message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -90,7 +88,7 @@ quotedstr(f_utama.sb.Panels[3].Text)+' and status=''belum lunas'' order by tangg
 fungsi.SQLExec(Q_bayar_piutang,'select * from _vw_jurnal_rinci  where kd_perusahaan= '''+
 f_utama.sb.Panels[3].Text+''' and refr=''PP'' and rujukan IS NOT NULL',true);
 
-fungsi.SQLExec(Q_return,'SELECT A1.* FROM tb_return_jual A1 INNER JOIN '+
+fungsi.SQLExec(Q_return,'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN '+
 '_vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',true);
 
 fungsi.SQLExec(Q_return_kirim,'SELECT A1.* FROM tb_return_kirim_global A1 INNER JOIN '+

@@ -23,7 +23,7 @@ object f_daftar_piutang: Tf_daftar_piutang
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
@@ -77,7 +77,7 @@ object f_daftar_piutang: Tf_daftar_piutang
     end
     object p1: TsPanel
       Left = 1
-      Top = 384
+      Top = 383
       Width = 148
       Height = 57
       Align = alBottom
@@ -99,7 +99,7 @@ object f_daftar_piutang: Tf_daftar_piutang
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -267,46 +267,42 @@ object f_daftar_piutang: Tf_daftar_piutang
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data3total_return
+          Column = t_data3nilai_faktur
         end>
       DataController.Summary.SummaryGroups = <>
+      OptionsBehavior.CellHints = True
+      OptionsBehavior.IncSearch = True
       OptionsData.Deleting = False
       OptionsData.Editing = False
       OptionsData.Inserting = False
-      OptionsView.ColumnAutoWidth = True
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
       Styles.Selection = dm.cxstyl1
-      object t_data3tgl_return: TcxGridDBColumn
-        DataBinding.FieldName = 'tgl_return'
-        Width = 33
-      end
-      object t_data3jam_return: TcxGridDBColumn
-        DataBinding.FieldName = 'jam_return'
-        Width = 33
-      end
       object t_data3kd_return_jual: TcxGridDBColumn
+        Caption = 'Kode Return'
         DataBinding.FieldName = 'kd_return_jual'
-        Width = 106
+        Width = 112
       end
-      object t_data3kd_barang: TcxGridDBColumn
-        DataBinding.FieldName = 'kd_barang'
-        Width = 73
+      object t_data3nilai_faktur: TcxGridDBColumn
+        Caption = 'Nilai Faktur'
+        DataBinding.FieldName = 'nilai_faktur'
+        Width = 77
       end
-      object t_data3n_barang: TcxGridDBColumn
-        DataBinding.FieldName = 'n_barang'
-        Width = 296
+      object t_data3pengguna: TcxGridDBColumn
+        Caption = 'User'
+        DataBinding.FieldName = 'pengguna'
+        Width = 85
       end
-      object t_data3total_return: TcxGridDBColumn
-        DataBinding.FieldName = 'total_return'
-        PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 73
+      object t_data3pengawas: TcxGridDBColumn
+        Caption = 'MD'
+        DataBinding.FieldName = 'pengawas'
+        Width = 96
       end
-      object t_data3user: TcxGridDBColumn
-        DataBinding.FieldName = 'user'
-        Width = 70
+      object t_data3simpan_pada: TcxGridDBColumn
+        Caption = 'Tanggal'
+        DataBinding.FieldName = 'simpan_pada'
+        Width = 130
       end
     end
     object t_data4: TcxGridDBTableView
@@ -372,6 +368,7 @@ object f_daftar_piutang: Tf_daftar_piutang
       object l_data4: TcxGridLevel
         Caption = 'Return Kirim Barang'
         GridView = t_data4
+        Options.DetailTabsPosition = dtpTop
       end
     end
   end
@@ -403,7 +400,7 @@ object f_daftar_piutang: Tf_daftar_piutang
   object Q_return: TmySQLQuery
     Database = dm.My_conn
     SQL.Strings = (
-      'select * from tb_return_jual')
+      'select * from tb_return_jual_global')
     Left = 288
     Top = 160
   end
