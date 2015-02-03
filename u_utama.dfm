@@ -663,10 +663,6 @@ object f_utama: Tf_utama
       OnClick = HartaTetap1Click
     end
   end
-  object MadExceptionHandler1: TMadExceptionHandler
-    Left = 136
-    Top = 88
-  end
   object pm1: TPopupMenu
     Left = 864
     Top = 88

@@ -1,6 +1,6 @@
 [GeneralSettings]
 MesVersion=4
-HandleExceptions=1
+HandleExceptions=0
 LinkInCode=1
 AppendMapFileToBinary=1
 NoOwnMadExceptSettings=0
@@ -86,6 +86,7 @@ SendAttachMsg=Sending attachments...
 SendFinalizeMsg=Finalizing...
 MailFailureMsg=Sorry, sending the bug report didn't work.
 VersionVariable=
+AuthMsg=Authentication...
 [ExceptionBox]
 ShowButtonMailBugReport=1
 ShowButtonSaveBugReport=0

@@ -1,12 +1,6 @@
 program Accounting;
 
 uses
-  fastMM4,
-  madExcept,
-  madLinkDisAsm,
-  madListHardware,
-  madListProcesses,
-  madListModules,
   Forms,
   u_cari in 'u_cari.pas' {f_cari},
   u_dm in 'u_dm.pas' {dm: TDataModule},

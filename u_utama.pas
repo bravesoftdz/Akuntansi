@@ -123,7 +123,6 @@ type
     ac_kiraan_buku_besar: TAction;
     N4: TMenuItem;
     UbahSkin1: TMenuItem;
-    MadExceptionHandler1: TMadExceptionHandler;
     Pertolongan1: TMenuItem;
     AccountofProfitHelp1: TMenuItem;
     tc_child: TsTabControl;
