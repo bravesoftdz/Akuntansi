@@ -17,7 +17,6 @@ object f_daftar_akun: Tf_daftar_akun
   WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object panel1: TsPanel
@@ -28,45 +27,6 @@ object f_daftar_akun: Tf_daftar_akun
     Align = alRight
     TabOrder = 1
     SkinData.SkinSection = 'PANEL'
-    object sLabel2: TsLabel
-      Left = 8
-      Top = 184
-      Width = 91
-      Height = 19
-      Caption = 'Saldo Awal'
-      ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5786691
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-    end
-    object sLabel3: TsLabel
-      Left = 8
-      Top = 248
-      Width = 84
-      Height = 19
-      Caption = 'Saldo Ahir'
-      ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5786691
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-    end
-    object sLabel1: TsLabel
-      Left = 8
-      Top = 312
-      Width = 103
-      Height = 19
-      Caption = 'Saldo Selisih'
-      ParentFont = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = 5786691
-      Font.Height = -16
-      Font.Name = 'Tahoma'
-      Font.Style = [fsBold]
-    end
     object sb_1: TsSpeedButton
       Left = 1
       Top = 1
@@ -115,100 +75,13 @@ object f_daftar_akun: Tf_daftar_akun
       Images = dm.image
       Reflected = True
     end
-    object ed_saldo_awal: TsCurrencyEdit
-      Left = 8
-      Top = 216
-      Width = 137
-      Height = 25
-      AutoSize = False
-      Color = 16513526
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 0
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
-      SkinData.SkinSection = 'EDIT'
-      GlyphMode.Blend = 0
-      GlyphMode.Grayed = False
-      DisplayFormat = '###,###,##0;(###,###,##0);0'
-    end
-    object ed_saldo_ahir: TsCurrencyEdit
-      Left = 8
-      Top = 280
-      Width = 137
-      Height = 25
-      AutoSize = False
-      Color = 16513526
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 1
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
-      SkinData.SkinSection = 'EDIT'
-      GlyphMode.Blend = 0
-      GlyphMode.Grayed = False
-      DisplayFormat = '###,###,##0;(###,###,##0);0'
-    end
-    object ed_ubah: TsCurrencyEdit
-      Left = 8
-      Top = 336
-      Width = 137
-      Height = 25
-      AutoSize = False
-      Color = 16513526
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
-      Font.Height = -16
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 2
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
-      SkinData.SkinSection = 'EDIT'
-      GlyphMode.Blend = 0
-      GlyphMode.Grayed = False
-      DisplayFormat = '###,###,##0;(###,###,##0);0'
-    end
     object p1: TsPanel
       Left = 1
       Top = 399
       Width = 148
       Height = 41
       Align = alBottom
-      TabOrder = 3
+      TabOrder = 0
       SkinData.SkinSection = 'PANEL'
       object b_cetak: TsButton
         Left = 8
@@ -243,7 +116,6 @@ object f_daftar_akun: Tf_daftar_akun
       NavigatorButtons.ConfirmDelete = False
       OnCellDblClick = t_dataCellDblClick
       OnEditKeyDown = t_dataEditKeyDown
-      OnFocusedRecordChanged = t_dataFocusedRecordChanged
       DataController.DataSource = dm.ds_kiraan
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <>

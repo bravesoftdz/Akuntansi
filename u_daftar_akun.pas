@@ -15,12 +15,6 @@ type
   Tf_daftar_akun = class(TForm)
     panel1: TsPanel;
     sSkinProvider1: TsSkinProvider;
-    sLabel2: TsLabel;
-    sLabel3: TsLabel;
-    ed_saldo_awal: TsCurrencyEdit;
-    ed_saldo_ahir: TsCurrencyEdit;
-    sLabel1: TsLabel;
-    ed_ubah: TsCurrencyEdit;
     grid: TcxGrid;
     t_data: TcxGridDBTableView;
     t_datakd_kiraan: TcxGridDBColumn;
@@ -45,9 +39,6 @@ type
     b_cetak: TsButton;
     procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure t_dataFocusedRecordChanged(Sender: TcxCustomGridTableView;
-      APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
-      ANewItemRecordFocusingChanged: Boolean);
     procedure t_dataCellDblClick(Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
@@ -61,8 +52,6 @@ type
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure b_cetakClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure segarkan;
   private
     { Private declarations }
   public
@@ -105,19 +94,11 @@ action:= cafree;
 f_daftar_akun:=nil;
 end;
 
-procedure Tf_daftar_akun.t_dataFocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord;
-  ANewItemRecordFocusingChanged: Boolean);
-begin
-segarkan;
-end;
-
 procedure Tf_daftar_akun.t_dataCellDblClick(Sender: TcxCustomGridTableView;
   ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
   AShift: TShiftState; var AHandled: Boolean);
 begin
-Mi_detailClick(Sender);
+b_cetakClick(Sender);
 end;
 
 procedure Tf_daftar_akun.t_dataEditKeyDown(Sender: TcxCustomGridTableView;
@@ -186,22 +167,6 @@ f_utama.sb.Panels[3].Text+'" and bulan= "'+f_utama.sb.Panels[6].Text+'" and tahu
 f_utama.sb.Panels[7].Text+'" and kd_kiraan = '+quotedstr(dm.Q_kiraan.fieldbyname('kd_kiraan').AsString)+'',true);
 dm.laporan.LoadFromFile(WPath + 'laporan\a_buku_besar.fr3');
 dm.laporan.ShowReport;
-end;
-
-procedure Tf_daftar_akun.FormShow(Sender: TObject);
-begin
-segarkan;
-end;
-
-procedure Tf_daftar_akun.segarkan;
-begin
-fungsi.SQLExec(dm.Q_temp,'select * from _vw_trial_balance where kd_kiraan='''+dm.Q_kiraan.fieldbyname('kd_kiraan').AsString+''' and kd_perusahaan= '''+
-f_utama.sb.Panels[3].Text+''' and bulan= '''+f_utama.sb.Panels[6].Text
-+''' and tahun='''+f_utama.sb.Panels[7].Text+'''',true);
-
-ed_saldo_awal.Value:= dm.Q_temp.fieldbyname('saldo_awal').AsFloat;
-ed_saldo_ahir.Value:= dm.Q_temp.fieldbyname('saldo_ahir').AsFloat;
-ed_ubah.Value:= ed_saldo_awal.Value-ed_saldo_ahir.Value;
 end;
 
 end.
