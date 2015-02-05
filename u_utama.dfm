@@ -349,6 +349,10 @@ object f_utama: Tf_utama
         ShortCut = 112
         OnClick = AccountofProfitHelp1Click
       end
+      object CekUpdate1: TMenuItem
+        Caption = 'Cek Update'
+        OnClick = CekUpdate1Click
+      end
     end
   end
   object AL: TActionList

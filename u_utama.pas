@@ -141,6 +141,7 @@ type
     mniN12: TMenuItem;
     mniDaftarStockOpnameSO1: TMenuItem;
     Timer1: TTimer;
+    CekUpdate1: TMenuItem;
     procedure MDIChildCreated(const childHandle : THandle);
     procedure MDIChildDestroyed(const childHandle : THandle);
     procedure ac_G_jurnalExecute(Sender: TObject);
@@ -200,6 +201,8 @@ type
     procedure mniDaftarStockOpnameSO1Click(Sender: TObject);
     procedure sbDblClick(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
+    procedure CekUpdate1Click(Sender: TObject);
+    procedure cek_update;
   private
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     { Private declarations }
@@ -813,6 +816,7 @@ procedure Tf_utama.FormCreate(Sender: TObject);
 begin
   DecimalSeparator:= '.';
   ThousandSeparator := ',';
+  cek_update;
 end;
 
 procedure Tf_utama.tc_childChange(Sender: TObject);
@@ -1053,6 +1057,17 @@ except
   end;
 end;
 
+end;
+
+procedure Tf_utama.CekUpdate1Click(Sender: TObject);
+begin
+cek_update;
+end;
+
+procedure Tf_utama.cek_update;
+begin
+WinExec(PAnsiChar('tools/cekVersi.exe '+
+fungsi.program_versi+' accounting'),SW_SHOWNOACTIVATE);
 end;
 
 end.
