@@ -7,7 +7,7 @@ uses
   Dialogs, sSkinProvider, ComCtrls, sStatusBar, acHeaderControl, ToolWin,
   sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan,U_fungsi,
   Buttons, sSpeedButton, ExtCtrls, sPanel, StdCtrls, sEdit,
-  sBitBtn,inifiles, shellapi, madExceptVcl, sTabControl;
+  sBitBtn,inifiles, shellapi, sTabControl;
 
   const
   WM_AFTER_SHOW = WM_USER + 300; // custom message
