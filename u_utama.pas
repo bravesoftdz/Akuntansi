@@ -1065,9 +1065,33 @@ cek_update;
 end;
 
 procedure Tf_utama.cek_update;
+var
+  versiDB,versiAPP,URLDownload:string;
+  fileName, UrlDownloadLocal:string;
+  hasil : Boolean;
 begin
-WinExec(PAnsiChar('tools/cekVersi.exe '+
-fungsi.program_versi+' accounting'),SW_SHOWNOACTIVATE);
+  hasil:=False;
+  
+  versiAPP := fungsi.program_versi;
+
+  fungsi.SQLExec(dm.Q_Show,'select versi_terbaru, URLdownload from  app_versi where kode="accounting.exe"',true);
+  versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
+  URLDownload       := dm.Q_Show.FieldByName('URLdownload').AsString;
+  fileName          := Copy(URLDownload,LastDelimiter('/',URLDownload) + 1,Length(URLDownload));
+  UrlDownloadLocal  := dm.My_conn.Host + '/GainProfit/' + fileName;
+
+  if versiAPP < versiDB then
+  begin
+    ShowMessage('APLIKASI AKUNTANSI TIDAK DAPAT DIJALANKAN' + #13#10 +
+    'aplikasi terbaru dengan versi : '+ versiDB + #13#10 +
+    'SUDAH DIRILIS...'+ #13#10#13#10 +
+    'Download Applikasi Terbaru!!!' );
+
+    WinExec(PChar('rundll32 url.dll,FileProtocolHandler '+ URLDownload),
+    SW_MAXIMIZE);
+    Application.Terminate;
+    Exit;
+  end;
 end;
 
 end.
