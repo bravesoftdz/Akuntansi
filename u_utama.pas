@@ -366,7 +366,7 @@ procedure Tf_utama.FormClose(Sender: TObject; var Action: TCloseAction);
 var appINI : TIniFile;
 begin
 metu_kabeh:=True;
-appINI := TIniFile.Create(WPath+'\tools\gain.ini') ;
+appINI := TIniFile.Create(AppPath+'gain.ini') ;
  try
   appINI.WriteString ('akun', 'kd_perusahaan', sb.Panels[3].text);
  finally
