@@ -228,8 +228,6 @@ end;
 
 procedure TFSaldoAwal.FormCreate(Sender: TObject);
 begin
-//btnClose.Glyph.LoadFromFile(wPath+'img/close.bmp');
-//btnRefresh.Glyph.LoadFromFile(wPath+'img/refresh.bmp');
 pgAwalAkun.ActivePage:= ABNeraca;
 
 f_utama.MDIChildCreated(Self.Handle);
