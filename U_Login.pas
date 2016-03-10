@@ -19,6 +19,7 @@ type
     sLabel6: TsLabel;
     Ed_Password: TsEdit;
     sb: TsStatusBar;
+    l_1: TsLabel;
     procedure Ed_Kd_UserKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure sButton1Click(Sender: TObject);
@@ -131,6 +132,8 @@ procedure TF_Login.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
 if key=vk_escape then close;
+if key = vk_f2 then
+    sbClick(self);
 end;
 
 procedure TF_Login.Ed_N_UserEnter(Sender: TObject);

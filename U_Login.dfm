@@ -3,7 +3,7 @@ object F_Login: TF_Login
   Top = 226
   BorderStyle = bsDialog
   Caption = 'Login'
-  ClientHeight = 258
+  ClientHeight = 275
   ClientWidth = 394
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -56,6 +56,19 @@ object F_Login: TF_Login
     Font.Color = 5786691
     Font.Height = -16
     Font.Name = 'Rockwell'
+    Font.Style = []
+  end
+  object l_1: TsLabel
+    Left = 8
+    Top = 232
+    Width = 216
+    Height = 16
+    Caption = 'Tekan F2 untuk merubah Perusahaan'
+    ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
     Font.Style = []
   end
   object sBitBtn2: TsBitBtn
@@ -174,7 +187,7 @@ object F_Login: TF_Login
   end
   object sb: TsStatusBar
     Left = 0
-    Top = 237
+    Top = 254
     Width = 394
     Height = 21
     Cursor = crHandPoint
