@@ -153,7 +153,7 @@ begin
   appINI := TIniFile.Create(AppPath + 'gain.ini');
   try
     kd_comp := appINI.ReadString('akun', 'kd_perusahaan', '');
-    sm.SkinName := appINI.ReadString('akun', 'nama_skin', 'Acryl (internal)');
+    sm.SkinName := appINI.ReadString('akun', 'nama_skin', 'Lucky');
     sm.HueOffset := appini.ReadInteger('akun', 'hue_skin', 0);
     sm.Saturation := appini.ReadInteger('akun', 'sat_skin', 0);
 
