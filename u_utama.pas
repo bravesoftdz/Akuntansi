@@ -203,6 +203,7 @@ type
     procedure Timer1Timer(Sender: TObject);
     procedure CekUpdate1Click(Sender: TObject);
     procedure cek_update;
+    procedure BuatSaldoAwalAkun;
   private
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     { Private declarations }
@@ -435,18 +436,7 @@ f_saldo_awal.ShowModal;
 if FSaldoAwal=nil then
 begin
   Application.CreateForm(TFSaldoAwal,FsaldoAwal);
-
-  dm.My_conn.StartTransaction;
-  try
-  fungsi.SQLExec(dm.Q_Exe,'call sp_saldo_awal_akun("'+f_utama.sb.Panels[3].Text+'","'+
-  formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
-
-  dm.My_conn.Commit;
-  except on e:exception do begin
-    dm.My_conn.Rollback;
-    showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
-    end;
-  end;
+  BuatSaldoAwalAkun;
 end;
 
 FSaldoAwal.Show;
@@ -1088,6 +1078,21 @@ begin
 
     Application.Terminate;
     Exit;
+  end;
+end;
+
+procedure Tf_utama.BuatSaldoAwalAkun;
+begin
+  dm.My_conn.StartTransaction;
+  try
+  fungsi.SQLExec(dm.Q_Exe,'call sp_saldo_awal_akun("'+f_utama.sb.Panels[3].Text+'","'+
+  formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
+
+  dm.My_conn.Commit;
+  except on e:exception do begin
+    dm.My_conn.Rollback;
+    showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
+    end;
   end;
 end;
 
