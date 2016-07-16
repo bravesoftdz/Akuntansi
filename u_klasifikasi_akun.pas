@@ -164,6 +164,9 @@ except on e:exception do begin
   showmessage('penyimpanan data gagal '#10#13'' +e.Message);
   end;
 end;
+
+// buat saldo awal akun ketika akun ditambah atau diubah...
+f_utama.BuatSaldoAwalAkun;
 end;
 
 procedure Tf_klasifikasi_akun.FormShow(Sender: TObject);
