@@ -6,18 +6,11 @@ object dm: Tdm
   Height = 649
   Width = 967
   object My_conn: TmySQLDatabase
-    DatabaseName = 'profit'
-    UserName = 'root'
-    UserPassword = 'server'
-    Host = 'localhost'
+    Port = 0
     ConnectOptions = []
     Params.Strings = (
-      'Port=3306'
-      'TIMEOUT=30'
-      'DatabaseName=profit'
-      'Host=localhost'
-      'UID=root'
-      'PWD=server')
+      'Port=0'
+      'TIMEOUT=30')
     Left = 8
     Top = 8
   end
