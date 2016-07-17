@@ -1,6 +1,6 @@
 object f_daftar_penjualan: Tf_daftar_penjualan
-  Left = 295
-  Top = 107
+  Left = 54
+  Top = 123
   Width = 928
   Height = 480
   Caption = 'Daftar Transaksi penjualan'
@@ -185,6 +185,16 @@ object f_daftar_penjualan: Tf_daftar_penjualan
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
           Column = t_data0selisih
+        end
+        item
+          Format = '###,###,##0;(###,###,##0);0'
+          Kind = skSum
+          Column = tv_data0debit
+        end
+        item
+          Format = '###,###,##0;(###,###,##0);0'
+          Kind = skSum
+          Column = tv_data0CashOut
         end>
       DataController.Summary.SummaryGroups = <>
       DateTimeHandling.MonthFormat = 'MM'
@@ -192,6 +202,7 @@ object f_daftar_penjualan: Tf_daftar_penjualan
       DateTimeHandling.DateFormat = 'dd/MM/yyyy'
       DateTimeHandling.HourFormat = 'hh:mm:ss'
       OptionsBehavior.IncSearch = True
+      OptionsCustomize.ColumnsQuickCustomization = True
       OptionsData.Deleting = False
       OptionsData.Editing = False
       OptionsData.Inserting = False
@@ -203,71 +214,88 @@ object f_daftar_penjualan: Tf_daftar_penjualan
       object t_data0kd_jaga: TcxGridDBColumn
         Caption = 'MD'
         DataBinding.FieldName = 'kd_jaga'
-        Width = 54
+        Width = 47
       end
       object t_data0user: TcxGridDBColumn
         Caption = 'User'
         DataBinding.FieldName = 'user'
-        Width = 69
+        Width = 61
       end
       object t_data0tanggal: TcxGridDBColumn
         Caption = 'Tanggal'
         DataBinding.FieldName = 'tanggal'
-        Width = 172
+        Width = 114
       end
       object t_data0selisih: TcxGridDBColumn
         Caption = 'Selisih'
         DataBinding.FieldName = 'selisih'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 49
+        Width = 47
       end
       object t_data0jumlah_setor_real: TcxGridDBColumn
         Caption = 'Setor Real'
         DataBinding.FieldName = 'jumlah_setor_real'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 48
+        Width = 47
       end
       object t_data0jumlah_setor_oh: TcxGridDBColumn
         Caption = 'Setor OH'
         DataBinding.FieldName = 'jumlah_setor_oh'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 50
+        Visible = False
+        Width = 47
       end
       object t_data0price_oh: TcxGridDBColumn
         Caption = 'Tunai'
         DataBinding.FieldName = 'price_oh'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 48
+        Width = 47
       end
       object t_data0kredit: TcxGridDBColumn
         Caption = 'Kredit'
         DataBinding.FieldName = 'kredit'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 49
+        Width = 48
+      end
+      object tv_data0debit: TcxGridDBColumn
+        Caption = 'Debit'
+        DataBinding.FieldName = 'debit'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Width = 47
+      end
+      object tv_data0CashOut: TcxGridDBColumn
+        Caption = 'Cash Out'
+        DataBinding.FieldName = 'cash_out'
+        PropertiesClassName = 'TcxCurrencyEditProperties'
+        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Width = 47
       end
       object t_data0return_jual: TcxGridDBColumn
         Caption = 'Return'
         DataBinding.FieldName = 'return_jual'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
-        Width = 48
+        Visible = False
+        Width = 46
       end
       object t_data0discount: TcxGridDBColumn
         Caption = 'Diskon'
         DataBinding.FieldName = 'discount'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Visible = False
         Width = 48
       end
       object t_data0status: TcxGridDBColumn
         Caption = 'Status'
         DataBinding.FieldName = 'status'
-        Width = 36
+        Width = 34
       end
       object t_data0ix_setor: TcxGridDBColumn
         Caption = 'Posted'
@@ -286,7 +314,7 @@ object f_daftar_penjualan: Tf_daftar_penjualan
             Value = '1'
           end>
         Properties.ShowDescriptions = False
-        Width = 72
+        Width = 68
       end
     end
     object l_data0: TcxGridLevel

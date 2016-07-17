@@ -52,6 +52,8 @@ type
     p2: TsPanel;
     sButton2: TsButton;
     sButton3: TsButton;
+    tv_data0debit: TcxGridDBColumn;
+    tv_data0CashOut: TcxGridDBColumn;
     procedure segarkan;
     procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE);message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
