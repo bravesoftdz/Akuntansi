@@ -66,27 +66,31 @@ begin
   fungsi.SQLExec(DM.Q_Show,sql,true);
   if dm.Q_show.Eof then
   Begin
-  messagedlg('Kode ini tidak terdaftar...',mtError,[mbOk],0);
-  ed_kd_user.SetFocus;
+    messagedlg('Kode ini tidak terdaftar...',mtError,[mbOk],0);
+    ed_kd_user.SetFocus;
   End else
   begin
     userRealName:= dm.Q_show.FieldByName('n_user').AsString;
     userPassword:= dm.Q_show.FieldByName('password').AsString;
 
-    sql:= 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) ' +
-          'AND user_id="'+ed_kd_user.Text+'"';
+    sql:= 'SELECT `nilai` FROM `tb_settings` WHERE `parameter`="checkin"';
     fungsi.SQLExec(DM.Q_Show,sql,true);
-    if dm.Q_show.Eof then
+    if dm.Q_show.FieldByName('nilai').AsBoolean then
     begin
-      messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',mtError,[mbOk],0);
-      ed_kd_user.SetFocus;
-    end
-    else
-    begin
+      sql:= 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) ' +
+            'AND user_id="'+ed_kd_user.Text+'"';
+      fungsi.SQLExec(DM.Q_Show,sql,true);
+      if dm.Q_show.Eof then
+      begin
+        messagedlg('Tidak Dapat Login '#10#13'USER belum Check IN....',mtError,[mbOk],0);
+        ed_kd_user.SetFocus;
+        Exit;
+      end;
+    end;
+
     ed_password.Enabled:= true;
     Ed_Password.SetFocus;
     Ed_N_User.Text:= userRealName;
-    end;                          
   end;
 end;
 
