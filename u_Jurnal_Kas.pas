@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, sButton, sCurrEdit, sCurrencyEdit, Grids, Mask,
   sMaskEdit, sCustomComboEdit, sTooledit, sEdit, Buttons, sSpeedButton,
-  sLabel, sRadioButton,u_fungsi, cxStyles, cxCustomData, cxGraphics,
+  sLabel, sRadioButton,cxStyles, cxCustomData, cxGraphics,
   cxFilter, cxData, cxDataStorage, cxEdit, cxCurrencyEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
   cxGridCustomView, cxGrid, sGroupBox, ExtCtrls, sPanel, sComboBox;
@@ -73,13 +73,12 @@ type
 
 var
   f_Jurnal_Kas: Tf_Jurnal_Kas;
-  fungsi: tfungsi;
   jenis_jurnal: string;
   total_value: Real;
 
 implementation
 
-uses u_dm, u_cari, u_utama;
+uses u_dm, u_cari, u_utama, U_fungsi;
 
 {$R *.dfm}
 

@@ -23,7 +23,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
@@ -77,7 +77,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     end
     object p1: TsPanel
       Left = 1
-      Top = 336
+      Top = 335
       Width = 148
       Height = 105
       Align = alBottom
@@ -107,7 +107,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     end
     object p2: TsPanel
       Left = 1
-      Top = 279
+      Top = 278
       Width = 148
       Height = 57
       Align = alBottom
@@ -129,7 +129,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, sCurrEdit, sCurrencyEdit, Buttons, sSpeedButton, Mask,
-  sMaskEdit, sCustomComboEdit, sTooledit, StdCtrls, sLabel, sEdit, sButton,u_fungsi,
+  sMaskEdit, sCustomComboEdit, sTooledit, StdCtrls, sLabel, sEdit, sButton,
   sGroupBox, cxGraphics, cxControls, cxContainer, cxEdit, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
   cxDBLookupComboBox, DB, mySQLDbTables;
@@ -57,11 +57,10 @@ type
 
 var
   F_asset: TF_asset;
-  fungsi: TFungsi;
   anyar: boolean;
 implementation
 
-uses u_dm, u_utama, u_daftar_asset;
+uses u_dm, u_utama, u_daftar_asset, U_fungsi;
 
 {$R *.dfm}
 

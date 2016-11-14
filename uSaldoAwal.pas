@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Graphics,
-  Forms, Dialogs, U_fungsi, DB, Grids, DBGrids, StdCtrls,
+  Forms, Dialogs, DB, Grids, DBGrids, StdCtrls,
   ComCtrls, Controls, Buttons, Classes, ExtCtrls, mySQLDbTables, sEdit,
   cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
   cxEdit, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
@@ -80,13 +80,12 @@ type
 
 var
   FSaldoAwal: TFSaldoAwal;
-  fungsi:Tfungsi;
 
 implementation
 
 {$R *.dfm}
 
-uses u_dm, u_utama;
+uses u_dm, u_utama, U_fungsi;
 
 procedure TFSaldoAwal.btnCloseClick(Sender: TObject);
 begin

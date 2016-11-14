@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Mask, sMaskEdit, sCustomComboEdit, sTooledit, StdCtrls, sEdit,
-  sLabel, Grids, sCurrEdit, sCurrencyEdit, sButton,u_fungsi, Buttons,
+  sLabel, Grids, sCurrEdit, sCurrencyEdit, sButton,Buttons,
   sSpeedButton, sGroupBox, cxStyles, cxCustomData, cxGraphics, cxFilter,
   cxData, cxDataStorage, cxEdit, cxCurrencyEdit, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
@@ -66,12 +66,11 @@ type
 
 var
   F_GJurnal: TF_GJurnal;
-  fungsi:tfungsi;
   tot_debet,tot_kredit: Real;
 
 implementation
 
-uses u_cari, u_dm, u_utama;
+uses u_cari, u_dm, u_utama, U_fungsi;
 
 {$R *.dfm}
 

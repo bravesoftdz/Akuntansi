@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sLabel,U_fungsi, sEdit, sGroupBox, Buttons, sBitBtn,
+  Dialogs, StdCtrls, sLabel, sEdit, sGroupBox, Buttons, sBitBtn,
   sButton, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit, sCurrencyEdit,
   ComCtrls, sRichEdit, sStatusBar;
 
@@ -42,12 +42,11 @@ type
 
 var
   F_Login: TF_Login;
-  fungsi:Tfungsi;
   userPassword,userRealName:string;
 
 implementation
 
-uses u_dm, u_utama, u_cari;
+uses u_dm, u_utama, u_cari, U_fungsi;
 
 
 {$R *.dfm}

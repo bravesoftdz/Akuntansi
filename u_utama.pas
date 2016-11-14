@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, sSkinProvider, ComCtrls, sStatusBar, acHeaderControl, ToolWin,
-  sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan,U_fungsi,
+  sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan,
   Buttons, sSpeedButton, ExtCtrls, sPanel, StdCtrls, sEdit,
   sBitBtn,inifiles, shellapi, sTabControl;
 
@@ -213,7 +213,6 @@ type
 
 var
   f_utama: Tf_utama;
-  fungsi:TFungsi;
 
 implementation
 
@@ -223,7 +222,7 @@ uses u_cari, u_GJurnal, u_dm, u_Jurnal_Kas, u_klasifikasi_akun,
   u_daftar_jurnal_umum, u_daftar_penjualan, u_daftar_pembelian,
   u_daftar_return, u_daftar_return_kirim, u_daftar_kirim, u_daftar_koreksi,
   u_daftar_bayar_hutang, u_daftar_hutang, u_daftar_bayar_piutang,
-  u_daftar_kas, u_daftar_piutang;
+  u_daftar_kas, u_daftar_piutang, U_fungsi;
 
 {$R *.dfm}
 

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, sButton, sCurrEdit, sCurrencyEdit, Mask, sMaskEdit,
-  sCustomComboEdit, sTooledit, sEdit, Grids, sLabel, Buttons, sSpeedButton,u_fungsi,
+  sCustomComboEdit, sTooledit, sEdit, Grids, sLabel, Buttons, sSpeedButton,
   ExtCtrls, sPanel, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
   cxDataStorage, cxEdit, cxCurrencyEdit, sGroupBox, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
@@ -79,12 +79,11 @@ type
 var
   f_bayar_piutang: Tf_bayar_piutang;
   kd_pelanggan: string;
-  fungsi: tfungsi;
   dibayar: Real;
 
 implementation
 
-uses u_dm, u_cari, u_utama;
+uses u_dm, u_cari, u_utama, U_fungsi;
 
 {$R *.dfm}
 

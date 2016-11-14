@@ -9,7 +9,7 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, sSkinProvider, StdCtrls, sLabel,
   Mask, sMaskEdit, sCustomComboEdit, sCurrEdit, sCurrencyEdit, Buttons,
-  sBitBtn, cxCurrencyEdit, Menus, sSpeedButton, sButton,U_fungsi;
+  sBitBtn, cxCurrencyEdit, Menus, sSpeedButton, sButton;
 
 type
   Tf_daftar_akun = class(TForm)
@@ -60,11 +60,10 @@ type
 
 var
   f_daftar_akun: Tf_daftar_akun;
-  fungsi: Tfungsi;
 
 implementation
 
-uses u_dm, u_utama, u_klasifikasi_akun;
+uses u_dm, u_utama, u_klasifikasi_akun, U_fungsi;
 
 {$R *.dfm}
 

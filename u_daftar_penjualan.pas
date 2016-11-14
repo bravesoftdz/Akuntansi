@@ -8,7 +8,7 @@ uses
   cxDataStorage, cxEdit, DB, cxDBData, sSkinManager, StdCtrls, Buttons,
   sBitBtn, ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid,u_fungsi, cxMaskEdit, cxCurrencyEdit,
+  cxGridCustomView, cxGrid, cxMaskEdit, cxCurrencyEdit,
   sSpeedButton, mySQLDbTables, sSkinProvider, cxImageComboBox, sButton;
 
 type
@@ -76,11 +76,10 @@ type
 
 var
   f_daftar_penjualan: Tf_daftar_penjualan;
-  fungsi:tFungsi;
 
 implementation
 
-uses u_dm, u_utama;
+uses u_dm, u_utama, U_fungsi;
 
 {$R *.dfm}
 

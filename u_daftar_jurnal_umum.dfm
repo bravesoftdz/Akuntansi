@@ -23,7 +23,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -151,7 +151,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 1
     SkinData.SkinSection = 'PANEL'
@@ -205,7 +205,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     end
     object p1: TsPanel
       Left = 1
-      Top = 384
+      Top = 383
       Width = 148
       Height = 57
       Align = alBottom

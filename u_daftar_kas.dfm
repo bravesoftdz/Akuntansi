@@ -24,7 +24,7 @@ object f_daftar_kas: Tf_daftar_kas
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 0
     SkinData.SkinSection = 'PANEL'
@@ -78,7 +78,7 @@ object f_daftar_kas: Tf_daftar_kas
     end
     object rg_jenis: TsRadioGroup
       Left = 1
-      Top = 295
+      Top = 294
       Width = 148
       Height = 89
       Align = alBottom
@@ -95,7 +95,7 @@ object f_daftar_kas: Tf_daftar_kas
     end
     object p1: TsPanel
       Left = 1
-      Top = 384
+      Top = 383
       Width = 148
       Height = 57
       Align = alBottom
@@ -117,7 +117,7 @@ object f_daftar_kas: Tf_daftar_kas
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

@@ -8,7 +8,7 @@ uses
   cxFilter, cxData, cxDataStorage, cxEdit, DB, cxDBData,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
   cxClasses, cxControls, cxGridCustomView, cxGrid, sButton, ExtCtrls,
-  sPanel, sComboBox, u_fungsi, cxContainer, cxTextEdit, cxMaskEdit,
+  sPanel, sComboBox, cxContainer, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBExtLookupComboBox,
   cxDBLookupComboBox, cxNavigator, cxDBNavigator, cxDBEdit, cxCurrencyEdit;
 
@@ -66,12 +66,11 @@ type
 
 var
   f_klasifikasi_akun: Tf_klasifikasi_akun;
-  fungsi:tfungsi;
   anyar:boolean;
 
 implementation
 
-uses u_dm, u_utama;
+uses u_dm, u_utama, U_fungsi;
 
 {$R *.dfm}
 

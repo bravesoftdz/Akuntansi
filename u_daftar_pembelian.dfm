@@ -23,7 +23,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -263,7 +263,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 1
     SkinData.SkinSection = 'PANEL'
@@ -317,7 +317,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     end
     object p1: TsPanel
       Left = 1
-      Top = 336
+      Top = 335
       Width = 148
       Height = 105
       Align = alBottom
@@ -347,7 +347,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     end
     object p2: TsPanel
       Left = 1
-      Top = 279
+      Top = 278
       Width = 148
       Height = 57
       Align = alBottom

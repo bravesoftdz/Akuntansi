@@ -23,7 +23,7 @@ object f_daftar_asset: Tf_daftar_asset
     Left = 0
     Top = 0
     Width = 762
-    Height = 442
+    Height = 441
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -210,7 +210,7 @@ object f_daftar_asset: Tf_daftar_asset
     Left = 762
     Top = 0
     Width = 150
-    Height = 442
+    Height = 441
     Align = alRight
     TabOrder = 1
     SkinData.SkinSection = 'PANEL'
@@ -264,7 +264,7 @@ object f_daftar_asset: Tf_daftar_asset
     end
     object p1: TsPanel
       Left = 1
-      Top = 344
+      Top = 343
       Width = 148
       Height = 97
       Align = alBottom
@@ -303,7 +303,7 @@ object f_daftar_asset: Tf_daftar_asset
     end
     object p2: TsPanel
       Left = 1
-      Top = 296
+      Top = 295
       Width = 148
       Height = 48
       Align = alBottom

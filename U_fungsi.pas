@@ -13,6 +13,9 @@ mySQLDbTables,Windows,SysUtils;
      function program_versi:string;
      procedure SQLExec(aQuery:TmySQLQuery; _SQL:string; isSearch: boolean);
   end;
+var
+  fungsi: Tfungsi;
+  
 implementation
 
 function Tfungsi.program_versi:string;
