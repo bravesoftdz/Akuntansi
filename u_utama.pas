@@ -291,7 +291,7 @@ end;
 
 procedure Tf_utama.FormShow(Sender: TObject);
 begin
-sb.Panels[8].Text:= 'Versi: '+fungsi.program_versi;
+sb.Panels[8].Text:= 'Versi: '+fungsi.GetVersiApp;
 
 sb.Panels[2].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
 sb.Panels[3].Text:= dm.kd_comp;
@@ -1061,7 +1061,7 @@ var
 begin
   hasil:=False;
   
-  versiAPP := fungsi.program_versi;
+  versiAPP := fungsi.GetVersiApp;
 
   fungsi.SQLExec(dm.Q_Show,'select versi_terbaru, URLdownload from  app_versi where kode="accounting.exe"',true);
   versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
