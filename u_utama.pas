@@ -366,8 +366,8 @@ end;
 procedure Tf_utama.FormClose(Sender: TObject; var Action: TCloseAction);
 var appINI : TIniFile;
 begin
-metu_kabeh:=True;
-appINI := TIniFile.Create(AppPath+'gain.ini') ;
+dm.metu_kabeh:=True;
+appINI := TIniFile.Create(dm.AppPath+'gain.ini') ;
  try
   appINI.WriteString ('akun', 'kd_perusahaan', sb.Panels[3].text);
  finally
@@ -1028,7 +1028,7 @@ periode := InputPeriode('Periode Akuntansi','Masukkan Periode Akuntansi',asli,is
 sb.Panels[6].Text:= Copy(periode,6,2);
 sb.Panels[7].Text:= Copy(periode,1,4);
 
-PeriodAktif:= sb.Panels[7].Text + sb.Panels[6].Text;
+dm.PeriodAktif:= sb.Panels[7].Text + sb.Panels[6].Text;
 
 isi_periode.Free;
 end;

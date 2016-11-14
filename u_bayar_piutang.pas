@@ -185,7 +185,7 @@ var x,ix_jurnal: integer;
 jurnal_piutang,isi_sql:string;
 begin
 
-if FormatDateTime('yyyyMM',de_tanggal.Date) <> PeriodAktif then
+if FormatDateTime('yyyyMM',de_tanggal.Date) <> dm.PeriodAktif then
 begin
 showmessage('Tidak dapat menyimpan transaksi, '#10#13'Tanggal tidak sesuai dengan Periode akuntansi...');
 de_tanggal.SetFocus;

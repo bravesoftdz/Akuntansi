@@ -124,7 +124,7 @@ F_utama.caption:= 'Account Of Profit ('+sb.Panels[1].Text+')';
 F_utama.sb.Panels[6].Text:= dm.Q_temp.fieldbyname('bulan').AsString;
 F_utama.sb.Panels[7].Text:= dm.Q_temp.fieldbyname('tahun').AsString;
 //F_utama.historical_balancing;
-PeriodAktif:= F_utama.sb.Panels[7].Text + F_utama.sb.Panels[6].Text;
+dm.PeriodAktif:= F_utama.sb.Panels[7].Text + F_utama.sb.Panels[6].Text;
 
 f_utama.panel_auto_width;
 sop:= false;

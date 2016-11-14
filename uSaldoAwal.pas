@@ -210,7 +210,7 @@ procedure TFSaldoAwal.FormActivate(Sender: TObject);
 var
   idx: Integer;
 begin
-if not(metu_kabeh) then
+if not(dm.metu_kabeh) then
 begin
     idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(Self.Handle));
     f_utama.tc_child.Tag := -1;

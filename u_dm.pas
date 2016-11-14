@@ -143,7 +143,7 @@ begin
     end;
   end;
 
-  dm.Path := ExtractFilePath(Application.ExeName);
+  Path := ExtractFilePath(Application.ExeName);
 
   AppPath := GetAppData(CSIDL_COMMON_APPDATA);
   if not (DirectoryExists(AppPath)) then
