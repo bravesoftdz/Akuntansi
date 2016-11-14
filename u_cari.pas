@@ -45,7 +45,7 @@ var
 implementation
 
 uses u_dm, u_utama, u_bayar_piutang, u_bayar_hutang, u_GJurnal,
-  u_Jurnal_Kas, U_Login, u_akun_penting, U_fungsi;
+  u_Jurnal_Kas, U_Login, u_akun_penting, UFungsi;
 
 {$R *.dfm}
 

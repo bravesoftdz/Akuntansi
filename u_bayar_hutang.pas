@@ -83,7 +83,7 @@ var
 
 implementation
 
-uses u_dm,u_cari, u_utama, U_fungsi;
+uses u_dm,u_cari, u_utama, UFungsi;
 
 {$R *.dfm}
 

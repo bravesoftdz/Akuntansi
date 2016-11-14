@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sButton, sEdit, sLabel,u_fungsi;
+  Dialogs, StdCtrls, sButton, sEdit, sLabel,UFungsi;
 
 type
   Tf_merk = class(TForm)

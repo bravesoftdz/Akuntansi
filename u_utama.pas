@@ -222,7 +222,7 @@ uses u_cari, u_GJurnal, u_dm, u_Jurnal_Kas, u_klasifikasi_akun,
   u_daftar_jurnal_umum, u_daftar_penjualan, u_daftar_pembelian,
   u_daftar_return, u_daftar_return_kirim, u_daftar_kirim, u_daftar_koreksi,
   u_daftar_bayar_hutang, u_daftar_hutang, u_daftar_bayar_piutang,
-  u_daftar_kas, u_daftar_piutang, U_fungsi;
+  u_daftar_kas, u_daftar_piutang, UFungsi;
 
 {$R *.dfm}
 

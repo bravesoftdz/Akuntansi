@@ -85,7 +85,7 @@ implementation
 
 {$R *.dfm}
 
-uses u_dm, u_utama, U_fungsi;
+uses u_dm, u_utama, UFungsi;
 
 procedure TFSaldoAwal.btnCloseClick(Sender: TObject);
 begin

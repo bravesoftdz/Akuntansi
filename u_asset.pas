@@ -60,7 +60,7 @@ var
   anyar: boolean;
 implementation
 
-uses u_dm, u_utama, u_daftar_asset, U_fungsi;
+uses u_dm, u_utama, u_daftar_asset, UFungsi;
 
 {$R *.dfm}
 

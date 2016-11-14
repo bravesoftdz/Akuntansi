@@ -63,7 +63,7 @@ var
 
 implementation
 
-uses u_dm, u_utama, u_klasifikasi_akun, U_fungsi;
+uses u_dm, u_utama, u_klasifikasi_akun, UFungsi;
 
 {$R *.dfm}
 
