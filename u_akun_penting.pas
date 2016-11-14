@@ -4,12 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
-  cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, StdCtrls, sLabel, ExtCtrls, sPanel,
-  sSkinProvider, Buttons, sBitBtn, cxDBLookupComboBox, cxCurrencyEdit,
-  sSpeedButton, mySQLDbTables, sButton;
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, StdCtrls,
+  sLabel, ExtCtrls, sPanel, sSkinProvider, Buttons, sBitBtn, cxDBLookupComboBox,
+  cxCurrencyEdit, sSpeedButton, mySQLDbTables, sButton;
 
 type
   Tf_akun_penting = class(TForm)
@@ -37,15 +36,15 @@ type
     p1: TsPanel;
     sButton1: TsButton;
     procedure segarkan;
-    procedure WMMDIACTIVATE(var msg : TWMMDIACTIVATE) ; message WM_MDIACTIVATE;
+    procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE); message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure sButton1Click(Sender: TObject);
-    procedure t_dataCellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure t_dataCellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo:
+      TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState;
+      var AHandled: Boolean);
   private
     { Private declarations }
   public
@@ -57,13 +56,14 @@ var
 
 implementation
 
-uses u_dm, u_utama, u_cari, UFungsi;
+uses
+  u_dm, u_utama, u_cari, UFungsi;
 
 {$R *.dfm}
 
 procedure Tf_akun_penting.segarkan;
 begin
-  fungsi.SQLExec(Q_akun_penting,'select * from vw_akun_penting',true);
+  fungsi.SQLExec(Q_akun_penting, 'select * from vw_akun_penting', true);
 end;
 
 procedure Tf_akun_penting.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -71,25 +71,24 @@ var
   active: TWinControl;
   idx: Integer;
 begin
-  active := FindControl(msg.ActiveWnd) ;
-if not(dm.metu_kabeh) then
-begin
-  if Assigned(active) then
+  active := FindControl(msg.ActiveWnd);
+  if not (dm.metu_kabeh) then
   begin
-    idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
-    f_utama.tc_child.Tag := -1;
-    f_utama.tc_child.TabIndex := idx;
-    f_utama.tc_child.Tag := 0;
+    if Assigned(active) then
+    begin
+      idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
+      f_utama.tc_child.Tag := -1;
+      f_utama.tc_child.TabIndex := idx;
+      f_utama.tc_child.Tag := 0;
+    end;
   end;
 end;
-end;
 
-procedure Tf_akun_penting.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure Tf_akun_penting.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-f_utama.MDIChildDestroyed(Self.Handle);
-action:= cafree;
-f_akun_penting:=nil;
+  f_utama.MDIChildDestroyed(Self.Handle);
+  action := cafree;
+  f_akun_penting := nil;
 end;
 
 procedure Tf_akun_penting.FormCreate(Sender: TObject);
@@ -99,32 +98,32 @@ end;
 
 procedure Tf_akun_penting.sb_1Click(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure Tf_akun_penting.sb_2Click(Sender: TObject);
 begin
-segarkan;
+  segarkan;
 end;
 
 procedure Tf_akun_penting.sButton1Click(Sender: TObject);
 begin
-application.CreateForm(tf_cari, f_cari);
-fungsi.SQLExec(dm.q_cari,'select kd_kiraan, n_kiraan from tb_kiraan',true);
-f_cari.clm1.caption:='Kode';
-f_cari.clm2.caption:='Deskripsi';
-u_cari.tipe_cari:=66;
-u_cari.asal:='f_akun_penting';
-f_cari.ShowModal;
-segarkan;
+  application.CreateForm(tf_cari, f_cari);
+  fungsi.SQLExec(dm.q_cari, 'select kd_kiraan, n_kiraan from tb_kiraan', true);
+  f_cari.clm1.caption := 'Kode';
+  f_cari.clm2.caption := 'Deskripsi';
+  u_cari.tipe_cari := 66;
+  u_cari.asal := 'f_akun_penting';
+  f_cari.ShowModal;
+  segarkan;
 end;
 
-procedure Tf_akun_penting.t_dataCellDblClick(
-  Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
+procedure Tf_akun_penting.t_dataCellDblClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift:
+  TShiftState; var AHandled: Boolean);
 begin
-sButton1Click(Self);
+  sButton1Click(Self);
 end;
 
 end.
+

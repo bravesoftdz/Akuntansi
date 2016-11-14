@@ -5,11 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, sSkinProvider, ComCtrls, sStatusBar, acHeaderControl, ToolWin,
-  sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan,
-  Buttons, sSpeedButton, ExtCtrls, sPanel, StdCtrls, sEdit,
-  sBitBtn,inifiles, shellapi, sTabControl;
+  sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan, Buttons,
+  sSpeedButton, ExtCtrls, sPanel, StdCtrls, sEdit, sBitBtn, inifiles, shellapi,
+  sTabControl;
 
-  const
+const
   WM_AFTER_SHOW = WM_USER + 300; // custom message
 
 type
@@ -142,8 +142,8 @@ type
     mniDaftarStockOpnameSO1: TMenuItem;
     Timer1: TTimer;
     CekUpdate1: TMenuItem;
-    procedure MDIChildCreated(const childHandle : THandle);
-    procedure MDIChildDestroyed(const childHandle : THandle);
+    procedure MDIChildCreated(const childHandle: THandle);
+    procedure MDIChildDestroyed(const childHandle: THandle);
     procedure ac_G_jurnalExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ac_neracaExecute(Sender: TObject);
@@ -216,41 +216,42 @@ var
 
 implementation
 
-uses u_cari, u_GJurnal, u_dm, u_Jurnal_Kas, u_klasifikasi_akun,
-  u_daftar_akun, u_akun_penting, usaldoawal, u_daftar_asset,
-  u_bayar_hutang, u_bayar_piutang, U_Login,acselectskin,
-  u_daftar_jurnal_umum, u_daftar_penjualan, u_daftar_pembelian,
-  u_daftar_return, u_daftar_return_kirim, u_daftar_kirim, u_daftar_koreksi,
-  u_daftar_bayar_hutang, u_daftar_hutang, u_daftar_bayar_piutang,
-  u_daftar_kas, u_daftar_piutang, UFungsi;
+uses
+  u_cari, u_GJurnal, u_dm, u_Jurnal_Kas, u_klasifikasi_akun, u_daftar_akun,
+  u_akun_penting, usaldoawal, u_daftar_asset, u_bayar_hutang, u_bayar_piutang,
+  U_Login, acselectskin, u_daftar_jurnal_umum, u_daftar_penjualan,
+  u_daftar_pembelian, u_daftar_return, u_daftar_return_kirim, u_daftar_kirim,
+  u_daftar_koreksi, u_daftar_bayar_hutang, u_daftar_hutang,
+  u_daftar_bayar_piutang, u_daftar_kas, u_daftar_piutang, UFungsi;
 
 {$R *.dfm}
 
 procedure Tf_utama.panel_auto_width;
-var x: integer;
-    y: string;
+var
+  x: integer;
+  y: string;
 begin
- for x:=0 to sb.Panels.Count-1 do
- begin
-    y:= sb.Panels[x].text;
-    sb.Panels[x].Width := sb.Canvas.TextWidth(y) +30;
- end;
+  for x := 0 to sb.Panels.Count - 1 do
+  begin
+    y := sb.Panels[x].text;
+    sb.Panels[x].Width := sb.Canvas.TextWidth(y) + 30;
+  end;
 end;
 
 //add a tab for an MDI child
-procedure tf_utama.MDIChildCreated(const childHandle : THandle);
+procedure tf_utama.MDIChildCreated(const childHandle: THandle);
 begin
   tc_child.Tabs.AddObject(TForm(FindControl(childHandle)).Caption, TObject(childHandle));
   tc_child.TabIndex := -1 + tc_child.Tabs.Count;
 
   if f_utama.MDIChildCount > 1 then
   begin
-  tc_child.Visible:=True;
+    tc_child.Visible := True;
   end;
 end;
 
 //remove a tab for this MDI child
-procedure tf_utama.MDIChildDestroyed(const childHandle : THandle);
+procedure tf_utama.MDIChildDestroyed(const childHandle: THandle);
 var
   idx: Integer;
 begin
@@ -258,169 +259,188 @@ begin
   tc_child.Tabs.Delete(idx);
 
   if f_utama.MDIChildCount = 2 then
-  tc_child.Visible:=False;
+    tc_child.Visible := False;
 end;
 
 procedure Tf_utama.WmAfterShow(var Msg: TMessage);
 begin
-dm.sm.Active:=true;
-application.CreateForm(Tf_login, f_login);
-f_login.sb.Panels[0].Text:=sb.Panels[3].Text;
-f_login.sb.Panels[1].Text:=sb.Panels[4].Text;
-F_Login.sb.Panels[2].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
-f_login.ShowModal;
+  dm.sm.Active := true;
+  application.CreateForm(Tf_login, f_login);
+  f_login.sb.Panels[0].Text := sb.Panels[3].Text;
+  f_login.sb.Panels[1].Text := sb.Panels[4].Text;
+  F_Login.sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  f_login.ShowModal;
 end;
 
 procedure Tf_utama.historical_balancing;
 begin
-dm.db_conn.StartTransaction;
-try
-fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
-dm.db_conn.Commit;
-except
-dm.db_conn.Rollback;
-end;
+  dm.db_conn.StartTransaction;
+  try
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_historical_balancing("' + f_utama.sb.Panels
+      [3].Text + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(sb.Panels
+      [7].Text), strtoint(sb.Panels[6].Text), 1)) + '")', false);
+    dm.db_conn.Commit;
+  except
+    dm.db_conn.Rollback;
+  end;
 end;
 
 procedure Tf_utama.ac_G_jurnalExecute(Sender: TObject);
 begin
-application.CreateForm(tf_GJurnal, f_GJurnal);
-f_GJurnal.ShowModal;
+  application.CreateForm(tf_GJurnal, f_GJurnal);
+  f_GJurnal.ShowModal;
 end;
 
 procedure Tf_utama.FormShow(Sender: TObject);
 begin
-sb.Panels[8].Text:= 'Versi: '+fungsi.GetVersiApp;
+  sb.Panels[8].Text := 'Versi: ' + fungsi.GetVersiApp;
 
-sb.Panels[2].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
-sb.Panels[3].Text:= dm.kd_comp;
-fungsi.SQLExec(dm.Q_temp,'select * from tb_company where kd_perusahaan = "'+sb.Panels[3].text+'"',true);
-sb.Panels[4].Text:=dm.Q_temp.fieldbyname('n_perusahaan').AsString;
-caption:= 'Account Of Profit ('+sb.Panels[4].Text+'  )';
+  sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  sb.Panels[3].Text := dm.kd_comp;
+  fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan = "' +
+    sb.Panels[3].text + '"', true);
+  sb.Panels[4].Text := dm.Q_temp.fieldbyname('n_perusahaan').AsString;
+  caption := 'Account Of Profit (' + sb.Panels[4].Text + '  )';
 
-fungsi.SQLExec(dm.Q_temp,'select RIGHT(periode_akun,2) as bulan, '+
-'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="'+sb.Panels[3].Text+'"',true);
+  fungsi.SQLExec(dm.Q_temp, 'select RIGHT(periode_akun,2) as bulan, ' +
+    'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="' + sb.Panels
+    [3].Text + '"', true);
 
-sb.Panels[6].Text:= dm.Q_temp.fieldbyname('bulan').AsString;
-sb.Panels[7].Text:= dm.Q_temp.fieldbyname('tahun').AsString;
-historical_balancing;
+  sb.Panels[6].Text := dm.Q_temp.fieldbyname('bulan').AsString;
+  sb.Panels[7].Text := dm.Q_temp.fieldbyname('tahun').AsString;
+  historical_balancing;
 
-PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
+  PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
 end;
 
 procedure Tf_utama.ac_neracaExecute(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_Trial_balance1,'select * from _vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
+  fungsi.SQLExec(dm.Q_Trial_balance1,
+    'select * from _vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "' +
+    sb.Panels[3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' +
+    sb.Panels[7].Text + '" order by kd_kiraan', true);
 
-fungsi.SQLExec(dm.Q_trial_balance2,'select * from vw_trial_balance_kredit where (kd_kiraan like "'+
-'2'+'%" or kd_kiraan like "'+'3'+'%") and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
+  fungsi.SQLExec(dm.Q_trial_balance2,
+    'select * from vw_trial_balance_kredit where (kd_kiraan like "' + '2' +
+    '%" or kd_kiraan like "' + '3' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" order by kd_kiraan', true);
 
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_neraca.fr3');   
-dm.laporan.ShowReport;
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_neraca.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.ac_bk_besarExecute(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_buku_besar,'select * from vw_buku_besar where kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_buku_besar,
+    'select * from vw_buku_besar where kd_perusahaan= "' + sb.Panels[3].Text +
+    '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
+    '" order by kd_kiraan', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.ac_tBalanceExecute(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_Trial_balance1,'select * from _vw_trial_balance where kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_Trial_balance1,
+    'select * from _vw_trial_balance where kd_perusahaan= "' + sb.Panels[3].Text
+    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" order by kd_kiraan', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.ac_laba_rugiExecute(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_Trial_balance1,'select * from vw_laba_rugi_kredit where (kd_kiraan like "'+
-'4'+'%" or kd_kiraan like "'+'8'+'%") and kd_perusahaan= "'+sb.Panels[3].Text+'" and bulan= "'+
-sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
+  fungsi.SQLExec(dm.Q_Trial_balance1,
+    'select * from vw_laba_rugi_kredit where (kd_kiraan like "' + '4' +
+    '%" or kd_kiraan like "' + '8' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" order by kd_kiraan', true);
 
-fungsi.SQLExec(dm.Q_trial_balance2,'select * from vw_laba_rugi where (kd_kiraan like "'+
-'5'+'%" or kd_kiraan like "'+'6'+'%" or kd_kiraan like "'+'7'+'%" or kd_kiraan like "'+
-'9'+'%") and kd_perusahaan= "'+sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_laba_rugi.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_trial_balance2,
+    'select * from vw_laba_rugi where (kd_kiraan like "' + '5' +
+    '%" or kd_kiraan like "' + '6' + '%" or kd_kiraan like "' + '7' +
+    '%" or kd_kiraan like "' + '9' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" order by kd_kiraan', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_laba_rugi.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.ac_custExecute(Sender: TObject);
 begin
-application.CreateForm(tf_cari, f_cari);
-fungsi.SQLExec(dm.q_cari,'select kd_perusahaan,kd_pelanggan,n_pelanggan from tb_pelanggan',true);
-f_cari.clm1.caption:='Kode comp';
-f_cari.clm2.caption:='kode pelanggan';
-f_cari.clm3.caption:='nama pelanggan';
-u_cari.tipe_cari:=11;
-f_cari.ShowModal;
+  application.CreateForm(tf_cari, f_cari);
+  fungsi.SQLExec(dm.q_cari,
+    'select kd_perusahaan,kd_pelanggan,n_pelanggan from tb_pelanggan', true);
+  f_cari.clm1.caption := 'Kode comp';
+  f_cari.clm2.caption := 'kode pelanggan';
+  f_cari.clm3.caption := 'nama pelanggan';
+  u_cari.tipe_cari := 11;
+  f_cari.ShowModal;
 end;
 
 procedure Tf_utama.FormClose(Sender: TObject; var Action: TCloseAction);
-var appINI : TIniFile;
+var
+  appINI: TIniFile;
 begin
-dm.metu_kabeh:=True;
-appINI := TIniFile.Create(dm.AppPath+'gain.ini') ;
- try
-  appINI.WriteString ('akun', 'kd_perusahaan', sb.Panels[3].text);
- finally
- appINI.Free;
- end;
+  dm.metu_kabeh := True;
+  appINI := TIniFile.Create(dm.AppPath + 'gain.ini');
+  try
+    appINI.WriteString('akun', 'kd_perusahaan', sb.Panels[3].text);
+  finally
+    appINI.Free;
+  end;
 
-dm.db_conn.Connected:= false;
+  dm.db_conn.Connected := false;
 
-action:=cafree;
-f_utama:=nil;
+  action := cafree;
+  f_utama := nil;
 end;
 
 procedure Tf_utama.sBitBtn1Click(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure Tf_utama.Ac_Jurnal_KasExecute(Sender: TObject);
 begin
-application.CreateForm(tf_jurnal_kas, f_jurnal_kas);
-f_jurnal_kas.ShowModal;
+  application.CreateForm(tf_jurnal_kas, f_jurnal_kas);
+  f_jurnal_kas.ShowModal;
 end;
 
 procedure Tf_utama.DefaultPerusahaan1Click(Sender: TObject);
 begin
-if f_utama.MDIChildCount<>0 then
-begin
-showmessage('tutup dulu semua windows...');
-exit;
-end;
-application.CreateForm(tf_cari, f_cari);
-fungsi.SQLExec(dm.q_cari,'select kd_perusahaan, n_perusahaan from tb_company',true);
-f_cari.clm1.caption:='Kode';
-f_cari.clm2.caption:='Nama Perusahaan';
-u_cari.tipe_cari:=8;
-asal:='f_utama';
-f_cari.ShowModal;
+  if f_utama.MDIChildCount <> 0 then
+  begin
+    showmessage('tutup dulu semua windows...');
+    exit;
+  end;
+  application.CreateForm(tf_cari, f_cari);
+  fungsi.SQLExec(dm.q_cari, 'select kd_perusahaan, n_perusahaan from tb_company', true);
+  f_cari.clm1.caption := 'Kode';
+  f_cari.clm2.caption := 'Nama Perusahaan';
+  u_cari.tipe_cari := 8;
+  asal := 'f_utama';
+  f_cari.ShowModal;
 end;
 
 procedure Tf_utama.AKlasifikasiAkun1Click(Sender: TObject);
 begin
-application.CreateForm(tf_klasifikasi_akun,f_klasifikasi_akun);
-f_klasifikasi_akun.ShowModal;
+  application.CreateForm(tf_klasifikasi_akun, f_klasifikasi_akun);
+  f_klasifikasi_akun.ShowModal;
 end;
 
 procedure Tf_utama.AkunPenting1Click(Sender: TObject);
 begin
-if f_akun_penting <> nil then
-f_akun_penting.Show else
-begin
-application.CreateForm(tf_akun_penting,f_akun_penting);
-f_akun_penting.segarkan;
-f_akun_penting.Show;
-end;
+  if f_akun_penting <> nil then
+    f_akun_penting.Show
+  else
+  begin
+    application.CreateForm(tf_akun_penting, f_akun_penting);
+    f_akun_penting.segarkan;
+    f_akun_penting.Show;
+  end;
 end;
 
 procedure Tf_utama.SaldoAwalAkun1Click(Sender: TObject);
@@ -432,116 +452,133 @@ QuotedStr(sb.Panels[3].Text)+' and bulan='+sb.Panels[6].Text+' and tahun='+sb.Pa
 application.CreateForm(tf_saldo_awal,f_saldo_awal);
 f_saldo_awal.ShowModal;
 }
-if FSaldoAwal=nil then
-begin
-  Application.CreateForm(TFSaldoAwal,FsaldoAwal);
-  BuatSaldoAwalAkun;
-end;
+  if FSaldoAwal = nil then
+  begin
+    Application.CreateForm(TFSaldoAwal, FsaldoAwal);
+    BuatSaldoAwalAkun;
+  end;
 
-FSaldoAwal.Show;
+  FSaldoAwal.Show;
 end;
 
 procedure Tf_utama.utupBukuAhirBulan1Click(Sender: TObject);
 begin
-if sb.Panels[6].Text='12' then
-begin
-showmessage('sekarang sudah ahir tahun pilih proses tutup buku ahir tahun');
-exit;
-end;
+  if sb.Panels[6].Text = '12' then
+  begin
+    showmessage('sekarang sudah ahir tahun pilih proses tutup buku ahir tahun');
+    exit;
+  end;
 
-if messagedlg('Tutup Buku Periode ke-'+sb.Panels[6].Text+' Tahun '+sb.Panels[7].Text+' '#10#13''#10#13''+
-'proses tutup buku bulanan adalah proses merubah periode akuntansi '#10#13''+
-'dan membuat saldo awal tiap perkiraan serta'#10#13''+
-'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13''+
-'akun historical balancing ke akun laba tahun berjalan....'#10#13''#10#13''+
-'proses ini akan menutup aplikasi ini , Yakin???....',mtconfirmation,[mbYes,mbNo],0)=mrYes then
-begin
-dm.db_conn.StartTransaction;
-try
+  if messagedlg('Tutup Buku Periode ke-' + sb.Panels[6].Text + ' Tahun ' + sb.Panels
+    [7].Text + ' '#10#13''#10#13'' +
+    'proses tutup buku bulanan adalah proses merubah periode akuntansi '#10#13'' +
+    'dan membuat saldo awal tiap perkiraan serta'#10#13'' +
+    'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13'' +
+    'akun historical balancing ke akun laba tahun berjalan....'#10#13''#10#13'' +
+    'proses ini akan menutup aplikasi ini , Yakin???....', mtconfirmation, [mbYes,
+    mbNo], 0) = mrYes then
+  begin
+    dm.db_conn.StartTransaction;
+    try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 }
-fungsi.SQLExec(dm.Q_Exe,'call sp_tutup_buku_bulan("'+f_utama.sb.Panels[3].Text+'",'+
-f_utama.sb.Panels[6].Text+','+f_utama.sb.Panels[7].Text+')',false);
+      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + f_utama.sb.Panels[3].Text
+        + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
+        ')', false);
 
-sb.Panels[6].Text:= inttostr(strtoint(sb.Panels[6].Text)+1);
-if length(sb.Panels[6].Text)=1 then
-sb.Panels[6].Text:= '0'+sb.Panels[6].Text;
+      sb.Panels[6].Text := inttostr(strtoint(sb.Panels[6].Text) + 1);
+      if length(sb.Panels[6].Text) = 1 then
+        sb.Panels[6].Text := '0' + sb.Panels[6].Text;
 
-fungsi.SQLExec(dm.Q_Exe,'update tb_company set periode_akun="'+
-sb.Panels[7].Text+'-'+sb.Panels[6].Text+'" where kd_perusahaan="'+sb.Panels[3].Text+'"',false);
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + sb.Panels
+        [7].Text + '-' + sb.Panels[6].Text + '" where kd_perusahaan="' + sb.Panels
+        [3].Text + '"', false);
 
-dm.db_conn.Commit;
-showmessage('proses tutup buku bulanan berhasil');
-close;
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
+      dm.db_conn.Commit;
+      showmessage('proses tutup buku bulanan berhasil');
+      close;
+    except
+      on e: exception do
+      begin
+        dm.db_conn.Rollback;
+        showmessage('pembuatan saldo awal akun gagal '#10#13'' + e.Message);
+      end;
+    end;
   end;
-end;
-end;
 end;
 
 procedure Tf_utama.utupBukuAhirTahun1Click(Sender: TObject);
 begin
-if messagedlg('Tutup Buku Tahun '+sb.Panels[7].Text+' '#10#13''#10#13''+
-'proses tutup buku tahunan adalah proses merubah periode akuntansi '#10#13''+
-'dan membuat saldo awal tiap perkiraan serta'#10#13''+
-'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13''+
-'akun historical balancing + akun laba Tahun Berjalan ke Akun Laba ditahan....'#10#13''#10#13''+
-'proses ini akan menutup aplikasi ini , Yakin???....',mtconfirmation,[mbYes,mbNo],0)=mrYes then
-begin
-dm.db_conn.StartTransaction;
-try
+  if messagedlg('Tutup Buku Tahun ' + sb.Panels[7].Text + ' '#10#13''#10#13'' +
+    'proses tutup buku tahunan adalah proses merubah periode akuntansi '#10#13'' +
+    'dan membuat saldo awal tiap perkiraan serta'#10#13'' +
+    'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13'' +
+    'akun historical balancing + akun laba Tahun Berjalan ke Akun Laba ditahan....'#10#13''#10#13'' +
+    'proses ini akan menutup aplikasi ini , Yakin???....', mtconfirmation, [mbYes,
+    mbNo], 0) = mrYes then
+  begin
+    dm.db_conn.StartTransaction;
+    try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 }
-fungsi.SQLExec(dm.Q_Exe,'call sp_tutup_buku_tahun("'+f_utama.sb.Panels[3].Text+'",'+
-f_utama.sb.Panels[6].Text+','+f_utama.sb.Panels[7].Text+')',false);
+      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + f_utama.sb.Panels[3].Text
+        + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
+        ')', false);
 
-sb.Panels[6].Text:= '01';
-sb.Panels[7].Text:= inttostr(strtoint(sb.Panels[7].Text)+1);
+      sb.Panels[6].Text := '01';
+      sb.Panels[7].Text := inttostr(strtoint(sb.Panels[7].Text) + 1);
 
-fungsi.SQLExec(dm.Q_Exe,'update tb_company set periode_akun="'+
-sb.Panels[7].Text+'-'+sb.Panels[6].Text+'" where kd_perusahaan="'+sb.Panels[3].Text+'"',false);
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + sb.Panels
+        [7].Text + '-' + sb.Panels[6].Text + '" where kd_perusahaan="' + sb.Panels
+        [3].Text + '"', false);
 
-dm.db_conn.Commit;
-showmessage('proses tutup buku Tahunan Berhasil berhasil');
-close;
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
+      dm.db_conn.Commit;
+      showmessage('proses tutup buku Tahunan Berhasil berhasil');
+      close;
+    except
+      on e: exception do
+      begin
+        dm.db_conn.Rollback;
+        showmessage('pembuatan saldo awal akun gagal '#10#13'' + e.Message);
+      end;
+    end;
   end;
-end;
-end;
 end;
 
 procedure Tf_utama.CekJurnalyangtidakBalance1Click(Sender: TObject);
-VAR ENT,cetak: STRING;
-    i: integer;
+var
+  ENT, cetak: string;
+  i: integer;
 begin
-ent:=''#10#13'';
+  ent := ''#10#13'';
 
-fungsi.SQLExec(dm.Q_temp,'SELECT * FROM vw_tidak_balance where kd_perusahaan="'+
-sb.Panels[3].Text+'" and bulan="'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-if dm.Q_temp.Eof then showmessage('Semua Jurnal Telah Balance...') else
-begin
-  dm.Q_temp.First;
-  for i:=1 to dm.Q_temp.RecordCount do
+  fungsi.SQLExec(dm.Q_temp,
+    'SELECT * FROM vw_tidak_balance where kd_perusahaan="' + sb.Panels[3].Text +
+    '" and bulan="' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
+    '"', true);
+  if dm.Q_temp.Eof then
+    showmessage('Semua Jurnal Telah Balance...')
+  else
+  begin
+    dm.Q_temp.First;
+    for i := 1 to dm.Q_temp.RecordCount do
     begin
-    cetak:=cetak+inttostr(i)+'. '+ dm.Q_temp.fieldbyname('no_refrensi').AsString +' --> '+
-    dm.Q_temp.fieldbyname('keterangan').AsString+' ('+dm.Q_temp.fieldbyname('selisih').AsString+')'+ent;
-    dm.Q_temp.Next;
+      cetak := cetak + inttostr(i) + '. ' + dm.Q_temp.fieldbyname('no_refrensi').AsString
+        + ' --> ' + dm.Q_temp.fieldbyname('keterangan').AsString + ' (' + dm.Q_temp.fieldbyname
+        ('selisih').AsString + ')' + ent;
+      dm.Q_temp.Next;
     end;
-showmessage('DAFTAR JURNAL YANG BELUM BALANCE'+ent+ent+cetak);
-end;        
+    showmessage('DAFTAR JURNAL YANG BELUM BALANCE' + ent + ent + cetak);
+  end;
 end;
 
 procedure Tf_utama.HitungUlangSaldoAhir1Click(Sender: TObject);
 begin
-historical_balancing;
+  historical_balancing;
 {dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
@@ -558,224 +595,251 @@ end;
 
 procedure Tf_utama.ac_kiraan_buku_besarExecute(Sender: TObject);
 begin
-if f_daftar_akun = nil then
-application.CreateForm(tf_daftar_akun,f_daftar_akun);
+  if f_daftar_akun = nil then
+    application.CreateForm(tf_daftar_akun, f_daftar_akun);
 
-f_daftar_akun.Show;
+  f_daftar_akun.Show;
 end;
 
 procedure Tf_utama.df_harta_tetapClick(Sender: TObject);
 begin
-if f_daftar_asset <> nil then
-f_daftar_asset.Show else
-begin
-application.CreateForm(tf_daftar_asset,f_daftar_asset);
-f_daftar_asset.segarkan;
-f_daftar_asset.Show;
-end;
+  if f_daftar_asset <> nil then
+    f_daftar_asset.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_asset, f_daftar_asset);
+    f_daftar_asset.segarkan;
+    f_daftar_asset.Show;
+  end;
 end;
 
 procedure Tf_utama.mnibayahutangClick(Sender: TObject);
 begin
-application.CreateForm(tf_bayar_hutang, f_bayar_hutang);
-f_bayar_hutang.ShowModal;
+  application.CreateForm(tf_bayar_hutang, f_bayar_hutang);
+  f_bayar_hutang.ShowModal;
 end;
 
 procedure Tf_utama.mnihutangClick(Sender: TObject);
 begin
-if (f_daftar_hutang <> nil) then
-begin
-f_daftar_hutang.Show;
-end else
-begin
-application.CreateForm(tf_daftar_hutang,f_daftar_hutang);
-f_daftar_hutang.segarkan;
-f_daftar_hutang.Show;
-end;
+  if (f_daftar_hutang <> nil) then
+  begin
+    f_daftar_hutang.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_hutang, f_daftar_hutang);
+    f_daftar_hutang.segarkan;
+    f_daftar_hutang.Show;
+  end;
 end;
 
 procedure Tf_utama.MenuItem5Click(Sender: TObject);
 begin
-if (f_daftar_piutang <> nil) then
-begin
-f_daftar_piutang.Show;
-end else
-begin
-application.CreateForm(tf_daftar_piutang,f_daftar_piutang);
-f_daftar_piutang.segarkan;
-f_daftar_piutang.Show;
-end;
+  if (f_daftar_piutang <> nil) then
+  begin
+    f_daftar_piutang.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_piutang, f_daftar_piutang);
+    f_daftar_piutang.segarkan;
+    f_daftar_piutang.Show;
+  end;
 end;
 
 procedure Tf_utama.df_jurnal_umumClick(Sender: TObject);
 begin
-if (f_daftar_jurnal_umum <> nil) then
-begin
-f_daftar_jurnal_umum.Show;
-end else
-begin
-application.CreateForm(tf_daftar_jurnal_umum,f_daftar_jurnal_umum);
-f_daftar_jurnal_umum.segarkan;
-f_daftar_jurnal_umum.Show;
-end; 
+  if (f_daftar_jurnal_umum <> nil) then
+  begin
+    f_daftar_jurnal_umum.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_jurnal_umum, f_daftar_jurnal_umum);
+    f_daftar_jurnal_umum.segarkan;
+    f_daftar_jurnal_umum.Show;
+  end;
 end;
 
 procedure Tf_utama.mnitransaksihutangClick(Sender: TObject);
 begin
-if (f_daftar_bayar_hutang <> nil) then
-begin
-f_daftar_bayar_hutang.Show;
-end else
-begin
-application.CreateForm(tf_daftar_bayar_hutang,f_daftar_bayar_hutang);
-f_daftar_bayar_hutang.segarkan;
-f_daftar_bayar_hutang.Show;
-end;
+  if (f_daftar_bayar_hutang <> nil) then
+  begin
+    f_daftar_bayar_hutang.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_bayar_hutang, f_daftar_bayar_hutang);
+    f_daftar_bayar_hutang.segarkan;
+    f_daftar_bayar_hutang.Show;
+  end;
 end;
 
 procedure Tf_utama.MenuItem7Click(Sender: TObject);
 begin
-if (f_daftar_bayar_piutang <> nil) then
-begin
-f_daftar_bayar_piutang.Show;
-end else
-begin
-application.CreateForm(tf_daftar_bayar_piutang,f_daftar_bayar_piutang);
-f_daftar_bayar_piutang.segarkan;
-f_daftar_bayar_piutang.Show;
-end;
+  if (f_daftar_bayar_piutang <> nil) then
+  begin
+    f_daftar_bayar_piutang.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_bayar_piutang, f_daftar_bayar_piutang);
+    f_daftar_bayar_piutang.segarkan;
+    f_daftar_bayar_piutang.Show;
+  end;
 end;
 
 procedure Tf_utama.MenuItem3Click(Sender: TObject);
 begin
-if (f_daftar_penjualan <> nil) then
-begin
-f_daftar_penjualan.Show;
-end else
-begin
-application.CreateForm(tf_daftar_penjualan,f_daftar_penjualan);
-f_daftar_penjualan.segarkan;
-f_daftar_penjualan.Show;
-end;
+  if (f_daftar_penjualan <> nil) then
+  begin
+    f_daftar_penjualan.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_penjualan, f_daftar_penjualan);
+    f_daftar_penjualan.segarkan;
+    f_daftar_penjualan.Show;
+  end;
 end;
 
 procedure Tf_utama.mnitransaksibeliClick(Sender: TObject);
 begin
-if f_daftar_pembelian <> nil then
-f_daftar_pembelian.Show else
-begin
-application.CreateForm(tf_daftar_pembelian,f_daftar_pembelian);
-f_daftar_pembelian.segarkan;
-f_daftar_pembelian.Show;
-end;
+  if f_daftar_pembelian <> nil then
+    f_daftar_pembelian.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_pembelian, f_daftar_pembelian);
+    f_daftar_pembelian.segarkan;
+    f_daftar_pembelian.Show;
+  end;
 end;
 
 procedure Tf_utama.DaftarTransaksiKasMasukdanKeluar1Click(Sender: TObject);
 begin
-if (f_daftar_kas <> nil) then
-begin
-f_daftar_kas.Show;
-end else
-begin
-application.CreateForm(tf_daftar_kas,f_daftar_kas);
-f_daftar_kas.segarkan;
-f_daftar_kas.Show;
-end;
+  if (f_daftar_kas <> nil) then
+  begin
+    f_daftar_kas.Show;
+  end
+  else
+  begin
+    application.CreateForm(tf_daftar_kas, f_daftar_kas);
+    f_daftar_kas.segarkan;
+    f_daftar_kas.Show;
+  end;
 end;
 
 procedure Tf_utama.MenuItem1Click(Sender: TObject);
 begin
-application.CreateForm(tf_bayar_piutang, f_bayar_piutang);
-f_bayar_piutang.ShowModal;
+  application.CreateForm(tf_bayar_piutang, f_bayar_piutang);
+  f_bayar_piutang.ShowModal;
 end;
 
 procedure Tf_utama.MenuItem24Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from _vw_jurnal_rinci where kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
-dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL GLOBAL';
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + sb.Panels[3].Text
+    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
+  dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL GLOBAL';
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.DaftarAkun1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_perkiraan',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_daftar_akun.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan, 'select * from vw_perkiraan', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_daftar_akun.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.JurnalUmum3Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''GJ'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_umum.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''GJ'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_umum.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.JurnalKasMasuk1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''KD'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_masuk.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''KD'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_masuk.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.JurnalKasKeluar1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''KK'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_keluar.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''KK'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_keluar.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.Pembelian1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_pembelian where kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembelian.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_pembelian where kd_perusahaan= "' + sb.Panels[3].Text +
+    '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
+    '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembelian.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.DaftarHutangUsaha1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_hutang where kd_perusahaan="'+
-f_utama.sb.Panels[3].Text+'" and status=''belum lunas'' order by tanggal DESC',true);
+  fungsi.SQLExec(dm.Q_laporan, 'select * from vw_hutang where kd_perusahaan="' +
+    f_utama.sb.Panels[3].Text +
+    '" and status=''belum lunas'' order by tanggal DESC', true);
 
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_hutang.fr3');
-dm.laporan.ShowReport;
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_hutang.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.DaftarPiutangUsaha1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from _vw_piutang where kd_perusahaan='+
-quotedstr(f_utama.sb.Panels[3].Text)+' and status=''belum lunas'' order by tanggal DESC',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_piutang.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan, 'select * from _vw_piutang where kd_perusahaan='
+    + quotedstr(f_utama.sb.Panels[3].Text) +
+    ' and status=''belum lunas'' order by tanggal DESC', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_piutang.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.PenJualan1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''TJ'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_penjualan.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''TJ'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_penjualan.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.JurnalPembayaranHutangUsaha1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''PH'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_hutang.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''PH'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_hutang.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.JurnalPembayaranPiutangUsaha1Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''PP'' and kd_perusahaan= "'+
-sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_piutang.fr3');
-dm.laporan.ShowReport;
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from vw_jurnal_global where refr=''PP'' and kd_perusahaan= "' + sb.Panels
+    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
+    [7].Text + '"', true);
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_piutang.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.HartaTetap1Click(Sender: TObject);
@@ -784,26 +848,28 @@ begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_asset where kd_perusahaan= "'+
 sb.Panels[3].Text+'"',true);
 }
-  fungsi.SQLExec(dm.Q_laporan,'call sp_asset("'+f_utama.sb.Panels[3].Text+'","'+
-  formatdatetime('yyyy-MM-dd',encodedate(strtoint(f_utama.sb.Panels[7].Text),strtoint(f_utama.sb.Panels[6].Text),1))+'")',true);
+  fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + f_utama.sb.Panels[3].Text +
+    '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
+    strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', true);
 
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_asset.fr3');
-dm.laporan.ShowReport;
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_asset.fr3');
+  dm.laporan.ShowReport;
 end;
 
 procedure Tf_utama.UbahSkin1Click(Sender: TObject);
 begin
-selectskin(dm.sm);
+  selectskin(dm.sm);
 end;
 
 procedure Tf_utama.AccountofProfitHelp1Click(Sender: TObject);
 begin
-ShellExecute(Handle,'open', PChar('hh.exe'),PChar(dm.Path+'tools/bantuan.chm::/Account_of_profit.htm'), nil, SW_SHOW);
+  ShellExecute(Handle, 'open', PChar('hh.exe'), PChar(dm.Path +
+    'tools/bantuan.chm::/Account_of_profit.htm'), nil, SW_SHOW);
 end;
 
 procedure Tf_utama.FormCreate(Sender: TObject);
 begin
-  DecimalSeparator:= '.';
+  DecimalSeparator := '.';
   ThousandSeparator := ',';
   cek_update;
 end;
@@ -815,7 +881,8 @@ var
 begin
   cHandle := Integer(tc_child.Tabs.Objects[tc_child.TabIndex]);
 
-  if tc_child.Tag = -1 then Exit;
+  if tc_child.Tag = -1 then
+    Exit;
 
   for k := 0 to MDIChildCount - 1 do
   begin
@@ -834,7 +901,8 @@ var
 begin
   cHandle := Integer(tc_child.Tabs.Objects[tc_child.TabIndex]);
 
-  if tc_child.Tag = -1 then Exit;
+  if tc_child.Tag = -1 then
+    Exit;
 
   for k := 0 to MDIChildCount - 1 do
   begin
@@ -847,13 +915,14 @@ begin
 end;
 
 procedure Tf_utama.utupSemua1Click(Sender: TObject);
-var h: Integer;
+var
+  h: Integer;
 begin
-  for h:=0 to f_utama.MDIChildCount-1 do
+  for h := 0 to f_utama.MDIChildCount - 1 do
   begin
     f_utama.MDIChildren[h].Close;
   end;
-  tc_child.Visible:=False;
+  tc_child.Visible := False;
 end;
 
 procedure Tf_utama.utupSemuaKecualiini1Click(Sender: TObject);
@@ -863,7 +932,8 @@ var
 begin
   cHandle := Integer(tc_child.Tabs.Objects[tc_child.TabIndex]);
 
-  if tc_child.Tag = -1 then Exit;
+  if tc_child.Tag = -1 then
+    Exit;
 
   for k := 0 to MDIChildCount - 1 do
   begin
@@ -872,51 +942,55 @@ begin
       MDIChildren[k].Close;
     end;
   end;
-  tc_child.Visible:=False;
+  tc_child.Visible := False;
 end;
 
 procedure Tf_utama.mniDaftarReturnPembelian1Click(Sender: TObject);
 begin
-if f_daftar_return <> nil then
-f_daftar_return.Show else
-begin
-application.CreateForm(tf_daftar_return,f_daftar_return);
-f_daftar_return.segarkan;
-f_daftar_return.Show;
-end;
+  if f_daftar_return <> nil then
+    f_daftar_return.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_return, f_daftar_return);
+    f_daftar_return.segarkan;
+    f_daftar_return.Show;
+  end;
 end;
 
 procedure Tf_utama.mniDaftarKirimBarang1Click(Sender: TObject);
 begin
-if f_daftar_kirim <> nil then
-f_daftar_kirim.Show else
-begin
-application.CreateForm(tf_daftar_kirim,f_daftar_kirim);
-f_daftar_kirim.segarkan;
-f_daftar_kirim.Show;
-end;
+  if f_daftar_kirim <> nil then
+    f_daftar_kirim.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_kirim, f_daftar_kirim);
+    f_daftar_kirim.segarkan;
+    f_daftar_kirim.Show;
+  end;
 end;
 
 procedure Tf_utama.mniDaftarReturnKirim1Click(Sender: TObject);
 begin
-if f_daftar_return_kirim <> nil then
-f_daftar_return_kirim.Show else
-begin
-application.CreateForm(tf_daftar_return_kirim,f_daftar_return_kirim);
-f_daftar_return_kirim.segarkan;
-f_daftar_return_kirim.Show;
-end;
+  if f_daftar_return_kirim <> nil then
+    f_daftar_return_kirim.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_return_kirim, f_daftar_return_kirim);
+    f_daftar_return_kirim.segarkan;
+    f_daftar_return_kirim.Show;
+  end;
 end;
 
 procedure Tf_utama.mniDaftarStockOpnameSO1Click(Sender: TObject);
 begin
-if f_daftar_koreksi <> nil then
-f_daftar_koreksi.Show else
-begin
-application.CreateForm(tf_daftar_koreksi,f_daftar_koreksi);
-f_daftar_koreksi.segarkan;
-f_daftar_koreksi.Show;
-end;
+  if f_daftar_koreksi <> nil then
+    f_daftar_koreksi.Show
+  else
+  begin
+    application.CreateForm(tf_daftar_koreksi, f_daftar_koreksi);
+    f_daftar_koreksi.segarkan;
+    f_daftar_koreksi.Show;
+  end;
 end;
 
 function GetAveCharSize(Canvas: TCanvas): TPoint;
@@ -924,13 +998,16 @@ var
   I: Integer;
   Buffer: array[0..51] of Char;
 begin
-  for I := 0 to 25 do Buffer[I] := Chr(I + Ord('A'));
-  for I := 0 to 25 do Buffer[I + 26] := Chr(I + Ord('a'));
+  for I := 0 to 25 do
+    Buffer[I] := Chr(I + Ord('A'));
+  for I := 0 to 25 do
+    Buffer[I + 26] := Chr(I + Ord('a'));
   GetTextExtentPoint(Canvas.Handle, Buffer, 52, TSize(Result));
   Result.X := Result.X div 52;
 end;
 
-function InputPeriode(const ACaption, APrompt,aslinya: string; periode: Tstrings): string;
+function InputPeriode(const ACaption, APrompt, aslinya: string; periode:
+  Tstrings): string;
 var
   Form: TForm;
   Prompt: TLabel;
@@ -941,139 +1018,142 @@ begin
   Result := aslinya;
   Form := TForm.Create(Application);
   with Form do
-    try
-      Canvas.Font := Font;
-      DialogUnits := GetAveCharSize(Canvas);
-      BorderStyle := bsDialog;
-      Caption := ACaption;
-      ClientWidth := MulDiv(180, DialogUnits.X, 4);
-      Position := poScreenCenter;
-      Prompt := TLabel.Create(Form);
-      with Prompt do
-      begin
-        Parent := Form;
-        Caption := APrompt;
-        Left := MulDiv(8, DialogUnits.X, 4);
-        Top := MulDiv(8, DialogUnits.Y, 8);
-        Constraints.MaxWidth := MulDiv(164, DialogUnits.X, 4);
-        WordWrap := True;
-      end;
-      Edit := TComboBox.Create(Form);
-      with Edit do
-      begin
-        Parent := Form;
-        Left := Prompt.Left;
-        Top := Prompt.Top + Prompt.Height + 5;
-        Width := MulDiv(164, DialogUnits.X, 4);
-        MaxLength := 255;
-        Style:= csOwnerDrawFixed;
-        Items:= periode;
-        ItemIndex:= 0;
-        SelectAll;
-      end;
-      ButtonTop := Edit.Top + Edit.Height + 15;
-      ButtonWidth := MulDiv(50, DialogUnits.X, 4);
-      ButtonHeight := MulDiv(14, DialogUnits.Y, 8);
-      with TButton.Create(Form) do
-      begin
-        Parent := Form;
-        Caption := 'OK';
-        ModalResult := mrOk;
-        Default := True;
-        SetBounds(MulDiv(38, DialogUnits.X, 4), ButtonTop, ButtonWidth,
-          ButtonHeight);
-      end;
-      with TButton.Create(Form) do
-      begin
-        Parent := Form;
-        Caption := 'Cancel';
-        ModalResult := mrCancel;
-        Cancel := True;
-        SetBounds(MulDiv(92, DialogUnits.X, 4), Edit.Top + Edit.Height + 15,
-          ButtonWidth, ButtonHeight);
-        Form.ClientHeight := Top + Height + 13;          
-      end;
-      if ShowModal = mrOk then
-      begin
-        Result := Edit.Text;
-      end;
-    finally
-      Form.Free;
+  try
+    Canvas.Font := Font;
+    DialogUnits := GetAveCharSize(Canvas);
+    BorderStyle := bsDialog;
+    Caption := ACaption;
+    ClientWidth := MulDiv(180, DialogUnits.X, 4);
+    Position := poScreenCenter;
+    Prompt := TLabel.Create(Form);
+    with Prompt do
+    begin
+      Parent := Form;
+      Caption := APrompt;
+      Left := MulDiv(8, DialogUnits.X, 4);
+      Top := MulDiv(8, DialogUnits.Y, 8);
+      Constraints.MaxWidth := MulDiv(164, DialogUnits.X, 4);
+      WordWrap := True;
     end;
+    Edit := TComboBox.Create(Form);
+    with Edit do
+    begin
+      Parent := Form;
+      Left := Prompt.Left;
+      Top := Prompt.Top + Prompt.Height + 5;
+      Width := MulDiv(164, DialogUnits.X, 4);
+      MaxLength := 255;
+      Style := csOwnerDrawFixed;
+      Items := periode;
+      ItemIndex := 0;
+      SelectAll;
+    end;
+    ButtonTop := Edit.Top + Edit.Height + 15;
+    ButtonWidth := MulDiv(50, DialogUnits.X, 4);
+    ButtonHeight := MulDiv(14, DialogUnits.Y, 8);
+    with TButton.Create(Form) do
+    begin
+      Parent := Form;
+      Caption := 'OK';
+      ModalResult := mrOk;
+      Default := True;
+      SetBounds(MulDiv(38, DialogUnits.X, 4), ButtonTop, ButtonWidth, ButtonHeight);
+    end;
+    with TButton.Create(Form) do
+    begin
+      Parent := Form;
+      Caption := 'Cancel';
+      ModalResult := mrCancel;
+      Cancel := True;
+      SetBounds(MulDiv(92, DialogUnits.X, 4), Edit.Top + Edit.Height + 15,
+        ButtonWidth, ButtonHeight);
+      Form.ClientHeight := Top + Height + 13;
+    end;
+    if ShowModal = mrOk then
+    begin
+      Result := Edit.Text;
+    end;
+  finally
+    Form.Free;
+  end;
 end;
 
 procedure Tf_utama.sbDblClick(Sender: TObject);
-var periode,asli : string;
-    isi_periode: TStrings;
-    x: Integer;
+var
+  periode, asli: string;
+  isi_periode: TStrings;
+  x: Integer;
 begin
-if f_utama.MDIChildCount<>0 then
-begin
-showmessage('untuk merubah periode akuntansi, Tutup dulu semua windows...');
-exit;
-end;
+  if f_utama.MDIChildCount <> 0 then
+  begin
+    showmessage('untuk merubah periode akuntansi, Tutup dulu semua windows...');
+    exit;
+  end;
 
-asli := sb.Panels[7].Text + '-'+ sb.Panels[6].Text;
+  asli := sb.Panels[7].Text + '-' + sb.Panels[6].Text;
 
-isi_periode:= TStringList.Create;
-fungsi.SQLExec(dm.Q_temp, 'SELECT DISTINCT CONCAT(tahun,"-",IF(LENGTH(bulan) = 1, '+
-'CONCAT("0",bulan),bulan)) AS Periode FROM tb_jurnal_history order by tahun DESC, bulan DESC',True);
-for x:= 1 to dm.Q_temp.RecordCount do
+  isi_periode := TStringList.Create;
+  fungsi.SQLExec(dm.Q_temp,
+    'SELECT DISTINCT CONCAT(tahun,"-",IF(LENGTH(bulan) = 1, ' + 'CONCAT("0",bulan),bulan)) AS Periode FROM tb_jurnal_history order by tahun DESC, bulan DESC',
+    True);
+  for x := 1 to dm.Q_temp.RecordCount do
   begin
     isi_periode.Add(dm.Q_temp.fieldbyname('periode').AsString);
     dm.Q_temp.Next;
   end;
-periode := InputPeriode('Periode Akuntansi','Masukkan Periode Akuntansi',asli,isi_periode);
-sb.Panels[6].Text:= Copy(periode,6,2);
-sb.Panels[7].Text:= Copy(periode,1,4);
+  periode := InputPeriode('Periode Akuntansi', 'Masukkan Periode Akuntansi',
+    asli, isi_periode);
+  sb.Panels[6].Text := Copy(periode, 6, 2);
+  sb.Panels[7].Text := Copy(periode, 1, 4);
 
-dm.PeriodAktif:= sb.Panels[7].Text + sb.Panels[6].Text;
+  dm.PeriodAktif := sb.Panels[7].Text + sb.Panels[6].Text;
 
-isi_periode.Free;
+  isi_periode.Free;
 end;
 
 procedure Tf_utama.Timer1Timer(Sender: TObject);
 begin
-try
-fungsi.SQLExec(dm.Q_koneksi,'select date(now()) as sekarang',True);
+  try
+    fungsi.SQLExec(dm.Q_koneksi, 'select date(now()) as sekarang', True);
 
-except
-  Timer1.Enabled:= False;
-  if (MessageDlg('KONEKSI TERPUTUS DENGAN SERVER...'+#13+#10+'coba '+
-  'hubungkan kembali??????', mtWarning, [mbOK], 0) = mrOk) then
-  begin
-    Timer1.Enabled:= True;
+  except
+    Timer1.Enabled := False;
+    if (MessageDlg('KONEKSI TERPUTUS DENGAN SERVER...' + #13 + #10 + 'coba ' +
+      'hubungkan kembali??????', mtWarning, [mbOK], 0) = mrOk) then
+    begin
+      Timer1.Enabled := True;
+    end;
   end;
-end;
 
 end;
 
 procedure Tf_utama.CekUpdate1Click(Sender: TObject);
 begin
-cek_update;
+  cek_update;
 end;
 
 procedure Tf_utama.cek_update;
 var
-  versiDB,versiAPP,URLDownload:string;
-  fileName, UrlDownloadLocal:string;
-  hasil : Boolean;
+  versiDB, versiAPP, URLDownload: string;
+  fileName, UrlDownloadLocal: string;
+  hasil: Boolean;
 begin
-  hasil:=False;
-  
+  hasil := False;
+
   versiAPP := fungsi.GetVersiApp;
 
-  fungsi.SQLExec(dm.Q_Show,'select versi_terbaru, URLdownload from  app_versi where kode="accounting.exe"',true);
-  versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
-  URLDownload       := dm.Q_Show.FieldByName('URLdownload').AsString;
-  fileName          := Copy(URLDownload,LastDelimiter('/',URLDownload) + 1,Length(URLDownload));
-  UrlDownloadLocal  := 'http://'+dm.db_conn.Host + '/GainProfit/' + fileName;
+  fungsi.SQLExec(dm.Q_Show,
+    'select versi_terbaru, URLdownload from  app_versi where kode="accounting.exe"',
+    true);
+  versiDB := dm.Q_Show.FieldByName('versi_terbaru').AsString;
+  URLDownload := dm.Q_Show.FieldByName('URLdownload').AsString;
+  fileName := Copy(URLDownload, LastDelimiter('/', URLDownload) + 1, Length(URLDownload));
+  UrlDownloadLocal := 'http://' + dm.db_conn.Host + '/GainProfit/' + fileName;
 
   if versiAPP < versiDB then
   begin
     ShowMessage('APLIKASI AKUNTANSI TIDAK DAPAT DIJALANKAN' + #13#10 +
-    'aplikasi terbaru dengan versi : '+ versiDB + #13#10 +
-    'SUDAH DIRILIS...');
+      'aplikasi terbaru dengan versi : ' + versiDB + #13#10 + 'SUDAH DIRILIS...');
 
     Application.Terminate;
     Exit;
@@ -1084,15 +1164,19 @@ procedure Tf_utama.BuatSaldoAwalAkun;
 begin
   dm.db_conn.StartTransaction;
   try
-  fungsi.SQLExec(dm.Q_Exe,'call sp_saldo_awal_akun("'+f_utama.sb.Panels[3].Text+'","'+
-  formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_saldo_awal_akun("' + f_utama.sb.Panels[3].Text
+      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(sb.Panels[7].Text),
+      strtoint(sb.Panels[6].Text), 1)) + '")', false);
 
-  dm.db_conn.Commit;
-  except on e:exception do begin
-    dm.db_conn.Rollback;
-    showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
+    dm.db_conn.Commit;
+  except
+    on e: exception do
+    begin
+      dm.db_conn.Rollback;
+      showmessage('pembuatan saldo awal akun gagal '#10#13'' + e.Message);
     end;
   end;
 end;
 
 end.
+

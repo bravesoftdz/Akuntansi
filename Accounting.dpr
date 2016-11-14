@@ -32,6 +32,8 @@ uses
 
 {$R *.res}
 
+
+
 begin
   Application.Initialize;
   Application.Title := 'Account of Profit 2.0';
@@ -39,3 +41,4 @@ begin
   Application.CreateForm(Tf_utama, f_utama);
   Application.Run;
 end.
+

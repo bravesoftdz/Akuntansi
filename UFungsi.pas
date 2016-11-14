@@ -278,7 +278,8 @@ begin
   TQueryTread.Create(aQuery, _SQL, isSearch);
 end;
 
-function Tfungsi.AmbilIniFile(nama_file, Section, Ident: string; def: string = ''): string;
+function Tfungsi.AmbilIniFile(nama_file, Section, Ident: string; def: string =
+  ''): string;
 var
   a: TIniFile;
 begin
@@ -316,8 +317,8 @@ begin
     Result := s + Text;
 end;
 
-function Tfungsi.TulisFormat(Text: string; lebar: integer; Alignment: TAlignment =
-  taleftjustify): string;
+function Tfungsi.TulisFormat(Text: string; lebar: integer; Alignment: TAlignment
+  = taleftjustify): string;
 var
   left, right: integer;
 begin

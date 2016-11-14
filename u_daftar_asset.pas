@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
-  cxDataStorage, cxEdit, DB, cxDBData, cxCalendar, cxCurrencyEdit,
-  StdCtrls, sButton, Buttons, sSpeedButton, ExtCtrls, sPanel, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGrid, sSkinProvider, mySQLDbTables;
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, cxCalendar, cxCurrencyEdit, StdCtrls, sButton, Buttons,
+  sSpeedButton, ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
+  cxGrid, sSkinProvider, mySQLDbTables;
 
 type
   Tf_daftar_asset = class(TForm)
@@ -42,15 +42,15 @@ type
     p2: TsPanel;
     sButton4: TsButton;
     procedure segarkan;
-    procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE);message WM_MDIACTIVATE;
+    procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE); message WM_MDIACTIVATE;
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure sButton1Click(Sender: TObject);
     procedure sButton2Click(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
-    procedure t_data1CellDblClick(Sender: TcxCustomGridTableView;
-      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-      AShift: TShiftState; var AHandled: Boolean);
+    procedure t_data1CellDblClick(Sender: TcxCustomGridTableView; ACellViewInfo:
+      TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift: TShiftState;
+      var AHandled: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure sButton4Click(Sender: TObject);
@@ -65,7 +65,8 @@ var
 
 implementation
 
-uses u_dm, u_utama, u_asset, UFungsi;
+uses
+  u_dm, u_utama, u_asset, UFungsi;
 
 {$R *.dfm}
 
@@ -74,8 +75,9 @@ begin
 {  fungsi.SQLExec(Q_asset,'select * from vw_asset where kd_perusahaan= '''+
   f_utama.sb.Panels[3].Text+'''',true);
 }
-  fungsi.SQLExec(Q_asset,'call sp_asset("'+f_utama.sb.Panels[3].Text+'","'+
-  formatdatetime('yyyy-MM-dd',encodedate(strtoint(f_utama.sb.Panels[7].Text),strtoint(f_utama.sb.Panels[6].Text),1))+'")',true);
+  fungsi.SQLExec(Q_asset, 'call sp_asset("' + f_utama.sb.Panels[3].Text + '","'
+    + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
+    strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', true);
 end;
 
 procedure Tf_daftar_asset.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -83,85 +85,88 @@ var
   active: TWinControl;
   idx: Integer;
 begin
-  active := FindControl(msg.ActiveWnd) ;
-if not(dm.metu_kabeh) then
-begin
-  if Assigned(active) then
+  active := FindControl(msg.ActiveWnd);
+  if not (dm.metu_kabeh) then
   begin
-    idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
-    f_utama.tc_child.Tag := -1;
-    f_utama.tc_child.TabIndex := idx;
-    f_utama.tc_child.Tag := 0;
+    if Assigned(active) then
+    begin
+      idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
+      f_utama.tc_child.Tag := -1;
+      f_utama.tc_child.TabIndex := idx;
+      f_utama.tc_child.Tag := 0;
+    end;
   end;
-end;
 end;
 
 procedure Tf_daftar_asset.sb_1Click(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure Tf_daftar_asset.sb_2Click(Sender: TObject);
 begin
-segarkan;
+  segarkan;
 end;
 
 procedure Tf_daftar_asset.sButton1Click(Sender: TObject);
-var posisi: Integer;
+var
+  posisi: Integer;
 begin
-application.CreateForm(tf_asset,f_asset);
-f_asset.baru;
-f_asset.ShowModal;
-posisi:= t_data1.DataController.DataSource.DataSet.RecNo;
-segarkan;
-t_data1.DataController.DataSource.DataSet.RecNo:= posisi;
+  application.CreateForm(tf_asset, f_asset);
+  f_asset.baru;
+  f_asset.ShowModal;
+  posisi := t_data1.DataController.DataSource.DataSet.RecNo;
+  segarkan;
+  t_data1.DataController.DataSource.DataSet.RecNo := posisi;
 end;
 
 procedure Tf_daftar_asset.sButton2Click(Sender: TObject);
-var posisi: Integer;
+var
+  posisi: Integer;
 begin
-application.CreateForm(tf_asset,f_asset);
-f_asset.ubah;
-f_asset.ShowModal;
+  application.CreateForm(tf_asset, f_asset);
+  f_asset.ubah;
+  f_asset.ShowModal;
 
-posisi:= t_data1.DataController.DataSource.DataSet.RecNo;
-segarkan;
-t_data1.DataController.DataSource.DataSet.RecNo:= posisi;
+  posisi := t_data1.DataController.DataSource.DataSet.RecNo;
+  segarkan;
+  t_data1.DataController.DataSource.DataSet.RecNo := posisi;
 end;
 
 procedure Tf_daftar_asset.sButton3Click(Sender: TObject);
 begin
-if MessageBox(0, 'Benarkah'+#13+#10+'Anda akan menghapus data ini???', 'Hapus data Asset', MB_ICONQUESTION or MB_YESNO)=mrYes then
-begin
-dm.db_conn.StartTransaction;
-try
-fungsi.SQLExec(dm.Q_Exe,'delete from tb_asset where kd_perusahaan="'+
-Q_asset.fieldbyname('kd_perusahaan').AsString+'" and kd_asset="'+
-Q_asset.fieldbyname('kd_asset').AsString+'"',false);
-dm.db_conn.Commit;
-segarkan;
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('penghapusan data gagal '#10#13'' +e.Message);
+  if MessageBox(0, 'Benarkah' + #13 + #10 + 'Anda akan menghapus data ini???',
+    'Hapus data Asset', MB_ICONQUESTION or MB_YESNO) = mrYes then
+  begin
+    dm.db_conn.StartTransaction;
+    try
+      fungsi.SQLExec(dm.Q_Exe, 'delete from tb_asset where kd_perusahaan="' +
+        Q_asset.fieldbyname('kd_perusahaan').AsString + '" and kd_asset="' +
+        Q_asset.fieldbyname('kd_asset').AsString + '"', false);
+      dm.db_conn.Commit;
+      segarkan;
+    except
+      on e: exception do
+      begin
+        dm.db_conn.Rollback;
+        showmessage('penghapusan data gagal '#10#13'' + e.Message);
+      end;
+    end;
   end;
 end;
-end;
+
+procedure Tf_daftar_asset.t_data1CellDblClick(Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton; AShift:
+  TShiftState; var AHandled: Boolean);
+begin
+  sbutton2Click(sender);
 end;
 
-procedure Tf_daftar_asset.t_data1CellDblClick(
-  Sender: TcxCustomGridTableView;
-  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
-  AShift: TShiftState; var AHandled: Boolean);
+procedure Tf_daftar_asset.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-sbutton2Click(sender);
-end;
-
-procedure Tf_daftar_asset.FormClose(Sender: TObject;
-  var Action: TCloseAction);
-begin
-f_utama.MDIChildDestroyed(self.Handle);
-action:= cafree;
-f_daftar_asset:=nil;
+  f_utama.MDIChildDestroyed(self.Handle);
+  action := cafree;
+  f_daftar_asset := nil;
 end;
 
 procedure Tf_daftar_asset.FormCreate(Sender: TObject);
@@ -171,18 +176,22 @@ end;
 
 procedure Tf_daftar_asset.sButton4Click(Sender: TObject);
 begin
-dm.db_conn.StartTransaction;
-try
-fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(f_utama.sb.Panels[7].Text),strtoint(f_utama.sb.Panels[6].Text),1))+'")',false);
-dm.db_conn.Commit;
-showmessage('proses Posting Daftar Harta Tetap kedalam Jurnal berhasil.....');
+  dm.db_conn.StartTransaction;
+  try
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_penyusutan("' + f_utama.sb.Panels[3].Text
+      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels
+      [7].Text), strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', false);
+    dm.db_conn.Commit;
+    showmessage('proses Posting Daftar Harta Tetap kedalam Jurnal berhasil.....');
 
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('Proses Posting Gagal, ahir gagal '#10#13'' +e.Message);
+  except
+    on e: exception do
+    begin
+      dm.db_conn.Rollback;
+      showmessage('Proses Posting Gagal, ahir gagal '#10#13'' + e.Message);
+    end;
   end;
-end;
 end;
 
 end.
+

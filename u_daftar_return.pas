@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
-  cxDataStorage, cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox,
-  cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, StdCtrls, sButton,
-  Buttons, sSpeedButton, ExtCtrls, sPanel, mySQLDbTables, sSkinProvider;
+  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox, cxGridLevel,
+  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
+  cxControls, cxGridCustomView, cxGrid, StdCtrls, sButton, Buttons, sSpeedButton,
+  ExtCtrls, sPanel, mySQLDbTables, sSkinProvider;
 
 type
   Tf_daftar_return = class(TForm)
@@ -52,13 +52,12 @@ type
     t_data0pengguna: TcxGridDBColumn;
     t_data0faktur_receipt: TcxGridDBColumn;
     procedure segarkan;
-    procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE);message WM_MDIACTIVATE;
+    procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE); message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure gridActiveTabChanged(Sender: TcxCustomGrid;
-      ALevel: TcxGridLevel);
+    procedure gridActiveTabChanged(Sender: TcxCustomGrid; ALevel: TcxGridLevel);
     procedure t_data0FocusedRecordChanged(Sender: TcxCustomGridTableView;
       APrevFocusedRecord, AFocusedRecord: TcxCustomGridRecord;
       ANewItemRecordFocusingChanged: Boolean);
@@ -76,23 +75,29 @@ var
 
 implementation
 
-uses u_utama, u_dm, UFungsi;
+uses
+  u_utama, u_dm, UFungsi;
 
 {$R *.dfm}
 
 procedure Tf_daftar_return.segarkan;
 begin
-fungsi.SQLExec(Q_return,'select *,IF(IFNULL(ix_return,0)=0,0,1) as posted from vw_list_return where kd_perusahaan= "'+
-f_utama.sb.Panels[3].Text+'" and month(tgl_return)="'+f_utama.sb.Panels[6].Text+'" and year(tgl_return)="'+
-f_utama.sb.Panels[7].Text+'" order by tgl_return DESC',true);
+  fungsi.SQLExec(Q_return,
+    'select *,IF(IFNULL(ix_return,0)=0,0,1) as posted from vw_list_return where kd_perusahaan= "' +
+    f_utama.sb.Panels[3].Text + '" and month(tgl_return)="' + f_utama.sb.Panels[6].Text
+    + '" and year(tgl_return)="' + f_utama.sb.Panels[7].Text +
+    '" order by tgl_return DESC', true);
 
-fungsi.SQLExec(Q_daftar_return,'select * from tb_jurnal_global where kd_perusahaan= "'+
-f_utama.sb.Panels[3].Text+'" and no_ix="'+Q_return.fieldbyname('ix_return').AsString+'"',true);
+  fungsi.SQLExec(Q_daftar_return,
+    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    + '" and no_ix="' + Q_return.fieldbyname('ix_return').AsString + '"', true);
 
-fungsi.SQLExec(Q_rinci_return,'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= '''+
-f_utama.sb.Panels[3].Text+''' and ix_jurnal = "'+Q_return.fieldbyname('ix_return').AsString+'"',true);
+  fungsi.SQLExec(Q_rinci_return,
+    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
+    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_return.fieldbyname('ix_return').AsString
+    + '"', true);
 
-t_data1.ViewData.Expand(True);
+  t_data1.ViewData.Expand(True);
 end;
 
 procedure Tf_daftar_return.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -100,38 +105,38 @@ var
   active: TWinControl;
   idx: Integer;
 begin
-  active := FindControl(msg.ActiveWnd) ;
-if not(dm.metu_kabeh) then
-begin
-  if Assigned(active) then
+  active := FindControl(msg.ActiveWnd);
+  if not (dm.metu_kabeh) then
   begin
-    idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
-    f_utama.tc_child.Tag := -1;
-    f_utama.tc_child.TabIndex := idx;
-    f_utama.tc_child.Tag := 0;
+    if Assigned(active) then
+    begin
+      idx := f_utama.tc_child.Tabs.IndexOfObject(TObject(msg.ActiveWnd));
+      f_utama.tc_child.Tag := -1;
+      f_utama.tc_child.TabIndex := idx;
+      f_utama.tc_child.Tag := 0;
+    end;
   end;
 end;
-end;
 
-procedure Tf_daftar_return.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure Tf_daftar_return.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-f_utama.MDIChildDestroyed(self.Handle);
-action:= cafree;
-f_daftar_return:=nil;
+  f_utama.MDIChildDestroyed(self.Handle);
+  action := cafree;
+  f_daftar_return := nil;
 end;
 
 procedure Tf_daftar_return.sb_1Click(Sender: TObject);
 begin
-Close;
+  Close;
 end;
 
 procedure Tf_daftar_return.sb_2Click(Sender: TObject);
-var posisi: Integer;
+var
+  posisi: Integer;
 begin
-posisi:= t_data0.DataController.DataSource.DataSet.RecNo;
-segarkan;
-t_data0.DataController.DataSource.DataSet.RecNo:= posisi;
+  posisi := t_data0.DataController.DataSource.DataSet.RecNo;
+  segarkan;
+  t_data0.DataController.DataSource.DataSet.RecNo := posisi;
 end;
 
 procedure Tf_daftar_return.FormCreate(Sender: TObject);
@@ -139,72 +144,80 @@ begin
   f_utama.MDIChildCreated(self.Handle);
 end;
 
-procedure Tf_daftar_return.gridActiveTabChanged(Sender: TcxCustomGrid;
-  ALevel: TcxGridLevel);
+procedure Tf_daftar_return.gridActiveTabChanged(Sender: TcxCustomGrid; ALevel:
+  TcxGridLevel);
 begin
-if ALevel = l_data1 then
-begin
-p1.Visible:= True;
-p2.Visible:= False;
-end else
-begin
-p1.Visible:= False;
-p2.Visible:= True;
+  if ALevel = l_data1 then
+  begin
+    p1.Visible := True;
+    p2.Visible := False;
+  end
+  else
+  begin
+    p1.Visible := False;
+    p2.Visible := True;
+  end;
 end;
-end;
 
-procedure Tf_daftar_return.t_data0FocusedRecordChanged(
-  Sender: TcxCustomGridTableView; APrevFocusedRecord,
-  AFocusedRecord: TcxCustomGridRecord;
-  ANewItemRecordFocusingChanged: Boolean);
+procedure Tf_daftar_return.t_data0FocusedRecordChanged(Sender:
+  TcxCustomGridTableView; APrevFocusedRecord, AFocusedRecord:
+  TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
-fungsi.SQLExec(Q_daftar_return,'select * from tb_jurnal_global where kd_perusahaan= "'+
-f_utama.sb.Panels[3].Text+'" and no_ix="'+Q_return.fieldbyname('ix_return').AsString+'"',true);
+  fungsi.SQLExec(Q_daftar_return,
+    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    + '" and no_ix="' + Q_return.fieldbyname('ix_return').AsString + '"', true);
 
-fungsi.SQLExec(Q_rinci_return,'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= '''+
-f_utama.sb.Panels[3].Text+''' and ix_jurnal = "'+Q_return.fieldbyname('ix_return').AsString+'"',true);
+  fungsi.SQLExec(Q_rinci_return,
+    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
+    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_return.fieldbyname('ix_return').AsString
+    + '"', true);
 
-t_data1.ViewData.Expand(True);
+  t_data1.ViewData.Expand(True);
 end;
 
 procedure Tf_daftar_return.sButton1Click(Sender: TObject);
 begin
-fungsi.SQLExec(Q_daftar_return,'select * from tb_jurnal_global where kd_perusahaan= "'+
-f_utama.sb.Panels[3].Text+'" and refr="KJ" and month(tgl)="'+
-f_utama.sb.Panels[6].Text+'" and year(tgl)="'+f_utama.sb.Panels[7].Text+'" order by tgl DESC',true);
+  fungsi.SQLExec(Q_daftar_return,
+    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    + '" and refr="KJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
+    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
 
-fungsi.SQLExec(Q_rinci_return,'select * from _vw_jurnal_rinci  where kd_perusahaan= '''+
-f_utama.sb.Panels[3].Text+''' and refr="KJ" and bulan='''+
-f_utama.sb.Panels[6].Text+''' and tahun='''+f_utama.sb.Panels[7].Text+'''',true);
+  fungsi.SQLExec(Q_rinci_return,
+    'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
+    [3].Text + ''' and refr="KJ" and bulan=''' + f_utama.sb.Panels[6].Text +
+    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
 end;
 
 procedure Tf_daftar_return.sButton2Click(Sender: TObject);
 begin
-dm.db_conn.StartTransaction;
-try
-  fungsi.SQLExec(dm.Q_Exe,'call sp_jurnal_return("'+f_utama.sb.Panels[3].Text+'","'+
-  Q_return.fieldbyname('kd_return').AsString+'")',False);
-  dm.db_conn.commit;
-  ShowMessage('Proses Posting jurnal Return Pembelian Berhasil....');
+  dm.db_conn.StartTransaction;
+  try
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_jurnal_return("' + f_utama.sb.Panels[3].Text
+      + '","' + Q_return.fieldbyname('kd_return').AsString + '")', False);
+    dm.db_conn.commit;
+    ShowMessage('Proses Posting jurnal Return Pembelian Berhasil....');
 
-  sb_2Click(Self);
-except on e:exception do
-  begin
-    dm.db_conn.Rollback;
-    showmessage('Proses Posting Gagal... '#10#13'' +e.Message);
+    sb_2Click(Self);
+  except
+    on e: exception do
+    begin
+      dm.db_conn.Rollback;
+      showmessage('Proses Posting Gagal... '#10#13'' + e.Message);
+    end;
   end;
-end;
 end;
 
 procedure Tf_daftar_return.sButton3Click(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_laporan,'select * from _vw_jurnal_rinci where kd_perusahaan= "'+
-f_utama.sb.Panels[3].Text+'" and bulan= "'+f_utama.sb.Panels[6].Text+'" and tahun="'+
-f_utama.sb.Panels[7].Text+'" and refr="KJ"',true);
+  fungsi.SQLExec(dm.Q_laporan,
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
+    [7].Text + '" and refr="KJ"', true);
 
-dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
-dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL RETURN PEMBELIAN';
-dm.laporan.ShowReport;
+  dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
+  dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL RETURN PEMBELIAN';
+  dm.laporan.ShowReport;
 end;
 
 end.
+

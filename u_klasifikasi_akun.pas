@@ -4,13 +4,13 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sMemo, sLabel, cxStyles, cxCustomData, cxGraphics,
-  cxFilter, cxData, cxDataStorage, cxEdit, DB, cxDBData,
-  cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGridLevel,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, sButton, ExtCtrls,
-  sPanel, sComboBox, cxContainer, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBExtLookupComboBox,
-  cxDBLookupComboBox, cxNavigator, cxDBNavigator, cxDBEdit, cxCurrencyEdit;
+  Dialogs, StdCtrls, sMemo, sLabel, cxStyles, cxCustomData, cxGraphics, cxFilter,
+  cxData, cxDataStorage, cxEdit, DB, cxDBData, cxGridCustomTableView,
+  cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxControls,
+  cxGridCustomView, cxGrid, sButton, ExtCtrls, sPanel, sComboBox, cxContainer,
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxDBExtLookupComboBox, cxDBLookupComboBox, cxNavigator, cxDBNavigator,
+  cxDBEdit, cxCurrencyEdit;
 
 type
   Tf_klasifikasi_akun = class(TForm)
@@ -51,8 +51,7 @@ type
     procedure sButton1Click(Sender: TObject);
     procedure sButton5Click(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure sButton8Click(Sender: TObject);
     procedure sButton6Click(Sender: TObject);
     procedure sButton7Click(Sender: TObject);
@@ -66,23 +65,24 @@ type
 
 var
   f_klasifikasi_akun: Tf_klasifikasi_akun;
-  anyar:boolean;
+  anyar: boolean;
 
 implementation
 
-uses u_dm, u_utama, UFungsi;
+uses
+  u_dm, u_utama, UFungsi;
 
 {$R *.dfm}
 
 procedure Tf_klasifikasi_akun.sButton2Click(Sender: TObject);
 begin
-close;
+  close;
 end;
 
 procedure Tf_klasifikasi_akun.sButton1Click(Sender: TObject);
 begin
-p1.Visible:= false;
-p2.Visible:= true;
+  p1.Visible := false;
+  p2.Visible := true;
 {dm.T_show.Close;
 dm.T_show.TableName:='tb_sub_klas';
 dm.T_show.Open;
@@ -90,8 +90,8 @@ dm.T_show.Open;
 
 procedure Tf_klasifikasi_akun.sButton5Click(Sender: TObject);
 begin
-p1.Visible:= true;
-p2.Visible:= false;
+  p1.Visible := true;
+  p2.Visible := false;
 {dm.T_show.Close;
 dm.T_show.TableName:='tb_klas';
 dm.T_show.Open;
@@ -99,80 +99,90 @@ dm.T_show.Open;
 
 procedure Tf_klasifikasi_akun.sButton3Click(Sender: TObject);
 begin
-if messagedlg('Apakah anda akan membuka Akun Perkiraan???',mtconfirmation,[mbYes,mbNo],0)=mrYes then
-f_utama.ac_kiraan_buku_besarExecute(Sender);
-close;
+  if messagedlg('Apakah anda akan membuka Akun Perkiraan???', mtconfirmation, [mbYes,
+    mbNo], 0) = mrYes then
+    f_utama.ac_kiraan_buku_besarExecute(Sender);
+  close;
 end;
 
-procedure Tf_klasifikasi_akun.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure Tf_klasifikasi_akun.FormKeyDown(Sender: TObject; var Key: Word; Shift:
+  TShiftState);
 begin
-if key=vk_escape then close;
+  if key = vk_escape then
+    close;
 end;
 
 procedure Tf_klasifikasi_akun.sButton8Click(Sender: TObject);
 begin
-anyar:= true;
-ce_kiraan.Enabled:= true;
-ce_kiraan.Clear;
-cb_subklas.Clear;
-ed_kiraan.Clear;
+  anyar := true;
+  ce_kiraan.Enabled := true;
+  ce_kiraan.Clear;
+  cb_subklas.Clear;
+  ed_kiraan.Clear;
 end;
 
 procedure Tf_klasifikasi_akun.ubah;
 begin
 //kjhg
-anyar:= false;
-ce_kiraan.Enabled:= false;
-ce_kiraan.Text:= dm.Q_kiraan.fieldbyname('kd_kiraan').AsString;
-cb_subklas.Text:= dm.Q_kiraan.fieldbyname('no_sub_klas').AsString;
-ed_kiraan.Text:= dm.Q_kiraan.fieldbyname('n_kiraan').AsString;
+  anyar := false;
+  ce_kiraan.Enabled := false;
+  ce_kiraan.Text := dm.Q_kiraan.fieldbyname('kd_kiraan').AsString;
+  cb_subklas.Text := dm.Q_kiraan.fieldbyname('no_sub_klas').AsString;
+  ed_kiraan.Text := dm.Q_kiraan.fieldbyname('n_kiraan').AsString;
 end;
 
 procedure Tf_klasifikasi_akun.sButton6Click(Sender: TObject);
 begin
-if messagedlg('Yakin akan menghapus data ini...',mtconfirmation,[mbyes,mbno],0)=mryes then
-begin
-fungsi.SQLExec(dm.Q_Exe,'delete from tb_kiraan where kd_kiraan='+ce_kiraan.Text+'',false);
-fungsi.SQLExec(dm.Q_kiraan,'select * from vw_perkiraan',true);
-close;
-end;
+  if messagedlg('Yakin akan menghapus data ini...', mtconfirmation, [mbyes, mbno],
+    0) = mryes then
+  begin
+    fungsi.SQLExec(dm.Q_Exe, 'delete from tb_kiraan where kd_kiraan=' +
+      ce_kiraan.Text + '', false);
+    fungsi.SQLExec(dm.Q_kiraan, 'select * from vw_perkiraan', true);
+    close;
+  end;
 end;
 
 procedure Tf_klasifikasi_akun.sButton7Click(Sender: TObject);
 begin
-dm.db_conn.StartTransaction;
-try
-if anyar=true then
-begin
-fungsi.SQLExec(dm.Q_Exe,'insert into tb_kiraan(kd_kiraan,no_sub_klas,n_kiraan)values("'+
-ce_kiraan.Text+'","'+cb_subklas.Text+'","'+ed_kiraan.Text+'")',false);
-end else
-begin
-fungsi.SQLExec(dm.Q_Exe,'update tb_kiraan set no_sub_klas='+cb_subklas.Text+',n_kiraan="'+
-ed_kiraan.Text+'" where kd_kiraan='+ce_kiraan.Text+'',false);
-end;
+  dm.db_conn.StartTransaction;
+  try
+    if anyar = true then
+    begin
+      fungsi.SQLExec(dm.Q_Exe,
+        'insert into tb_kiraan(kd_kiraan,no_sub_klas,n_kiraan)values("' +
+        ce_kiraan.Text + '","' + cb_subklas.Text + '","' + ed_kiraan.Text + '")', false);
+    end
+    else
+    begin
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_kiraan set no_sub_klas=' + cb_subklas.Text
+        + ',n_kiraan="' + ed_kiraan.Text + '" where kd_kiraan=' + ce_kiraan.Text
+        + '', false);
+    end;
 
-fungsi.SQLExec(dm.Q_kiraan,'select * from vw_perkiraan',true);
+    fungsi.SQLExec(dm.Q_kiraan, 'select * from vw_perkiraan', true);
 
-dm.db_conn.Commit;
-showmessage('Penyimpanan data berhasil...');
-close;
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('penyimpanan data gagal '#10#13'' +e.Message);
+    dm.db_conn.Commit;
+    showmessage('Penyimpanan data berhasil...');
+    close;
+  except
+    on e: exception do
+    begin
+      dm.db_conn.Rollback;
+      showmessage('penyimpanan data gagal '#10#13'' + e.Message);
+    end;
   end;
-end;
 
 // buat saldo awal akun ketika akun ditambah atau diubah...
-f_utama.BuatSaldoAwalAkun;
+  f_utama.BuatSaldoAwalAkun;
 end;
 
 procedure Tf_klasifikasi_akun.FormShow(Sender: TObject);
 begin
-fungsi.SQLExec(dm.Q_klas,'select * from tb_klas',true);
-fungsi.SQLExec(dm.Q_subklas,'select * from tb_sub_klas',true);
-fungsi.SQLExec(dm.Q_kiraan,'select * from vw_perkiraan',true);
+  fungsi.SQLExec(dm.Q_klas, 'select * from tb_klas', true);
+  fungsi.SQLExec(dm.Q_subklas, 'select * from tb_sub_klas', true);
+  fungsi.SQLExec(dm.Q_kiraan, 'select * from vw_perkiraan', true);
 end;
 
 end.
+
