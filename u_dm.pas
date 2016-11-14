@@ -53,7 +53,7 @@ type
 var
   dm: Tdm;
   WPath, AppPath: string;
-  sop, metu_kabeh: boolean;
+  metu_kabeh: boolean;
   PeriodAktif: string;
   mgs: TMsg;
 
@@ -160,9 +160,6 @@ begin
   finally
     appINI.Free;
   end;
-
-  sop := true;
-
 end;
 
 procedure Tdm.smAfterChange(Sender: TObject);

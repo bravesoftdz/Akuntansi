@@ -36,6 +36,7 @@ type
   private
     { Private declarations }
   public
+    sop :Boolean;
     { Public declarations }
   end;
 
