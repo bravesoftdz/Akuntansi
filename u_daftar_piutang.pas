@@ -148,12 +148,12 @@ begin
   begin
     fungsi.SQLExec(dm.Q_laporan,'select * from vw_cetak_kirim where kd_perusahaan="'+
     f_utama.sb.Panels[3].Text+'" and kd_kirim="'+Q_piutang.fieldbyname('faktur').AsString+'"',true);
-    dm.laporan.LoadFromFile(WPath + 'laporan\gp_kirim_rinci.fr3');
+    dm.laporan.LoadFromFile(dm.Path + 'laporan\gp_kirim_rinci.fr3');
     dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
     dm.laporan.ShowReport;
   end else
   begin
-    dm.laporan.LoadFromFile(WPath + 'laporan/k_struk_retail.fr3');
+    dm.laporan.LoadFromFile(dm.Path + 'laporan/k_struk_retail.fr3');
     dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('grand_total').AsFloat)+'Rupiah';
     dm.laporan.ShowReport;
   end;

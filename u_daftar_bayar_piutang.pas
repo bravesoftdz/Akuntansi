@@ -120,7 +120,7 @@ fungsi.SQLExec(dm.Q_laporan,'select * from _vw_jurnal_rinci where kd_perusahaan=
 f_utama.sb.Panels[3].Text+'" and bulan= "'+f_utama.sb.Panels[6].Text+'" and tahun="'+
 f_utama.sb.Panels[7].Text+'" and refr="PP"',true);
 
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_global.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
 dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL BAYAR PIUTANG';
 dm.laporan.ShowReport;
 end;

@@ -136,7 +136,7 @@ procedure Tf_daftar_hutang.sButton3Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_cetak_receipt where kd_perusahaan="'+
 f_utama.sb.Panels[3].Text+'" and kd_receipt="'+Q_hutang.fieldbyname('faktur').AsString+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\gp_receipt_rinci.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\gp_receipt_rinci.fr3');
 dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)+'Rupiah';
 dm.laporan.ShowReport;
 end;

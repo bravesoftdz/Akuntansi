@@ -165,7 +165,7 @@ begin
 fungsi.SQLExec(dm.Q_buku_besar,'select * from vw_buku_besar where kd_perusahaan= "'+
 f_utama.sb.Panels[3].Text+'" and bulan= "'+f_utama.sb.Panels[6].Text+'" and tahun="'+
 f_utama.sb.Panels[7].Text+'" and kd_kiraan = '+quotedstr(dm.Q_kiraan.fieldbyname('kd_kiraan').AsString)+'',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_buku_besar.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
 dm.laporan.ShowReport;
 end;
 

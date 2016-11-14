@@ -45,6 +45,9 @@ type
     { Private declarations }
   public
     kd_comp: string;
+    Path, AppPath: string;
+    metu_kabeh: boolean;
+    PeriodAktif: string;
     function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;
     function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
     { Public declarations }
@@ -52,9 +55,6 @@ type
 
 var
   dm: Tdm;
-  WPath, AppPath: string;
-  metu_kabeh: boolean;
-  PeriodAktif: string;
   mgs: TMsg;
 
 implementation
@@ -143,7 +143,7 @@ begin
     end;
   end;
 
-  WPath := ExtractFilePath(Application.ExeName);
+  dm.Path := ExtractFilePath(Application.ExeName);
 
   AppPath := GetAppData(CSIDL_COMMON_APPDATA);
   if not (DirectoryExists(AppPath)) then

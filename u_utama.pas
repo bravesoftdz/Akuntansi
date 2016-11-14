@@ -319,7 +319,7 @@ fungsi.SQLExec(dm.Q_trial_balance2,'select * from vw_trial_balance_kredit where 
 '2'+'%" or kd_kiraan like "'+'3'+'%") and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
 
-dm.laporan.LoadFromFile(WPath + 'laporan\a_neraca.fr3');   
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_neraca.fr3');   
 dm.laporan.ShowReport;
 end;
 
@@ -327,7 +327,7 @@ procedure Tf_utama.ac_bk_besarExecute(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_buku_besar,'select * from vw_buku_besar where kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_buku_besar.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -335,7 +335,7 @@ procedure Tf_utama.ac_tBalanceExecute(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_Trial_balance1,'select * from _vw_trial_balance where kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_trial_balance.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -348,7 +348,7 @@ sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true)
 fungsi.SQLExec(dm.Q_trial_balance2,'select * from vw_laba_rugi where (kd_kiraan like "'+
 '5'+'%" or kd_kiraan like "'+'6'+'%" or kd_kiraan like "'+'7'+'%" or kd_kiraan like "'+
 '9'+'%") and kd_perusahaan= "'+sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'" order by kd_kiraan',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_laba_rugi.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_laba_rugi.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -694,7 +694,7 @@ procedure Tf_utama.MenuItem24Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from _vw_jurnal_rinci where kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_global.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
 dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL GLOBAL';
 dm.laporan.ShowReport;
 end;
@@ -702,7 +702,7 @@ end;
 procedure Tf_utama.DaftarAkun1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_perkiraan',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_daftar_akun.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_daftar_akun.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -710,7 +710,7 @@ procedure Tf_utama.JurnalUmum3Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''GJ'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_umum.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_umum.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -718,7 +718,7 @@ procedure Tf_utama.JurnalKasMasuk1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''KD'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_kas_masuk.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_masuk.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -726,7 +726,7 @@ procedure Tf_utama.JurnalKasKeluar1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''KK'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_kas_keluar.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_keluar.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -734,7 +734,7 @@ procedure Tf_utama.Pembelian1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_pembelian where kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_pembelian.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembelian.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -743,7 +743,7 @@ begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_hutang where kd_perusahaan="'+
 f_utama.sb.Panels[3].Text+'" and status=''belum lunas'' order by tanggal DESC',true);
 
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_hutang.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_hutang.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -751,7 +751,7 @@ procedure Tf_utama.DaftarPiutangUsaha1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from _vw_piutang where kd_perusahaan='+
 quotedstr(f_utama.sb.Panels[3].Text)+' and status=''belum lunas'' order by tanggal DESC',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_piutang.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_piutang.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -759,7 +759,7 @@ procedure Tf_utama.PenJualan1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''TJ'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_penjualan.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_penjualan.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -767,7 +767,7 @@ procedure Tf_utama.JurnalPembayaranHutangUsaha1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''PH'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_pembayaran_hutang.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_hutang.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -775,7 +775,7 @@ procedure Tf_utama.JurnalPembayaranPiutangUsaha1Click(Sender: TObject);
 begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_jurnal_global where refr=''PP'' and kd_perusahaan= "'+
 sb.Panels[3].Text+'" and bulan= "'+sb.Panels[6].Text+'" and tahun="'+sb.Panels[7].Text+'"',true);
-dm.laporan.LoadFromFile(WPath + 'laporan\a_jurnal_pembayaran_piutang.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_piutang.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -788,7 +788,7 @@ sb.Panels[3].Text+'"',true);
   fungsi.SQLExec(dm.Q_laporan,'call sp_asset("'+f_utama.sb.Panels[3].Text+'","'+
   formatdatetime('yyyy-MM-dd',encodedate(strtoint(f_utama.sb.Panels[7].Text),strtoint(f_utama.sb.Panels[6].Text),1))+'")',true);
 
-dm.laporan.LoadFromFile(WPath + 'laporan\a_asset.fr3');
+dm.laporan.LoadFromFile(dm.Path + 'laporan\a_asset.fr3');
 dm.laporan.ShowReport;
 end;
 
@@ -799,7 +799,7 @@ end;
 
 procedure Tf_utama.AccountofProfitHelp1Click(Sender: TObject);
 begin
-ShellExecute(Handle,'open', PChar('hh.exe'),PChar(wpath+'tools/bantuan.chm::/Account_of_profit.htm'), nil, SW_SHOW);
+ShellExecute(Handle,'open', PChar('hh.exe'),PChar(dm.Path+'tools/bantuan.chm::/Account_of_profit.htm'), nil, SW_SHOW);
 end;
 
 procedure Tf_utama.FormCreate(Sender: TObject);
