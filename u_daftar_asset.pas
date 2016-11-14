@@ -133,15 +133,15 @@ procedure Tf_daftar_asset.sButton3Click(Sender: TObject);
 begin
 if MessageBox(0, 'Benarkah'+#13+#10+'Anda akan menghapus data ini???', 'Hapus data Asset', MB_ICONQUESTION or MB_YESNO)=mrYes then
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'delete from tb_asset where kd_perusahaan="'+
 Q_asset.fieldbyname('kd_perusahaan').AsString+'" and kd_asset="'+
 Q_asset.fieldbyname('kd_asset').AsString+'"',false);
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 segarkan;
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('penghapusan data gagal '#10#13'' +e.Message);
   end;
 end;
@@ -171,15 +171,15 @@ end;
 
 procedure Tf_daftar_asset.sButton4Click(Sender: TObject);
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(f_utama.sb.Panels[7].Text),strtoint(f_utama.sb.Panels[6].Text),1))+'")',false);
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 showmessage('proses Posting Daftar Harta Tetap kedalam Jurnal berhasil.....');
 
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('Proses Posting Gagal, ahir gagal '#10#13'' +e.Message);
   end;
 end;

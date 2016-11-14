@@ -60,16 +60,16 @@ end;
 
 procedure Tf_merk.B_saveClick(Sender: TObject);
 begin
-dm.My_Conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 if merk_baru=true then
 fungsi.SQLExec(dm.Q_Exe,'insert into tb_merk (kd_merk,n_merk)values ("'+ed_kode.Text+'","'+ed_desc.Text+'")',false) else
 fungsi.SQLExec(dm.Q_Exe,'update tb_merk set n_merk="'+ed_desc.Text+'" where kd_merk="'+ed_kode.Text+'"',false);
 
 showmessage('penyimpanan data sukses....');
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 except
-dm.My_conn.Rollback;
+dm.db_conn.Rollback;
 showmessage('penyimpanan data gagal');
 end;
 dm.q_cari.Close;

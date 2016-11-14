@@ -106,7 +106,7 @@ ed_kode.SetFocus;
 exit;
 end;
 
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 if anyar=true then
 begin
@@ -126,11 +126,11 @@ end;
 
 //fungsi.SQLExec(f_daftar_asset.Q_asset,'select * from vw_asset',true);
 
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 baru;
 showmessage('Penyimpanan data Asset berhasil...');
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('penyimpanan data gagal '#10#13'' +e.Message);
   end;
 end;

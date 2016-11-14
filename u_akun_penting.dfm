@@ -223,7 +223,7 @@ object f_akun_penting: Tf_akun_penting
     Top = 96
   end
   object Q_akun_penting: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 520
     Top = 64
   end

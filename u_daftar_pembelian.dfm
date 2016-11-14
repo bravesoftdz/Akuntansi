@@ -366,7 +366,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     end
   end
   object Q_daftar_beli: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_jurnal_global')
     Left = 512
@@ -383,7 +383,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     Top = 96
   end
   object Q_rinci_beli: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 512
@@ -395,7 +395,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     Top = 64
   end
   object Q_beli: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       
         'select *, IF(IFNULL(ix_receipt,0)=0,0,1) as posted from vw_list_' +

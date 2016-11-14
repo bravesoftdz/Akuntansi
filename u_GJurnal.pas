@@ -137,7 +137,7 @@ exit;
 end;
 
 
-dm.My_Conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_temp,'select IFNULL(max(no_ix),1) as jumlah from tb_jurnal_global',true);
 ix_jurnal:= (dm.Q_temp.fieldbyname('jumlah').AsInteger)+1;
@@ -159,12 +159,12 @@ ed_refrensi.Text+'","GJ","'+floattostr(tot_debet)+'")',false);
   'debet,kredit) values '+isi_sql, false);
 
 fungsi.SQLExec(dm.Q_exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+formatdatetime('yyyy-MM-dd',de_tanggal.Date)+'")',false);
-dm.My_Conn.Commit;
+dm.db_conn.Commit;
 showmessage('Penyimpanan Data Sukses...'#10#13'Tekan Enter Untuk Melakukan Transaksi Baru...');
 AWAL;
 ed_keterangan.SetFocus;
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('penyimpanan data gagal '#10#13'' +e.Message);
   end;
 end;

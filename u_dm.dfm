@@ -5,7 +5,7 @@ object dm: Tdm
   Top = 51
   Height = 649
   Width = 967
-  object My_conn: TmySQLDatabase
+  object db_conn: TmySQLDatabase
     Port = 0
     ConnectOptions = []
     Params.Strings = (
@@ -20,12 +20,12 @@ object dm: Tdm
     Top = 56
   end
   object Q_Exe: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 72
     Top = 8
   end
   object Q_Show: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     SQL.Strings = (
       'select * from tb_klas')
     Left = 8
@@ -69,7 +69,7 @@ object dm: Tdm
     Top = 296
   end
   object Q_temp: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 120
     Top = 8
   end
@@ -8810,7 +8810,7 @@ object dm: Tdm
     Bitmap = {}
   end
   object q_cari: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Filtered = True
     Left = 8
     Top = 112
@@ -8821,7 +8821,7 @@ object dm: Tdm
     Top = 112
   end
   object Q_buku_besar: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     SQL.Strings = (
       '')
     Left = 208
@@ -9463,7 +9463,7 @@ object dm: Tdm
     end
   end
   object Q_Trial_balance1: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     SQL.Strings = (
       '')
     Left = 208
@@ -9478,7 +9478,7 @@ object dm: Tdm
     Top = 160
   end
   object Q_trial_balance2: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     SQL.Strings = (
       ''
       '')
@@ -9494,7 +9494,7 @@ object dm: Tdm
     Top = 200
   end
   object Q_laporan: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 208
     Top = 56
   end
@@ -9847,22 +9847,22 @@ object dm: Tdm
     Top = 8
   end
   object Q_klas: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 344
     Top = 8
   end
   object Q_subklas: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 432
     Top = 8
   end
   object Q_kiraan: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 544
     Top = 8
   end
   object Q_tampil: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 424
     Top = 264
   end
@@ -9877,7 +9877,7 @@ object dm: Tdm
     end
   end
   object Q_koneksi: TmySQLQuery
-    Database = My_conn
+    Database = db_conn
     Left = 120
     Top = 64
   end

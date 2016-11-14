@@ -366,7 +366,7 @@ object f_daftar_return: Tf_daftar_return
     Top = 64
   end
   object Q_return: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       
         'select *, IF(IFNULL(ix_return,0)=0,0,1) as posted from vw_list_r' +
@@ -380,7 +380,7 @@ object f_daftar_return: Tf_daftar_return
     Top = 96
   end
   object Q_rinci_return: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 512
@@ -392,7 +392,7 @@ object f_daftar_return: Tf_daftar_return
     Top = 56
   end
   object Q_daftar_return: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_jurnal_global')
     Left = 512

@@ -240,7 +240,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
     Top = 104
   end
   object Q_rinci_bayar_piutang: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 288
     Top = 104
   end
@@ -250,7 +250,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
     Top = 56
   end
   object Q_bayar_piutang: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 288
     Top = 56
   end

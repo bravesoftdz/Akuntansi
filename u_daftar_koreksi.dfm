@@ -362,7 +362,7 @@ object f_daftar_koreksi: Tf_daftar_koreksi
     Top = 96
   end
   object Q_rinci_koreksi: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 512
@@ -374,7 +374,7 @@ object f_daftar_koreksi: Tf_daftar_koreksi
     Top = 64
   end
   object Q_koreksi: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       
         'select *, IF(IFNULL(ix_koreksi,0)=0,0,1) as posted from tb_korek' +
@@ -388,7 +388,7 @@ object f_daftar_koreksi: Tf_daftar_koreksi
     Top = 56
   end
   object Q_daftar_koreksi: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_jurnal_global')
     Left = 512

@@ -240,7 +240,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     Top = 56
   end
   object Q_jurnal_umum: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 288
     Top = 56
   end
@@ -250,7 +250,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     Top = 104
   end
   object Q_rinci: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 288
     Top = 104
   end

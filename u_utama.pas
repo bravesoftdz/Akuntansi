@@ -268,19 +268,19 @@ dm.sm.Active:=true;
 application.CreateForm(Tf_login, f_login);
 f_login.sb.Panels[0].Text:=sb.Panels[3].Text;
 f_login.sb.Panels[1].Text:=sb.Panels[4].Text;
-F_Login.sb.Panels[2].Text:= dm.My_conn.DatabaseName +'@'+ dm.My_conn.Host;
+F_Login.sb.Panels[2].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
 f_login.ShowModal;
 end;
 
 procedure Tf_utama.historical_balancing;
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 except
-dm.My_conn.Rollback;
+dm.db_conn.Rollback;
 end;
 end;
 
@@ -294,7 +294,7 @@ procedure Tf_utama.FormShow(Sender: TObject);
 begin
 sb.Panels[8].Text:= 'Versi: '+fungsi.program_versi;
 
-sb.Panels[2].Text:= dm.My_conn.DatabaseName +'@'+ dm.My_conn.Host;
+sb.Panels[2].Text:= dm.db_conn.DatabaseName +'@'+ dm.db_conn.Host;
 sb.Panels[3].Text:= dm.kd_comp;
 fungsi.SQLExec(dm.Q_temp,'select * from tb_company where kd_perusahaan = "'+sb.Panels[3].text+'"',true);
 sb.Panels[4].Text:=dm.Q_temp.fieldbyname('n_perusahaan').AsString;
@@ -374,7 +374,7 @@ appINI := TIniFile.Create(AppPath+'gain.ini') ;
  appINI.Free;
  end;
 
-dm.My_conn.Connected:= false;
+dm.db_conn.Connected:= false;
 
 action:=cafree;
 f_utama:=nil;
@@ -457,7 +457,7 @@ if messagedlg('Tutup Buku Periode ke-'+sb.Panels[6].Text+' Tahun '+sb.Panels[7].
 'akun historical balancing ke akun laba tahun berjalan....'#10#13''#10#13''+
 'proses ini akan menutup aplikasi ini , Yakin???....',mtconfirmation,[mbYes,mbNo],0)=mrYes then
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
@@ -473,11 +473,11 @@ sb.Panels[6].Text:= '0'+sb.Panels[6].Text;
 fungsi.SQLExec(dm.Q_Exe,'update tb_company set periode_akun="'+
 sb.Panels[7].Text+'-'+sb.Panels[6].Text+'" where kd_perusahaan="'+sb.Panels[3].Text+'"',false);
 
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 showmessage('proses tutup buku bulanan berhasil');
 close;
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
   end;
 end;
@@ -493,7 +493,7 @@ if messagedlg('Tutup Buku Tahun '+sb.Panels[7].Text+' '#10#13''#10#13''+
 'akun historical balancing + akun laba Tahun Berjalan ke Akun Laba ditahan....'#10#13''#10#13''+
 'proses ini akan menutup aplikasi ini , Yakin???....',mtconfirmation,[mbYes,mbNo],0)=mrYes then
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+
@@ -508,11 +508,11 @@ sb.Panels[7].Text:= inttostr(strtoint(sb.Panels[7].Text)+1);
 fungsi.SQLExec(dm.Q_Exe,'update tb_company set periode_akun="'+
 sb.Panels[7].Text+'-'+sb.Panels[6].Text+'" where kd_perusahaan="'+sb.Panels[3].Text+'"',false);
 
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 showmessage('proses tutup buku Tahunan Berhasil berhasil');
 close;
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
   end;
 end;
@@ -543,15 +543,15 @@ end;
 procedure Tf_utama.HitungUlangSaldoAhir1Click(Sender: TObject);
 begin
 historical_balancing;
-{dm.My_conn.StartTransaction;
+{dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 showmessage('proses Hitung Ulang saldo ahir dan penyusutan berhasil');
 
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('hitung ulang saldo ahir gagal '#10#13'' +e.Message);
   end;
 end;
@@ -1068,7 +1068,7 @@ begin
   versiDB           := dm.Q_Show.FieldByName('versi_terbaru').AsString;
   URLDownload       := dm.Q_Show.FieldByName('URLdownload').AsString;
   fileName          := Copy(URLDownload,LastDelimiter('/',URLDownload) + 1,Length(URLDownload));
-  UrlDownloadLocal  := 'http://'+dm.My_conn.Host + '/GainProfit/' + fileName;
+  UrlDownloadLocal  := 'http://'+dm.db_conn.Host + '/GainProfit/' + fileName;
 
   if versiAPP < versiDB then
   begin
@@ -1083,14 +1083,14 @@ end;
 
 procedure Tf_utama.BuatSaldoAwalAkun;
 begin
-  dm.My_conn.StartTransaction;
+  dm.db_conn.StartTransaction;
   try
   fungsi.SQLExec(dm.Q_Exe,'call sp_saldo_awal_akun("'+f_utama.sb.Panels[3].Text+'","'+
   formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 
-  dm.My_conn.Commit;
+  dm.db_conn.Commit;
   except on e:exception do begin
-    dm.My_conn.Rollback;
+    dm.db_conn.Rollback;
     showmessage('pembuatan saldo awal akun gagal '#10#13'' +e.Message);
     end;
   end;

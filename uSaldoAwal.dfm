@@ -583,13 +583,13 @@ object FSaldoAwal: TFSaldoAwal
     Top = 200
   end
   object ZqNeraca: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     RequestLive = True
     Left = 84
     Top = 145
   end
   object ZqLabaRugi: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     RequestLive = True
     Left = 204
     Top = 137

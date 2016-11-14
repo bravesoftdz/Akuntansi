@@ -189,18 +189,18 @@ ShowMessage('data ini tidak dapat di posting '#10#13'Karena masih dalam keadaan 
 Exit;
 end;
 
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
   fungsi.SQLExec(dm.Q_Exe,'call sp_setor_kasir_jurnal("'+f_utama.sb.Panels[3].Text+'","'+
   Q_setor.fieldbyname('user').AsString+'","'+Q_setor.fieldbyname('kd_jaga').AsString+'","'+
   formatdatetime('yyyy-MM-dd hh:mm:ss',Q_setor.fieldbyname('tanggal').AsDateTime)+'")',False);
-  dm.My_conn.commit;
+  dm.db_conn.commit;
   ShowMessage('Proses Posting jurnal Penjualan Berhasil....');
 
   sb_2Click(Self);
 except on e:exception do
   begin
-    dm.My_conn.Rollback;
+    dm.db_conn.Rollback;
     showmessage('Proses Posting Gagal... '#10#13'' +e.Message);
   end;
 end;

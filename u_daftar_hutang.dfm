@@ -355,7 +355,7 @@ object f_daftar_hutang: Tf_daftar_hutang
     Top = 104
   end
   object Q_bayar_hutang: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 288
@@ -367,14 +367,14 @@ object f_daftar_hutang: Tf_daftar_hutang
     Top = 56
   end
   object Q_hutang: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from vw_hutang')
     Left = 288
     Top = 56
   end
   object Q_return: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_return_global')
     Left = 288

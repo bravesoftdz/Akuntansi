@@ -142,7 +142,7 @@ end;
 
 procedure Tf_klasifikasi_akun.sButton7Click(Sender: TObject);
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
 if anyar=true then
 begin
@@ -156,11 +156,11 @@ end;
 
 fungsi.SQLExec(dm.Q_kiraan,'select * from vw_perkiraan',true);
 
-dm.My_conn.Commit;
+dm.db_conn.Commit;
 showmessage('Penyimpanan data berhasil...');
 close;
 except on e:exception do begin
-  dm.My_conn.Rollback;
+  dm.db_conn.Rollback;
   showmessage('penyimpanan data gagal '#10#13'' +e.Message);
   end;
 end;

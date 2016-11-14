@@ -351,7 +351,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     Top = 96
   end
   object Q_rinci_kirim: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 512
@@ -363,7 +363,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     Top = 64
   end
   object Q_kirim: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       
         'select *, IF(IFNULL(ix_kirim,0)=0,0,1) as posted from vw_list_ki' +
@@ -377,7 +377,7 @@ object f_daftar_kirim: Tf_daftar_kirim
     Top = 56
   end
   object Q_daftar_kirim: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_jurnal_global')
     Left = 512

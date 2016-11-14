@@ -442,14 +442,14 @@ object f_daftar_penjualan: Tf_daftar_penjualan
     Top = 56
   end
   object Q_daftar_jual: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from tb_jurnal_global')
     Left = 512
     Top = 56
   end
   object Q_rinci_jual: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       'select * from _vw_jurnal_rinci')
     Left = 512
@@ -477,7 +477,7 @@ object f_daftar_penjualan: Tf_daftar_penjualan
     Top = 64
   end
   object Q_setor: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     SQL.Strings = (
       
         'select *, IF(IFNULL(ix_setor,0)=0,0,1) as posted from tb_login_k' +

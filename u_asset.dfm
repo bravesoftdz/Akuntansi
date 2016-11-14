@@ -472,7 +472,7 @@ object F_asset: TF_asset
     Top = 224
   end
   object Q_kiraan: TmySQLQuery
-    Database = dm.My_conn
+    Database = dm.db_conn
     Left = 8
     Top = 224
   end

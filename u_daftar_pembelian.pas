@@ -195,17 +195,17 @@ end;
 
 procedure Tf_daftar_pembelian.sButton2Click(Sender: TObject);
 begin
-dm.My_conn.StartTransaction;
+dm.db_conn.StartTransaction;
 try
   fungsi.SQLExec(dm.Q_Exe,'call sp_jurnal_receipt("'+f_utama.sb.Panels[3].Text+'","'+
   Q_beli.fieldbyname('kd_receipt').AsString+'")',False);
-  dm.My_conn.commit;
+  dm.db_conn.commit;
   ShowMessage('Proses Posting jurnal Pembelian Berhasil....');
 
   sb_2Click(Self);
 except on e:exception do
   begin
-    dm.My_conn.Rollback;
+    dm.db_conn.Rollback;
     showmessage('Proses Posting Gagal... '#10#13'' +e.Message);
   end;
 end;
