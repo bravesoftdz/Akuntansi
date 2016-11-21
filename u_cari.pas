@@ -184,14 +184,14 @@ begin
         begin
           if asal = 'f_bayar_piutang' then
           begin
-            u_bayar_piutang.kd_pelanggan := dm.q_cari.fieldbyname('kd_pelanggan').AsString;
+            f_bayar_piutang.kd_pelanggan := dm.q_cari.fieldbyname('kd_pelanggan').AsString;
             f_bayar_piutang.ed_pelanggan.text := dm.q_cari.fieldbyname('n_pelanggan').AsString;
             f_bayar_piutang.ed_keterangan.Text := 'Pembayaran Piutang oleh ' +
               f_bayar_piutang.ed_pelanggan.text;
           end
           else if asal = 'f_bayar_hutang' then
           begin
-            u_bayar_hutang.kd_supp := dm.q_cari.fieldbyname('kode').AsString;
+            f_bayar_hutang.kd_supp := dm.q_cari.fieldbyname('kode').AsString;
             f_bayar_hutang.ed_supp.text := dm.q_cari.fieldbyname('n_supp').AsString;
             f_bayar_hutang.ed_keterangan.Text := 'Pembayaran Hutang pada ' +
               f_bayar_hutang.ed_supp.text;

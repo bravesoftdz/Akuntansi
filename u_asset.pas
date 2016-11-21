@@ -51,12 +51,12 @@ type
   private
     { Private declarations }
   public
+    anyar: boolean;
     { Public declarations }
   end;
 
 var
   F_asset: TF_asset;
-  anyar: boolean;
 
 implementation
 

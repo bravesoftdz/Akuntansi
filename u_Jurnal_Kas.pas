@@ -65,13 +65,13 @@ type
   private
     { Private declarations }
   public
+    jenis_jurnal: string;
+    total_value: Real;
     { Public declarations }
   end;
 
 var
   f_Jurnal_Kas: Tf_Jurnal_Kas;
-  jenis_jurnal: string;
-  total_value: Real;
 
 implementation
 

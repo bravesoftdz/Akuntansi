@@ -51,12 +51,12 @@ type
   private
     { Private declarations }
   public
+    j_trans, j_print: string;
     { Public declarations }
   end;
 
 var
   f_daftar_kas: Tf_daftar_kas;
-  j_trans, j_print: string;
 
 implementation
 

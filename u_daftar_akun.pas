@@ -127,7 +127,7 @@ begin
   f_klasifikasi_akun.p2.Visible := false;
   f_klasifikasi_akun.p3.Visible := true;
   f_klasifikasi_akun.Height := 150;
-  anyar := true;
+  f_klasifikasi_akun.anyar := true;
   f_klasifikasi_akun.ShowModal;
 end;
 

@@ -68,13 +68,13 @@ type
   private
     { Private declarations }
   public
+    kd_supp: string;
+    dibayar: Real;
     { Public declarations }
   end;
 
 var
   f_bayar_hutang: Tf_bayar_hutang;
-  kd_supp: string;
-  dibayar: Real;
 
 implementation
 

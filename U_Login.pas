@@ -33,13 +33,13 @@ type
   private
     { Private declarations }
   public
+    userPassword, userRealName: string;
     sop: Boolean;
     { Public declarations }
   end;
 
 var
   F_Login: TF_Login;
-  userPassword, userRealName: string;
 
 implementation
 

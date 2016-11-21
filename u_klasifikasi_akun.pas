@@ -60,12 +60,12 @@ type
   private
     { Private declarations }
   public
+    anyar: boolean;
     { Public declarations }
   end;
 
 var
   f_klasifikasi_akun: Tf_klasifikasi_akun;
-  anyar: boolean;
 
 implementation
 

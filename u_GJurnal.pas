@@ -58,12 +58,12 @@ type
   private
     { Private declarations }
   public
+    tot_debet, tot_kredit: Real;
     { Public declarations }
   end;
 
 var
   F_GJurnal: TF_GJurnal;
-  tot_debet, tot_kredit: Real;
 
 implementation
 
