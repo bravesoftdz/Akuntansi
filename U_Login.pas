@@ -184,15 +184,22 @@ var
   pencarian: Tf_cari;
 begin
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari, 'select kd_perusahaan, n_perusahaan from tb_company', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Nama Perusahaan';
-  u_cari.tipe_cari := 8;
-  asal := 'f_login';
-  f_cari.ShowModal;
-  Ed_Kd_User.Clear;
-  Ed_Kd_User.SetFocus;
-  Ed_Password.Enabled := False;
+  with F_cari do
+  try
+    _SQLi := 'select kd_perusahaan, n_perusahaan from tb_company';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      sb.Panels[0].Text := TblVal[0];
+      sb.Panels[1].Text := TblVal[1];
+      Ed_Kd_User.Clear;
+      Ed_Kd_User.SetFocus;
+      Ed_Password.Enabled := False;
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure TF_Login.FormShow(Sender: TObject);

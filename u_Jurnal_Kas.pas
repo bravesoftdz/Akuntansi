@@ -147,13 +147,19 @@ procedure Tf_Jurnal_Kas.sb_jurnalClick(Sender: TObject);
 begin
   ed_no_jurnal.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan like ''11%''', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Deskripsi';
-  u_cari.tipe_cari := 66;
-  u_cari.asal := 'f_jurnal_kas1';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi := 'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan like "11%"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_no_jurnal.Text := TblVal[0];
+      ed_nJurnal.Text := TblVal[1];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_Jurnal_Kas.simpan;
@@ -182,22 +188,22 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' +
-      inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
-      + '","' + ed_keterangan.Text + '","' + ed_refrensi.Text + '","' +
-      jenis_jurnal + '","' + floattostr(total_value) + '")', false);
+      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
+      + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '","' +
+      ed_keterangan.Text + '","' + ed_refrensi.Text + '","' + jenis_jurnal +
+      '","' + floattostr(total_value) + '")', false);
 
     if cb_jenis.ItemIndex = 0 then
     begin
       fungsi.SQLExec(dm.Q_exe,
         'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-        + '",1,"' + ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
+        'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
+        '",1,"' + ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
 
       for x := 0 to tableview.DataController.RecordCount - 1 do
       begin
-        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr
-          (ix_jurnal) + '","' + inttostr(x + 2) + '","' + TableView.DataController.GetDisplayText
+        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
+          + '","' + inttostr(x + 2) + '","' + TableView.DataController.GetDisplayText
           (x, 0) + '","' + floattostr(TableView.DataController.GetValue(x, 2)) + '"),';
       end;
       delete(isi_sql, length(isi_sql), 1);
@@ -211,8 +217,8 @@ begin
     begin
       for x := 0 to tableview.DataController.RecordCount - 1 do
       begin
-        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr
-          (ix_jurnal) + '","' + inttostr(x + 1) + '","' + TableView.DataController.GetDisplayText
+        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
+          + '","' + inttostr(x + 1) + '","' + TableView.DataController.GetDisplayText
           (x, 0) + '","' + floattostr(TableView.DataController.GetValue(x, 2)) + '"),';
       end;
       delete(isi_sql, length(isi_sql), 1);
@@ -223,8 +229,8 @@ begin
 
       fungsi.SQLExec(dm.Q_exe,
         'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'kredit) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-        + '","' + inttostr(tableview.DataController.RecordCount + 1) + '","' +
+        'kredit) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
+        '","' + inttostr(tableview.DataController.RecordCount + 1) + '","' +
         ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
     end;
 
@@ -356,14 +362,19 @@ begin
 
   ed_code.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan <> ' + quotedstr(ed_no_jurnal.Text)
-    + '', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Deskripsi';
-  u_cari.tipe_cari := 66;
-  u_cari.asal := 'f_jurnal_kas2';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi := 'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan <> "' +
+      ed_no_jurnal.Text + '"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_code.Text := TblVal[0];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_Jurnal_Kas.ed_codeKeyPress(Sender: TObject; var Key: Char);

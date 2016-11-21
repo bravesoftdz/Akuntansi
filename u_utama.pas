@@ -118,7 +118,7 @@ type
     N16: TMenuItem;
     Ac_Jurnal_Kas: TAction;
     N2: TMenuItem;
-    DefaultPerusahaan1: TMenuItem;
+    LogOut: TMenuItem;
     HitungUlangSaldoAhir1: TMenuItem;
     ac_kiraan_buku_besar: TAction;
     N4: TMenuItem;
@@ -150,11 +150,10 @@ type
     procedure ac_bk_besarExecute(Sender: TObject);
     procedure ac_tBalanceExecute(Sender: TObject);
     procedure ac_laba_rugiExecute(Sender: TObject);
-    procedure ac_custExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure sBitBtn1Click(Sender: TObject);
     procedure Ac_Jurnal_KasExecute(Sender: TObject);
-    procedure DefaultPerusahaan1Click(Sender: TObject);
+    procedure LogOutClick(Sender: TObject);
     procedure AKlasifikasiAkun1Click(Sender: TObject);
     procedure AkunPenting1Click(Sender: TObject);
     procedure SaldoAwalAkun1Click(Sender: TObject);
@@ -368,18 +367,6 @@ begin
   dm.laporan.ShowReport;
 end;
 
-procedure Tf_utama.ac_custExecute(Sender: TObject);
-begin
-  application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select kd_perusahaan,kd_pelanggan,n_pelanggan from tb_pelanggan', true);
-  f_cari.clm1.caption := 'Kode comp';
-  f_cari.clm2.caption := 'kode pelanggan';
-  f_cari.clm3.caption := 'nama pelanggan';
-  u_cari.tipe_cari := 11;
-  f_cari.ShowModal;
-end;
-
 procedure Tf_utama.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   appINI: TIniFile;
@@ -409,20 +396,19 @@ begin
   f_jurnal_kas.ShowModal;
 end;
 
-procedure Tf_utama.DefaultPerusahaan1Click(Sender: TObject);
+procedure Tf_utama.LogOutClick(Sender: TObject);
 begin
   if f_utama.MDIChildCount <> 0 then
   begin
     showmessage('tutup dulu semua windows...');
     exit;
   end;
-  application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari, 'select kd_perusahaan, n_perusahaan from tb_company', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Nama Perusahaan';
-  u_cari.tipe_cari := 8;
-  asal := 'f_utama';
-  f_cari.ShowModal;
+
+  application.CreateForm(Tf_login, f_login);
+  f_login.sb.Panels[0].Text := dm.kd_perusahaan;
+  f_login.sb.Panels[1].Text := sb.Panels[4].Text;
+  F_Login.sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  f_login.ShowModal;
 end;
 
 procedure Tf_utama.AKlasifikasiAkun1Click(Sender: TObject);

@@ -291,9 +291,9 @@ object f_utama: Tf_utama
       object N2: TMenuItem
         Caption = '-'
       end
-      object DefaultPerusahaan1: TMenuItem
-        Caption = 'Default Perusahaan'
-        OnClick = DefaultPerusahaan1Click
+      object LogOut: TMenuItem
+        Caption = 'Log Out'
+        OnClick = LogOutClick
       end
     end
     object utupBuku1: TMenuItem

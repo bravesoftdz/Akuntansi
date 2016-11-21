@@ -109,13 +109,26 @@ end;
 procedure Tf_akun_penting.sButton1Click(Sender: TObject);
 begin
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari, 'select kd_kiraan, n_kiraan from tb_kiraan', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Deskripsi';
-  u_cari.tipe_cari := 66;
-  u_cari.asal := 'f_akun_penting';
-  f_cari.ShowModal;
-  segarkan;
+  with F_cari do
+  try
+    _SQLi := 'select kd_kiraan, n_kiraan from tb_kiraan';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      if MessageBox(0, 'Benarkah data akun penting ini' + #13 + #10 +
+        'AKAN ANDA RUBAH...???', 'UBAH AKUN PENTING', MB_ICONQUESTION or
+        MB_YESNO) = mrYes then
+      begin
+        fungsi.SQLExec(dm.Q_Exe, 'update tb_konfig_akun set kd_akun = ' +
+          QuotedStr(TblVal[0]) + ', `update` = date(now()) where no_ix= ' +
+          quotedStr(Q_akun_penting.fieldbyname('no_ix').AsString) + '', False);
+        segarkan;
+      end;
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_akun_penting.t_dataCellDblClick(Sender: TcxCustomGridTableView;

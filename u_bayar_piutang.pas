@@ -52,7 +52,6 @@ type
     procedure FormShow(Sender: TObject);
     procedure sg_jurnalSelectCell(Sender: TObject; ACol, ARow: Integer; var
       CanSelect: Boolean);
-    procedure sg_jurnalDblClick(Sender: TObject);
     procedure b_hapusClick(Sender: TObject);
     procedure b_simpanClick(Sender: TObject);
     procedure b_baruClick(Sender: TObject);
@@ -118,13 +117,19 @@ procedure Tf_bayar_piutang.sSpeedButton1Click(Sender: TObject);
 begin
   ed_no_jurnal.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan like ''11%''', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Deskripsi';
-  u_cari.tipe_cari := 66;
-  u_cari.asal := 'f_bayar_piutang';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi := 'select kd_kiraan, n_kiraan from tb_kiraan where kd_kiraan like "11%"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_no_jurnal.Text := TblVal[0];
+      ed_nJurnal.Text := TblVal[1];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_bayar_piutang.FormShow(Sender: TObject);
@@ -139,27 +144,6 @@ begin
     canselect := false
   else
     canselect := true;
-end;
-
-procedure Tf_bayar_piutang.sg_jurnalDblClick(Sender: TObject);
-begin
-  if (ed_pelanggan.Text = '') then
-  begin
-    showmessage('pelanggan harus diisi terlebih dahulu');
-    exit;
-  end;
-
-  application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-    dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
-    '" and status=''belum lunas''', true);
-  f_cari.clm1.caption := 'Tanggal';
-  f_cari.clm2.caption := 'Faktur';
-  f_cari.clm3.caption := 'Saldo Piutang';
-  u_cari.tipe_cari := 11;
-  u_cari.asal := 'f_bayar_piutang';
-  f_cari.ShowModal;
 end;
 
 procedure Tf_bayar_piutang.update_ket2;
@@ -242,15 +226,15 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' +
-      inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
-      + '","' + ed_keterangan.Text + ' untuk ' + ed_ket2.Text + '","' +
-      ed_refrensi.Text + '","PP","' + floattostr(dibayar) + '")', false);
+      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
+      + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '","' +
+      ed_keterangan.Text + ' untuk ' + ed_ket2.Text + '","' + ed_refrensi.Text +
+      '","PP","' + floattostr(dibayar) + '")', false);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-      + '",1,"' + ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
+      'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
+      '",1,"' + ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
@@ -288,12 +272,19 @@ procedure Tf_bayar_piutang.sb_1Click(Sender: TObject);
 begin
   ed_pelanggan.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari, 'select kd_pelanggan,n_pelanggan from tb_pelanggan', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Nama pelanggan';
-  u_cari.tipe_cari := 9;
-  u_cari.asal := 'f_bayar_piutang';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi := 'select kd_pelanggan,n_pelanggan from tb_pelanggan ' +
+      'where kd_perusahaan="' + dm.kd_perusahaan + '"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_pelanggan.Text := TblVal[0];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_bayar_piutang.sb_cariClick(Sender: TObject);
@@ -307,16 +298,20 @@ begin
 
   ed_code.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari,
-    'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-    dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
-    '" and status=''belum lunas''', true);
-  f_cari.clm1.caption := 'Tanggal';
-  f_cari.clm2.caption := 'Faktur';
-  f_cari.clm3.caption := 'Saldo Piutang';
-  u_cari.tipe_cari := 11;
-  u_cari.asal := 'f_bayar_piutang';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi :=
+      'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' + dm.kd_perusahaan
+      + '" and pelanggan="' + kd_pelanggan + '" and status="belum lunas"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_code.Text := TblVal[0];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure Tf_bayar_piutang.createrows;

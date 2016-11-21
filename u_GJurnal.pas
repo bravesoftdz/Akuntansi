@@ -207,12 +207,18 @@ procedure TF_GJurnal.sb_cariClick(Sender: TObject);
 begin
   ed_code.SetFocus;
   application.CreateForm(tf_cari, f_cari);
-  fungsi.SQLExec(dm.q_cari, 'select kd_kiraan, n_kiraan from tb_kiraan', true);
-  f_cari.clm1.caption := 'Kode';
-  f_cari.clm2.caption := 'Deskripsi';
-  u_cari.tipe_cari := 66;
-  u_cari.asal := 'f_jglobal';
-  f_cari.ShowModal;
+  with F_cari do
+  try
+    _SQLi := 'select kd_kiraan, n_kiraan from tb_kiraan';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_code.Text := TblVal[0];
+    end;
+  finally
+    close;
+  end;
 end;
 
 procedure TF_GJurnal.CreateRows;
