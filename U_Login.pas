@@ -59,7 +59,7 @@ begin
     sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
       + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
       'tb_user.kd_user="' + ed_kd_user.Text + '" AND tb_user_company.akun="Y" '
-      + 'AND tb_user_company.kd_perusahaan="' + sb.Panels[0].Text + '"';
+      + 'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
     fungsi.SQLExec(DM.Q_Show, sql, true);
     if dm.Q_show.Eof then
     begin
@@ -105,8 +105,8 @@ begin
   begin
     fungsi.SQLExec(dm.Q_temp, 'select md5("' + ed_password.Text +
       '")as passs, RIGHT(periode_akun,2) as bulan, ' +
-      'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="' + sb.Panels
-      [0].Text + '"', true);
+      'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="' + dm.kd_perusahaan
+      + '"', true);
     passs := dm.Q_temp.fieldbyname('passs').AsString;
 
     if compareText(userPassword, passs) <> 0 then
@@ -117,10 +117,12 @@ begin
     end
     else
     begin
-      F_utama.Sb.Panels[0].Text := ed_kd_user.Text;
+      dm.kd_user := Ed_Kd_User.Text;
+      F_utama.Sb.Panels[0].Text := dm.kd_user;
       F_utama.Sb.Panels[1].Text := ed_N_User.Text;
 
-      F_utama.sb.Panels[3].Text := sb.Panels[0].Text;
+      dm.kd_perusahaan := sb.Panels[0].Text;
+      F_utama.sb.Panels[3].Text := dm.kd_perusahaan;
       F_utama.sb.Panels[4].Text := sb.Panels[1].Text;
       F_utama.caption := 'Account Of Profit (' + sb.Panels[1].Text + ')';
 

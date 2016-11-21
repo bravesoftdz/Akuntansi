@@ -164,7 +164,8 @@ begin
               then
             begin
               application.CreateForm(Tf_login, f_login);
-              F_Login.sb.Panels[0].Text := dm.q_cari.fieldbyname('kd_Perusahaan').AsString;
+              dm.kd_perusahaan := dm.q_cari.fieldbyname('kd_Perusahaan').AsString;
+              F_Login.sb.Panels[0].Text := dm.kd_perusahaan;
               F_Login.sb.Panels[1].Text := dm.q_cari.fieldbyname('n_Perusahaan').AsString;
               f_utama.caption := 'Account Of Profit (' + f_utama.sb.Panels[4].Text + ')';
               f_cari.hide;
