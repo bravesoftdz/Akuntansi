@@ -50,8 +50,6 @@ type
     procedure update_ket2;
     procedure sSpeedButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure sg_jurnalSelectCell(Sender: TObject; ACol, ARow: Integer; var
-      CanSelect: Boolean);
     procedure b_hapusClick(Sender: TObject);
     procedure b_simpanClick(Sender: TObject);
     procedure b_baruClick(Sender: TObject);
@@ -135,15 +133,6 @@ end;
 procedure Tf_bayar_piutang.FormShow(Sender: TObject);
 begin
   awal;
-end;
-
-procedure Tf_bayar_piutang.sg_jurnalSelectCell(Sender: TObject; ACol, ARow:
-  Integer; var CanSelect: Boolean);
-begin
-  if acol < 3 then
-    canselect := false
-  else
-    canselect := true;
 end;
 
 procedure Tf_bayar_piutang.update_ket2;

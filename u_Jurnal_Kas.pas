@@ -41,8 +41,6 @@ type
     l_1: TsLabel;
     l_6: TsLabel;
     l_5: TsLabel;
-    procedure sg_jurnalSelectCell(Sender: TObject; ACol, ARow: Integer; var
-      CanSelect: Boolean);
     procedure awal;
     procedure ubah_refrensi;
     procedure simpan;
@@ -79,15 +77,6 @@ uses
   u_dm, u_cari, u_utama, UFungsi;
 
 {$R *.dfm}
-
-procedure Tf_Jurnal_Kas.sg_jurnalSelectCell(Sender: TObject; ACol, ARow: Integer;
-  var CanSelect: Boolean);
-begin
-  if acol < 2 then
-    canselect := false
-  else
-    canselect := true;
-end;
 
 procedure Tf_Jurnal_Kas.ubah_refrensi;
 var
