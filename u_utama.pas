@@ -296,7 +296,7 @@ begin
   sb.Panels[8].Text := 'Versi: ' + fungsi.GetVersiApp;
 
   sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
-  sb.Panels[3].Text := dm.kd_comp;
+  sb.Panels[3].Text := dm.kd_perusahaan;
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan = "' +
     sb.Panels[3].text + '"', true);
   sb.Panels[4].Text := dm.Q_temp.fieldbyname('n_perusahaan').AsString;

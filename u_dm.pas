@@ -44,7 +44,7 @@ type
   private
     { Private declarations }
   public
-    kd_comp: string;
+    kd_perusahaan: string;
     Path, AppPath: string;
     metu_kabeh: boolean;
     PeriodAktif: string;
@@ -152,7 +152,7 @@ begin
 
   appINI := TIniFile.Create(AppPath + 'gain.ini');
   try
-    kd_comp := appINI.ReadString('akun', 'kd_perusahaan', '');
+    kd_perusahaan := appINI.ReadString('akun', 'kd_perusahaan', '');
     sm.SkinName := appINI.ReadString('akun', 'nama_skin', 'Lucky');
     sm.HueOffset := appini.ReadInteger('akun', 'hue_skin', 0);
     sm.Saturation := appini.ReadInteger('akun', 'sat_skin', 0);
