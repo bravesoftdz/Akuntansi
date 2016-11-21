@@ -4,24 +4,23 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sButton, sCurrEdit, sCurrencyEdit, Mask, sMaskEdit,
-  sCustomComboEdit, sTooledit, sEdit, Grids, sLabel, Buttons, sSpeedButton,
-  ExtCtrls, sPanel, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
-  cxDataStorage, cxEdit, cxCurrencyEdit, sGroupBox, cxGridLevel,
-  cxGridCustomTableView, cxGridTableView, cxClasses, cxControls,
-  cxGridCustomView, cxGrid;
+  Dialogs, StdCtrls, sLabel, sEdit, Buttons, sSpeedButton, sButton, sCurrEdit,
+  sCurrencyEdit, Grids, Mask, sMaskEdit, sCustomComboEdit, sTooledit, ExtCtrls,
+  sPanel, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  cxEdit, cxCurrencyEdit, sGroupBox, cxGridLevel, cxGridCustomTableView,
+  cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid;
 
 type
   Tf_bayar_piutang = class(TForm)
     sPanel1: TsPanel;
+    sPanel2: TsPanel;
     ed_nJurnal: TsEdit;
     sSpeedButton1: TsSpeedButton;
     ed_no_jurnal: TsEdit;
     Lbl1: TsLabel;
-    sPanel2: TsPanel;
-    b_hapus: TsButton;
-    b_baru: TsButton;
     b_simpan: TsButton;
+    b_baru: TsButton;
+    b_hapus: TsButton;
     Grid: TcxGrid;
     tableview: TcxGridTableView;
     ableViewColumn1: TcxGridColumn;
@@ -32,32 +31,32 @@ type
     ed_code: TsEdit;
     sb_cari: TsSpeedButton;
     gb_1: TsGroupBox;
-    sb_1: TsSpeedButton;
-    Lbl3: TsLabel;
-    Lbl5: TsLabel;
-    Lbl4: TsLabel;
     Lbl2: TsLabel;
+    sb_1: TsSpeedButton;
+    Lbl4: TsLabel;
+    Lbl5: TsLabel;
+    Lbl3: TsLabel;
     ed_pihak_lain: TsEdit;
     ed_refrensi: TsEdit;
+    de_tanggal: TsDateEdit;
     ed_keterangan: TsEdit;
     ed_ket2: TsEdit;
-    de_tanggal: TsDateEdit;
-    Lbl7: TsLabel;
     Lbl6: TsLabel;
+    Lbl7: TsLabel;
     procedure awal;
     procedure simpan;
     procedure createrows;
     procedure update_ket2;
+    procedure sb_1Click(Sender: TObject);
     procedure sSpeedButton1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure b_hapusClick(Sender: TObject);
     procedure b_simpanClick(Sender: TObject);
     procedure b_baruClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure sb_1Click(Sender: TObject);
     procedure sb_cariClick(Sender: TObject);
-    procedure ed_codeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ed_no_jurnalKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure ed_codeKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ed_codeKeyPress(Sender: TObject; var Key: Char);
     procedure
       tableviewTcxGridDataControllerTcxDataSummaryFooterSummaryItems3GetText(Sender:
@@ -116,6 +115,25 @@ begin
   tableview.DataController.RecordCount := 0;
 end;
 
+procedure Tf_bayar_piutang.sb_1Click(Sender: TObject);
+begin
+  ed_pihak_lain.SetFocus;
+  application.CreateForm(tf_cari, f_cari);
+  with F_cari do
+  try
+    _SQLi := 'select kd_pelanggan,n_pelanggan from tb_pelanggan ' +
+      'where kd_perusahaan="' + dm.kd_perusahaan + '"';
+    tblcap[0] := 'Kode';
+    tblCap[1] := 'Deskripsi';
+    if ShowModal = mrOk then
+    begin
+      ed_pihak_lain.Text := TblVal[0];
+    end;
+  finally
+    close;
+  end;
+end;
+
 procedure Tf_bayar_piutang.sSpeedButton1Click(Sender: TObject);
 begin
   ed_no_jurnal.SetFocus;
@@ -155,8 +173,6 @@ begin
 end;
 
 procedure Tf_bayar_piutang.b_hapusClick(Sender: TObject);
-var
-  p: integer;
 begin
   if (MessageDlg('Yakinkah, Anda akan menghapus data ini???', mtConfirmation, [mbYes,
     mbNo], 0) = mrYes) then
@@ -262,25 +278,6 @@ begin
     ed_code.setfocus;
 end;
 
-procedure Tf_bayar_piutang.sb_1Click(Sender: TObject);
-begin
-  ed_pihak_lain.SetFocus;
-  application.CreateForm(tf_cari, f_cari);
-  with F_cari do
-  try
-    _SQLi := 'select kd_pelanggan,n_pelanggan from tb_pelanggan ' +
-      'where kd_perusahaan="' + dm.kd_perusahaan + '"';
-    tblcap[0] := 'Kode';
-    tblCap[1] := 'Deskripsi';
-    if ShowModal = mrOk then
-    begin
-      ed_pihak_lain.Text := TblVal[0];
-    end;
-  finally
-    close;
-  end;
-end;
-
 procedure Tf_bayar_piutang.sb_cariClick(Sender: TObject);
 begin
   if (ed_pihak_lain.Text = '') then
@@ -306,6 +303,13 @@ begin
   finally
     close;
   end;
+end;
+
+procedure Tf_bayar_piutang.ed_no_jurnalKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = vk_return then
+    sSpeedButton1Click(Sender);
 end;
 
 procedure Tf_bayar_piutang.createrows;
@@ -381,13 +385,6 @@ begin
       TableView.DataController.DeleteFocused;
       update_ket2;
     end;
-end;
-
-procedure Tf_bayar_piutang.ed_no_jurnalKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin
-  if Key = vk_return then
-    sSpeedButton1Click(Sender);
 end;
 
 procedure Tf_bayar_piutang.ed_codeKeyPress(Sender: TObject; var Key: Char);
