@@ -119,7 +119,7 @@ end;
 procedure Tf_daftar_bayar_piutang.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and refr="PP"', true);
 

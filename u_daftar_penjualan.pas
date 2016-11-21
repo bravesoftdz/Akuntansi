@@ -86,17 +86,17 @@ procedure tf_daftar_penjualan.segarkan;
 begin
   fungsi.SQLExec(Q_setor,
     'select *,IF(IFNULL(ix_setor,0)=0,0,1) as posted from tb_login_kasir where kd_perusahaan= "' +
-    f_utama.sb.Panels[3].Text + '" and month(tanggal)="' + f_utama.sb.Panels[6].Text
+    dm.kd_perusahaan + '" and month(tanggal)="' + f_utama.sb.Panels[6].Text
     + '" and year(tanggal)="' + f_utama.sb.Panels[7].Text +
     '" order by tanggal DESC', true);
 
   fungsi.SQLExec(Q_daftar_jual,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and no_ix="' + Q_setor.fieldbyname('ix_setor').AsString + '"', true);
 
   fungsi.SQLExec(Q_rinci_jual,
     'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
-    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_setor.fieldbyname('ix_setor').AsString
+    dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_setor.fieldbyname('ix_setor').AsString
     + '"', true);
 
   t_data1.ViewData.Expand(True);
@@ -151,12 +151,12 @@ procedure Tf_daftar_penjualan.t_data0FocusedRecordChanged(Sender:
   TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
   fungsi.SQLExec(Q_daftar_jual,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and no_ix="' + Q_setor.fieldbyname('ix_setor').AsString + '"', true);
 
   fungsi.SQLExec(Q_rinci_jual,
     'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
-    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_setor.fieldbyname('ix_setor').AsString
+    dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_setor.fieldbyname('ix_setor').AsString
     + '"', true);
 
   t_data1.ViewData.Expand(True);
@@ -180,7 +180,7 @@ end;
 procedure Tf_daftar_penjualan.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_jual,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and refr="TJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
     '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
 
@@ -200,7 +200,7 @@ begin
 
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_Exe, 'call sp_setor_kasir_jurnal("' + f_utama.sb.Panels[3].Text
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_setor_kasir_jurnal("' + dm.kd_perusahaan
       + '","' + Q_setor.fieldbyname('user').AsString + '","' + Q_setor.fieldbyname
       ('kd_jaga').AsString + '","' + formatdatetime('yyyy-MM-dd hh:mm:ss',
       Q_setor.fieldbyname('tanggal').AsDateTime) + '")', False);
@@ -220,7 +220,7 @@ end;
 procedure Tf_daftar_penjualan.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and refr="TJ"', true);
 

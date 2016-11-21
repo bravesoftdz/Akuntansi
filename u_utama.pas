@@ -481,10 +481,10 @@ begin
     dm.db_conn.StartTransaction;
     try
 {
-fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
+fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 }
-      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + f_utama.sb.Panels[3].Text
+      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + dm.kd_perusahaan
         + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
         ')', false);
 
@@ -522,10 +522,10 @@ begin
     dm.db_conn.StartTransaction;
     try
 {
-fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+f_utama.sb.Panels[3].Text+'","'+
+fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+dm.kd_perusahaan+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 }
-      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + f_utama.sb.Panels[3].Text
+      fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + dm.kd_perusahaan
         + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
         ')', false);
 
@@ -581,7 +581,7 @@ begin
   historical_balancing;
 {dm.db_conn.StartTransaction;
 try
-fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+f_utama.sb.Panels[3].Text+'","'+
+fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
 formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
 dm.db_conn.Commit;
 showmessage('proses Hitung Ulang saldo ahir dan penyusutan berhasil');
@@ -796,7 +796,7 @@ end;
 procedure Tf_utama.DaftarHutangUsaha1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan, 'select * from vw_hutang where kd_perusahaan="' +
-    f_utama.sb.Panels[3].Text +
+    dm.kd_perusahaan +
     '" and status=''belum lunas'' order by tanggal DESC', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_hutang.fr3');
@@ -806,7 +806,7 @@ end;
 procedure Tf_utama.DaftarPiutangUsaha1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan, 'select * from _vw_piutang where kd_perusahaan='
-    + quotedstr(f_utama.sb.Panels[3].Text) +
+    + quotedstr(dm.kd_perusahaan) +
     ' and status=''belum lunas'' order by tanggal DESC', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_piutang.fr3');
   dm.laporan.ShowReport;
@@ -848,7 +848,7 @@ begin
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_asset where kd_perusahaan= "'+
 sb.Panels[3].Text+'"',true);
 }
-  fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + f_utama.sb.Panels[3].Text +
+  fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + dm.kd_perusahaan +
     '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
     strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', true);
 
@@ -1164,7 +1164,7 @@ procedure Tf_utama.BuatSaldoAwalAkun;
 begin
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_Exe, 'call sp_saldo_awal_akun("' + f_utama.sb.Panels[3].Text
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_saldo_awal_akun("' + dm.kd_perusahaan
       + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(sb.Panels[7].Text),
       strtoint(sb.Panels[6].Text), 1)) + '")', false);
 

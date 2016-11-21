@@ -152,7 +152,7 @@ begin
   application.CreateForm(tf_cari, f_cari);
   fungsi.SQLExec(dm.q_cari,
     'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-    f_utama.sb.Panels[3].Text + '" and pelanggan="' + kd_pelanggan +
+    dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
     '" and status=''belum lunas''', true);
   f_cari.clm1.caption := 'Tanggal';
   f_cari.clm2.caption := 'Faktur';
@@ -229,7 +229,7 @@ begin
 
     for x := 0 to tableview.DataController.RecordCount - 1 do
     begin
-      isi_sql := isi_sql + '("' + f_utama.sb.Panels[3].Text + '","' + inttostr(ix_jurnal)
+      isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
         + '","' + inttostr(x + 2) + '","' + jurnal_piutang + '","' + floattostr(TableView.DataController.GetValue
         (x, 3)) + '","' + TableView.DataController.GetDisplayText(x, 0) + '"),';
 
@@ -242,14 +242,14 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai) values ("' + f_utama.sb.Panels[3].Text + '","' +
+      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' +
       inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
       + '","' + ed_keterangan.Text + ' untuk ' + ed_ket2.Text + '","' +
       ed_refrensi.Text + '","PP","' + floattostr(dibayar) + '")', false);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'debet) values ("' + f_utama.sb.Panels[3].Text + '","' + inttostr(ix_jurnal)
+      'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
       + '",1,"' + ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
 
     fungsi.SQLExec(dm.Q_exe,
@@ -309,7 +309,7 @@ begin
   application.CreateForm(tf_cari, f_cari);
   fungsi.SQLExec(dm.q_cari,
     'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-    f_utama.sb.Panels[3].Text + '" and pelanggan="' + kd_pelanggan +
+    dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
     '" and status=''belum lunas''', true);
   f_cari.clm1.caption := 'Tanggal';
   f_cari.clm2.caption := 'Faktur';
@@ -358,7 +358,7 @@ begin
 
     fungsi.sqlExec(dm.Q_temp,
       'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-      f_utama.sb.Panels[3].Text + '" and pelanggan="' + kd_pelanggan +
+      dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
       '" and status=''belum lunas'' and faktur =' + quotedstr(ed_code.Text) + '', true);
     if dm.Q_temp.RecordCount <> 0 then
       createrows

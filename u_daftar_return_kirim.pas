@@ -83,18 +83,18 @@ procedure Tf_daftar_return_kirim.segarkan;
 begin
   fungsi.SQLExec(Q_return_kirim,
     'select *,IF(IFNULL(ix_return_kirim,0)=0,0,1) as posted from vw_list_return_kirim where kd_perusahaan= "' +
-    f_utama.sb.Panels[3].Text + '" and month(tgl_return_kirim)="' + f_utama.sb.Panels
+    dm.kd_perusahaan + '" and month(tgl_return_kirim)="' + f_utama.sb.Panels
     [6].Text + '" and year(tgl_return_kirim)="' + f_utama.sb.Panels[7].Text +
     '" order by tgl_return_kirim DESC', true);
 
   fungsi.SQLExec(Q_daftar_return_kirim,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and no_ix="' + Q_return_kirim.fieldbyname('ix_return_kirim').AsString +
     '"', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
     'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
-    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
+    dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
     ('ix_return_kirim').AsString + '"', true);
 
   t_data1.ViewData.Expand(True);
@@ -164,13 +164,13 @@ procedure Tf_daftar_return_kirim.t_data0FocusedRecordChanged(Sender:
   TcxCustomGridRecord; ANewItemRecordFocusingChanged: Boolean);
 begin
   fungsi.SQLExec(Q_daftar_return_kirim,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and no_ix="' + Q_return_kirim.fieldbyname('ix_return_kirim').AsString +
     '"', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
     'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
-    f_utama.sb.Panels[3].Text + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
+    dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
     ('ix_return_kirim').AsString + '"', true);
 
   t_data1.ViewData.Expand(True);
@@ -179,7 +179,7 @@ end;
 procedure Tf_daftar_return_kirim.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_return_kirim,
-    'select * from tb_jurnal_global where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and refr="RK" and month(tgl)="' + f_utama.sb.Panels[6].Text +
     '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
 
@@ -212,7 +212,7 @@ end;
 procedure Tf_daftar_return_kirim.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and refr="RK"', true);
 

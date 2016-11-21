@@ -76,11 +76,11 @@ procedure Tf_daftar_hutang.segarkan;
 begin
 
   fungsi.SQLExec(Q_hutang, 'select * from vw_hutang where kd_perusahaan="' +
-    f_utama.sb.Panels[3].Text +
+    dm.kd_perusahaan +
     '" and status=''belum lunas'' order by tanggal DESC', true);
 {
 fungsi.SQLExec(Q_hutang,'select * from vw_hutang where kd_perusahaan="'+
-f_utama.sb.Panels[3].Text+'" order by tanggal DESC',true);
+dm.kd_perusahaan+'" order by tanggal DESC',true);
 }
   fungsi.SQLExec(Q_bayar_hutang,
     'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
@@ -138,7 +138,7 @@ end;
 procedure Tf_daftar_hutang.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_cetak_receipt where kd_perusahaan="' + f_utama.sb.Panels[3].Text
+    'select * from vw_cetak_receipt where kd_perusahaan="' + dm.kd_perusahaan
     + '" and kd_receipt="' + Q_hutang.fieldbyname('faktur').AsString + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\gp_receipt_rinci.fr3');
   dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)

@@ -162,7 +162,7 @@ end;
 procedure Tf_daftar_akun.b_cetakClick(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_buku_besar,
-    'select * from vw_buku_besar where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from vw_buku_besar where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and kd_kiraan = ' + quotedstr(dm.Q_kiraan.fieldbyname('kd_kiraan').AsString)
     + '', true);

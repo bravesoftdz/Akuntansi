@@ -122,7 +122,7 @@ begin
       F_utama.Sb.Panels[1].Text := ed_N_User.Text;
 
       dm.kd_perusahaan := sb.Panels[0].Text;
-      F_utama.sb.Panels[3].Text := dm.kd_perusahaan;
+      dm.kd_perusahaan := dm.kd_perusahaan;
       F_utama.sb.Panels[4].Text := sb.Panels[1].Text;
       F_utama.caption := 'Account Of Profit (' + sb.Panels[1].Text + ')';
 

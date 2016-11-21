@@ -153,7 +153,7 @@ begin
 
     for x := 0 to tableview.DataController.RecordCount - 1 do
     begin
-      isi_sql := isi_sql + '("' + f_utama.sb.Panels[3].Text + '","' + inttostr(ix_jurnal)
+      isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
         + '","' + inttostr(x + 1) + '","' + TableView.DataController.GetDisplayText
         (x, 0) + '","' + floattostr(TableView.DataController.GetValue(x, 2)) +
         '","' + floattostr(TableView.DataController.GetValue(x, 3)) + '"),';
@@ -162,7 +162,7 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai) values ("' + f_utama.sb.Panels[3].Text + '","' +
+      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' +
       inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
       + '","' + ed_keterangan.Text + '","' + ed_refrensi.Text + '","GJ","' +
       floattostr(tot_debet) + '")', false);

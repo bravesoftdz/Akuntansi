@@ -68,7 +68,7 @@ uses
 procedure Tf_daftar_kas.segarkan;
 begin
   fungsi.SQLExec(Q_kas, 'select * from tb_jurnal_global where kd_perusahaan= '''
-    + f_utama.sb.Panels[3].Text + ''' and ' + j_trans + ' and month(tgl)=''' +
+    + dm.kd_perusahaan + ''' and ' + j_trans + ' and month(tgl)=''' +
     f_utama.sb.Panels[6].Text + ''' and year(tgl)=''' + f_utama.sb.Panels[7].Text
     + '''', true);
 
@@ -157,7 +157,7 @@ end;
 procedure Tf_daftar_kas.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + f_utama.sb.Panels[3].Text
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and ' + j_trans + '', true);
 

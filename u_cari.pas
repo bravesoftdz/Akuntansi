@@ -160,7 +160,7 @@ begin
         begin
           if asal = 'f_utama' then
           begin
-            if f_utama.sb.Panels[3].Text <> dm.q_cari.fieldbyname('kd_Perusahaan').AsString
+            if dm.kd_perusahaan <> dm.q_cari.fieldbyname('kd_Perusahaan').AsString
               then
             begin
               application.CreateForm(Tf_login, f_login);
