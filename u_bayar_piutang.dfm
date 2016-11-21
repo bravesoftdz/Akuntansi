@@ -2,7 +2,7 @@ object f_bayar_piutang: Tf_bayar_piutang
   Left = 300
   Top = 59
   BorderStyle = bsDialog
-  Caption = 'Pembayaran Piutang'
+  Caption = 'Bayar'
   ClientHeight = 464
   ClientWidth = 531
   Color = clBtnFace
@@ -317,7 +317,7 @@ object f_bayar_piutang: Tf_bayar_piutang
       Top = 16
       Width = 29
       Height = 13
-      Caption = 'Dari'
+      Caption = 'Untuk'
       ParentFont = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 5786691
@@ -375,7 +375,7 @@ object f_bayar_piutang: Tf_bayar_piutang
       Font.Name = 'MS Sans Serif'
       Font.Style = []
     end
-    object ed_pelanggan: TsEdit
+    object ed_pihak_lain: TsEdit
       Left = 56
       Top = 16
       Width = 257
@@ -390,7 +390,7 @@ object f_bayar_piutang: Tf_bayar_piutang
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      OnKeyDown = ed_pelangganKeyDown
+      OnKeyDown = ed_pihak_lainKeyDown
       SkinData.SkinSection = 'EDIT'
       BoundLabel.Indent = 0
       BoundLabel.Font.Charset = DEFAULT_CHARSET

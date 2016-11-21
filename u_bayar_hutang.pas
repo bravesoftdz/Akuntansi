@@ -36,7 +36,7 @@ type
     Lbl4: TsLabel;
     Lbl5: TsLabel;
     Lbl3: TsLabel;
-    ed_supp: TsEdit;
+    ed_pihak_lain: TsEdit;
     ed_refrensi: TsEdit;
     de_tanggal: TsDateEdit;
     ed_keterangan: TsEdit;
@@ -61,11 +61,11 @@ type
     procedure
       tableviewTcxGridDataControllerTcxDataSummaryFooterSummaryItems3GetText(Sender:
       TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean; var AText: string);
-    procedure ed_suppKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
   public
-    kd_supp: string;
+    kd_supp,jenis : string;
     dibayar: Real;
     { Public declarations }
   end;
@@ -84,6 +84,11 @@ procedure Tf_bayar_hutang.awal;
 var
   a: integer;
 begin
+  if jenis = 'hutang' then
+    Caption := 'Pembayaran Hutang'
+  else
+    Caption := 'Pembayaran Piutang';
+
   fungsi.SQLExec(dm.Q_temp,
     'select IFNULL(count(no_ix),0) as jumlah from tb_jurnal_global where refr=''PH''',
     true);
@@ -104,7 +109,7 @@ begin
 
   ed_keterangan.Clear;
   ed_ket2.Clear;
-  ed_supp.Clear;
+  ed_pihak_lain.Clear;
 
   de_tanggal.Date := now;
   tableview.DataController.RecordCount := 0;
@@ -112,7 +117,7 @@ end;
 
 procedure Tf_bayar_hutang.sb_1Click(Sender: TObject);
 begin
-  ed_supp.SetFocus;
+  ed_pihak_lain.SetFocus;
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
@@ -122,7 +127,7 @@ begin
     tblCap[1] := 'Deskripsi';
     if ShowModal = mrOk then
     begin
-      ed_supp.Text := TblVal[0];
+      ed_pihak_lain.Text := TblVal[0];
     end;
   finally
     close;
@@ -275,10 +280,10 @@ end;
 
 procedure Tf_bayar_hutang.sb_cariClick(Sender: TObject);
 begin
-  if (ed_supp.Text = '') then
+  if (ed_pihak_lain.Text = '') then
   begin
     showmessage('supplier harus diisi terlebih dahulu');
-    ed_supp.SetFocus;
+    ed_pihak_lain.SetFocus;
     exit;
   end;
 
@@ -420,7 +425,7 @@ begin
     dibayar := AValue;
 end;
 
-procedure Tf_bayar_hutang.ed_suppKeyDown(Sender: TObject; var Key: Word; Shift:
+procedure Tf_bayar_hutang.ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift:
   TShiftState);
 begin
   if Key = vk_return then

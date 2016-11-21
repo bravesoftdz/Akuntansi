@@ -2,7 +2,7 @@ object f_bayar_hutang: Tf_bayar_hutang
   Left = 300
   Top = 59
   BorderStyle = bsDialog
-  Caption = 'Pembayaran Hutang'
+  Caption = 'Bayar'
   ClientHeight = 464
   ClientWidth = 531
   Color = clBtnFace
@@ -375,7 +375,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       Font.Name = 'MS Sans Serif'
       Font.Style = []
     end
-    object ed_supp: TsEdit
+    object ed_pihak_lain: TsEdit
       Left = 56
       Top = 16
       Width = 257
@@ -390,7 +390,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       ParentFont = False
       ReadOnly = True
       TabOrder = 0
-      OnKeyDown = ed_suppKeyDown
+      OnKeyDown = ed_pihak_lainKeyDown
       SkinData.SkinSection = 'EDIT'
       BoundLabel.Indent = 0
       BoundLabel.Font.Charset = DEFAULT_CHARSET

@@ -602,6 +602,7 @@ end;
 procedure Tf_utama.mnibayahutangClick(Sender: TObject);
 begin
   application.CreateForm(tf_bayar_hutang, f_bayar_hutang);
+  f_bayar_hutang.jenis := 'hutang';
   f_bayar_hutang.ShowModal;
 end;
 
@@ -718,6 +719,7 @@ end;
 procedure Tf_utama.MenuItem1Click(Sender: TObject);
 begin
   application.CreateForm(tf_bayar_piutang, f_bayar_piutang);
+  f_bayar_piutang.jenis := 'piutang';
   f_bayar_piutang.ShowModal;
 end;
 
