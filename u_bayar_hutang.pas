@@ -65,7 +65,7 @@ type
   private
     { Private declarations }
   public
-    kd_supp,jenis : string;
+    kd_supp, jenis: string;
     dibayar: Real;
     { Public declarations }
   end;
@@ -121,8 +121,8 @@ begin
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
   try
-    _SQLi := 'select kode,n_supp from tb_supp ' +
-      'where kd_perusahaan="' + dm.kd_perusahaan + '"';
+    _SQLi := 'select kode,n_supp from tb_supp ' + 'where kd_perusahaan="' + dm.kd_perusahaan
+      + '"';
     tblcap[0] := 'Kode';
     tblCap[1] := 'Deskripsi';
     if ShowModal = mrOk then
@@ -425,8 +425,8 @@ begin
     dibayar := AValue;
 end;
 
-procedure Tf_bayar_hutang.ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift:
-  TShiftState);
+procedure Tf_bayar_hutang.ed_pihak_lainKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
   if Key = vk_return then
     sb_1Click(Sender);
