@@ -298,7 +298,7 @@ begin
   sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
   sb.Panels[3].Text := dm.kd_perusahaan;
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan = "' +
-    sb.Panels[3].text + '"', true);
+    dm.kd_perusahaan + '"', true);
   sb.Panels[4].Text := dm.Q_temp.fieldbyname('n_perusahaan').AsString;
   caption := 'Account Of Profit (' + sb.Panels[4].Text + '  )';
 
@@ -317,12 +317,12 @@ procedure Tf_utama.ac_neracaExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
     'select * from _vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "' +
-    sb.Panels[3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' +
+    dm.kd_perusahaan + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' +
     sb.Panels[7].Text + '" order by kd_kiraan', true);
 
   fungsi.SQLExec(dm.Q_trial_balance2,
     'select * from vw_trial_balance_kredit where (kd_kiraan like "' + '2' +
-    '%" or kd_kiraan like "' + '3' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    '%" or kd_kiraan like "' + '3' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '" order by kd_kiraan', true);
 
@@ -333,7 +333,7 @@ end;
 procedure Tf_utama.ac_bk_besarExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_buku_besar,
-    'select * from vw_buku_besar where kd_perusahaan= "' + sb.Panels[3].Text +
+    'select * from vw_buku_besar where kd_perusahaan= "' + dm.kd_perusahaan +
     '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
     '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
@@ -343,7 +343,7 @@ end;
 procedure Tf_utama.ac_tBalanceExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
-    'select * from _vw_trial_balance where kd_perusahaan= "' + sb.Panels[3].Text
+    'select * from _vw_trial_balance where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
@@ -354,14 +354,14 @@ procedure Tf_utama.ac_laba_rugiExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
     'select * from vw_laba_rugi_kredit where (kd_kiraan like "' + '4' +
-    '%" or kd_kiraan like "' + '8' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    '%" or kd_kiraan like "' + '8' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '" order by kd_kiraan', true);
 
   fungsi.SQLExec(dm.Q_trial_balance2,
     'select * from vw_laba_rugi where (kd_kiraan like "' + '5' +
     '%" or kd_kiraan like "' + '6' + '%" or kd_kiraan like "' + '7' +
-    '%" or kd_kiraan like "' + '9' + '%") and kd_perusahaan= "' + sb.Panels[3].Text
+    '%" or kd_kiraan like "' + '9' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_laba_rugi.fr3');
@@ -387,7 +387,7 @@ begin
   dm.metu_kabeh := True;
   appINI := TIniFile.Create(dm.AppPath + 'gain.ini');
   try
-    appINI.WriteString('akun', 'kd_perusahaan', sb.Panels[3].text);
+    appINI.WriteString('akun', 'kd_perusahaan', dm.kd_perusahaan);
   finally
     appINI.Free;
   end;
@@ -447,7 +447,7 @@ procedure Tf_utama.SaldoAwalAkun1Click(Sender: TObject);
 begin
 {
 fungsi.SQLExec(dm.Q_tampil,'select * from vw_saldo_awal_akun where kd_perusahaan='+
-QuotedStr(sb.Panels[3].Text)+' and bulan='+sb.Panels[6].Text+' and tahun='+sb.Panels[7].Text+'',true);
+QuotedStr(dm.kd_perusahaan)+' and bulan='+sb.Panels[6].Text+' and tahun='+sb.Panels[7].Text+'',true);
 
 application.CreateForm(tf_saldo_awal,f_saldo_awal);
 f_saldo_awal.ShowModal;
@@ -557,7 +557,7 @@ begin
   ent := ''#10#13'';
 
   fungsi.SQLExec(dm.Q_temp,
-    'SELECT * FROM vw_tidak_balance where kd_perusahaan="' + sb.Panels[3].Text +
+    'SELECT * FROM vw_tidak_balance where kd_perusahaan="' + dm.kd_perusahaan +
     '" and bulan="' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
     '"', true);
   if dm.Q_temp.Eof then
@@ -738,7 +738,7 @@ end;
 procedure Tf_utama.MenuItem24Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + sb.Panels[3].Text
+    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
@@ -786,7 +786,7 @@ end;
 procedure Tf_utama.Pembelian1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_pembelian where kd_perusahaan= "' + sb.Panels[3].Text +
+    'select * from vw_pembelian where kd_perusahaan= "' + dm.kd_perusahaan +
     '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
     '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembelian.fr3');
@@ -846,7 +846,7 @@ procedure Tf_utama.HartaTetap1Click(Sender: TObject);
 begin
 {
 fungsi.SQLExec(dm.Q_laporan,'select * from vw_asset where kd_perusahaan= "'+
-sb.Panels[3].Text+'"',true);
+dm.kd_perusahaan+'"',true);
 }
   fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + dm.kd_perusahaan +
     '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
