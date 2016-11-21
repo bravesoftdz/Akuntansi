@@ -44,7 +44,7 @@ type
   private
     { Private declarations }
   public
-    kd_perusahaan: string;
+    kd_perusahaan, kd_user: string;
     Path, AppPath: string;
     metu_kabeh: boolean;
     PeriodAktif: string;
