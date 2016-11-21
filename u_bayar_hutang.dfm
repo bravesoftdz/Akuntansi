@@ -1,6 +1,6 @@
 object f_bayar_hutang: Tf_bayar_hutang
-  Left = 317
-  Top = 38
+  Left = 300
+  Top = 59
   BorderStyle = bsDialog
   Caption = 'Pembayaran Hutang'
   ClientHeight = 464
@@ -29,7 +29,7 @@ object f_bayar_hutang: Tf_bayar_hutang
     ImageIndex = 0
     Images = dm.gambar
   end
-  object l_6: TsLabel
+  object Lbl6: TsLabel
     Left = 8
     Top = 400
     Width = 16
@@ -42,7 +42,7 @@ object f_bayar_hutang: Tf_bayar_hutang
     Font.Name = 'MS Sans Serif'
     Font.Style = []
   end
-  object l_5: TsLabel
+  object Lbl7: TsLabel
     Left = 32
     Top = 400
     Width = 153
@@ -74,7 +74,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       ImageIndex = 0
       Images = dm.gambar
     end
-    object sLabel5: TsLabel
+    object Lbl1: TsLabel
       Left = 8
       Top = 12
       Width = 49
@@ -312,7 +312,7 @@ object f_bayar_hutang: Tf_bayar_hutang
     Height = 105
     TabOrder = 1
     SkinData.SkinSection = 'GROUPBOX'
-    object l_1: TsLabel
+    object Lbl2: TsLabel
       Left = 8
       Top = 16
       Width = 29
@@ -336,7 +336,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       ImageIndex = 0
       Images = dm.gambar
     end
-    object l_2: TsLabel
+    object Lbl4: TsLabel
       Left = 328
       Top = 48
       Width = 39
@@ -349,7 +349,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       Font.Name = 'MS Sans Serif'
       Font.Style = []
     end
-    object l_3: TsLabel
+    object Lbl5: TsLabel
       Left = 328
       Top = 72
       Width = 39
@@ -362,7 +362,7 @@ object f_bayar_hutang: Tf_bayar_hutang
       Font.Name = 'MS Sans Serif'
       Font.Style = []
     end
-    object l_4: TsLabel
+    object Lbl3: TsLabel
       Left = 8
       Top = 48
       Width = 29
