@@ -243,12 +243,12 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
-      '",1,"' + ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
+      'kredit,rujukan) values ' + isi_sql, false);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'kredit,rujukan) values ' + isi_sql, false);
+      'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
+      '",1,"' + ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
 
     fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + f_utama.sb.Panels
       [3].Text + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
