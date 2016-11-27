@@ -56,10 +56,11 @@ begin
   if key = vk_return then
   begin
     PeekMessage(Mgs, 0, WM_CHAR, WM_CHAR, PM_REMOVE);
-    sql := 'SELECT tb_user.n_user, tb_user.`password` FROM tb_user INNER JOIN '
-      + 'tb_user_company ON tb_user.kd_user = tb_user_company.kd_user WHERE ' +
-      'tb_user.kd_user="' + ed_kd_user.Text + '" AND tb_user_company.akun="Y" '
-      + 'AND tb_user_company.kd_perusahaan="' + dm.kd_perusahaan + '"';
+    sql := Format('SELECT tb_user.n_user, tb_user.`password` FROM tb_user ' +
+      'INNER JOIN tb_user_company ON tb_user.kd_user = tb_user_company.kd_user ' +
+      'WHERE tb_user.kd_user="%s" AND tb_user_company.akun="Y" ' +
+      'AND tb_user_company.kd_perusahaan="%s"', [ed_kd_user.Text, dm.kd_perusahaan]);
+
     fungsi.SQLExec(DM.Q_Show, sql, true);
     if dm.Q_show.Eof then
     begin
@@ -75,8 +76,8 @@ begin
       fungsi.SQLExec(DM.Q_Show, sql, true);
       if dm.Q_show.FieldByName('nilai').AsBoolean then
       begin
-        sql := 'SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
-          + 'AND user_id="' + ed_kd_user.Text + '"';
+        sql := Format('SELECT user_id FROM tb_checkinout WHERE ISNULL(checkout_time) '
+          + 'AND user_id="%s"', [ed_kd_user.Text]);
         fungsi.SQLExec(DM.Q_Show, sql, true);
         if dm.Q_show.Eof then
         begin
@@ -99,14 +100,15 @@ end;
 
 procedure TF_Login.sButton1Click(Sender: TObject);
 var
-  passs: string;
+  passs, sql: string;
 begin
   if ed_n_user.Text <> '' then
   begin
-    fungsi.SQLExec(dm.Q_temp, 'select md5("' + ed_password.Text +
-      '")as passs, RIGHT(periode_akun,2) as bulan, ' +
-      'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="' + dm.kd_perusahaan
-      + '"', true);
+    sql := Format('select md5("%s")as passs, RIGHT(periode_akun,2) as bulan, ' +
+      'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="%s"',
+      [ed_password.Text, dm.kd_perusahaan]);
+      
+    fungsi.SQLExec(dm.Q_temp, sql, true);
     passs := dm.Q_temp.fieldbyname('passs').AsString;
 
     if compareText(userPassword, passs) <> 0 then
