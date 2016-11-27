@@ -117,11 +117,11 @@ begin
     begin
       fungsi.SQLExec(dm.Q_Exe,
         'insert into tb_asset(kd_perusahaan,kd_asset,Nm_asset, ' + 'tgl_perolehan,Q_asset,jumlah_nilai,nilai_residu,umur_ekonomis,kiraan_asset,kiraan_depresiasi, '
-        + 'kiraan_akum_depresiasi) values ("' + dm.kd_perusahaan +
+        + 'kiraan_akum_depresiasi, kd_user) values ("' + dm.kd_perusahaan +
         '","' + ed_kode.Text + '","' + ed_nama.Text + '","' + formatdatetime('yyyy-MM-dd',
         de_tanggal.Date) + '","' + ce_qty.Text + '","' + ce_nilai.Text + '","' +
         ce_res.Text + '","' + ce_umur.Text + '","' + cb_Asset.Text + '","' +
-        cb_dep.Text + '","' + cb_Ak_Dep.Text + '")', false);
+        cb_dep.Text + '","' + cb_Ak_Dep.Text + '", "' + dm.kd_pengguna + '")', false);
     end
     else
     begin
@@ -130,9 +130,9 @@ begin
         '",Q_asset="' + ce_qty.Text + '",jumlah_nilai="' + ce_nilai.Text +
         '",nilai_residu="' + ce_res.Text + '",umur_ekonomis="' + ce_umur.Text +
         '",kiraan_asset="' + cb_Asset.Text + '",kiraan_depresiasi="' + cb_dep.Text
-        + '",kiraan_akum_depresiasi="' + cb_Ak_Dep.Text +
-        '" where kd_perusahaan="' + dm.kd_perusahaan +
-        '" and kd_asset="' + ed_kode.Text + '"', false);
+        + '",kiraan_akum_depresiasi="' + cb_Ak_Dep.Text + '",kd_user = "' + dm.kd_pengguna
+        + '" where kd_perusahaan="' + dm.kd_perusahaan + '" and kd_asset="' +
+        ed_kode.Text + '"', false);
     end;
 
 //fungsi.SQLExec(f_daftar_asset.Q_asset,'select * from vw_asset',true);

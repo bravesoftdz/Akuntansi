@@ -177,10 +177,11 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-      + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '","' +
-      ed_keterangan.Text + '","' + ed_refrensi.Text + '","' + jenis_jurnal +
-      '","' + floattostr(total_value) + '")', false);
+      'no_refrensi,refr,nilai, kd_user) values ("' + dm.kd_perusahaan + '","' +
+      inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
+      + '","' + ed_keterangan.Text + '","' + ed_refrensi.Text + '","' +
+      jenis_jurnal + '","' + floattostr(total_value) + '", "' + dm.kd_pengguna +
+      '")', false);
 
     if cb_jenis.ItemIndex = 0 then
     begin
