@@ -63,10 +63,10 @@ type
       TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean; var AText: string);
     procedure ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
+    dibayar: Real;
     { Private declarations }
   public
-    kd_pelanggan, jenis: string;
-    dibayar: Real;
+    jenis: string;
     { Public declarations }
   end;
 
@@ -293,12 +293,13 @@ begin
   try
     _SQLi :=
       'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' + dm.kd_perusahaan
-      + '" and pelanggan="' + kd_pelanggan + '" and status="belum lunas"';
+      + '" and pelanggan="' + ed_pihak_lain.Text + '" and status="belum lunas"';
     tblcap[0] := 'Kode';
     tblCap[1] := 'Deskripsi';
+    tblCap[2] := 'Piutang';
     if ShowModal = mrOk then
     begin
-      ed_code.Text := TblVal[0];
+      ed_code.Text := TblVal[1];
     end;
   finally
     close;
@@ -351,13 +352,13 @@ begin
 
     fungsi.sqlExec(dm.Q_temp,
       'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-      dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
+      dm.kd_perusahaan + '" and pelanggan="' + ed_pihak_lain.Text +
       '" and status=''belum lunas'' and faktur =' + quotedstr(ed_code.Text) + '', true);
     if dm.Q_temp.RecordCount <> 0 then
       createrows
     else
     begin
-      showmessage('no kiraan tidak dapat ditemukan...');
+      showmessage('no Faktur tidak dapat ditemukan...');
       Exit;
     end;
     ed_code.Clear
