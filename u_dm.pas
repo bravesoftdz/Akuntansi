@@ -16,8 +16,6 @@ type
     sm: TsSkinManager;
     Q_temp: TmySQLQuery;
     gambar: TsAlphaImageList;
-    q_cari: TmySQLQuery;
-    ds_cari: TDataSource;
     Q_buku_besar: TmySQLQuery;
     R_buku_besar: TfrxDBDataset;
     Laporan: TfrxReport;

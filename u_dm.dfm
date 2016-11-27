@@ -8809,17 +8809,6 @@ object dm: Tdm
     Top = 296
     Bitmap = {}
   end
-  object q_cari: TmySQLQuery
-    Database = db_conn
-    Filtered = True
-    Left = 8
-    Top = 112
-  end
-  object ds_cari: TDataSource
-    DataSet = q_cari
-    Left = 72
-    Top = 112
-  end
   object Q_buku_besar: TmySQLQuery
     Database = db_conn
     SQL.Strings = (
