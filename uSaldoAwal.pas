@@ -3,13 +3,14 @@ unit uSaldoAwal;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Graphics, Forms, Dialogs, DB, Grids,
-  DBGrids, StdCtrls, ComCtrls, Controls, Buttons, Classes, ExtCtrls,
-  mySQLDbTables, sEdit, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData,
+  Windows, Messages, SysUtils, Variants, Graphics, Forms, Dialogs, DB, 
+  StdCtrls, ComCtrls, Controls, Buttons, Classes, ExtCtrls,
+  mySQLDbTables, sEdit, cxStyles, cxGraphics, 
   cxDataStorage, cxEdit, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, Mask, sMaskEdit, sCustomComboEdit, sCurrEdit, sCurrencyEdit,
-  sSpeedButton, sSkinProvider, sPanel;
+  cxGrid, sCurrEdit, sCurrencyEdit,
+  sSpeedButton, sSkinProvider, sPanel, 
+  Mask, sMaskEdit, sCustomComboEdit, cxCustomData, cxFilter, cxData;
 
 type
   TFSaldoAwal = class(TForm)

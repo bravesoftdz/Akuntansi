@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
-  cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, StdCtrls,
-  sLabel, ExtCtrls, sPanel, sSkinProvider, Buttons, sBitBtn, cxDBLookupComboBox,
-  cxCurrencyEdit, sSpeedButton, mySQLDbTables, sButton;
+  cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, 
+  ExtCtrls, sPanel, sSkinProvider, Buttons, cxDBLookupComboBox,
+  cxCurrencyEdit, sSpeedButton, mySQLDbTables, sButton, cxCustomData,
+  cxFilter, cxData, StdCtrls;
 
 type
   Tf_akun_penting = class(TForm)

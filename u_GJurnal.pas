@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Mask, sMaskEdit, sCustomComboEdit, sTooledit, StdCtrls, sEdit, sLabel,
-  Grids, sCurrEdit, sCurrencyEdit, sButton, Buttons, sSpeedButton, sGroupBox,
-  cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage, cxEdit,
+  Dialogs, sTooledit, sEdit, sLabel,
+  sCurrEdit, sCurrencyEdit, sButton, Buttons, sSpeedButton, sGroupBox,
+  cxStyles, cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
-  cxControls, cxGridCustomView, cxGrid, ExtCtrls, sPanel;
+  cxControls, cxGridCustomView, cxGrid, ExtCtrls, sPanel, cxFilter, cxData,
+  StdCtrls, Mask, sMaskEdit, sCustomComboEdit;
 
 type
   TF_GJurnal = class(TForm)

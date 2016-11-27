@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, sCurrEdit, sCurrencyEdit, Buttons, sSpeedButton, Mask, sMaskEdit,
-  sCustomComboEdit, sTooledit, StdCtrls, sLabel, sEdit, sButton, sGroupBox,
+  Dialogs, sCurrEdit, sCurrencyEdit, Buttons, 
+  sTooledit, sLabel, sEdit, sButton, sGroupBox,
   cxGraphics, cxControls, cxContainer, cxEdit, cxTextEdit, cxMaskEdit,
-  cxDropDownEdit, cxLookupEdit, cxDBLookupEdit, cxDBLookupComboBox, DB,
-  mySQLDbTables;
+  cxDropDownEdit, cxDBLookupComboBox, DB,
+  mySQLDbTables, cxLookupEdit, cxDBLookupEdit, StdCtrls, Mask, sMaskEdit,
+  sCustomComboEdit;
 
 type
   TF_asset = class(TForm)
@@ -61,7 +62,7 @@ var
 implementation
 
 uses
-  u_dm, u_utama, u_daftar_asset, UFungsi;
+  u_dm, u_daftar_asset, UFungsi;
 
 {$R *.dfm}
 

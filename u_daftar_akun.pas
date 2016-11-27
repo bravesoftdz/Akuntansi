@@ -4,12 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, sSkinProvider, StdCtrls, sLabel, Mask, sMaskEdit, sCustomComboEdit,
-  sCurrEdit, sCurrencyEdit, Buttons, sBitBtn, cxCurrencyEdit, Menus,
-  sSpeedButton, sButton;
+  cxGrid, sSkinProvider, 
+  Buttons, cxCurrencyEdit, Menus,
+  sSpeedButton, sButton, cxCustomData, cxFilter, cxData, StdCtrls;
 
 type
   Tf_daftar_akun = class(TForm)

@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, mySQLDbTables, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
-  StdCtrls, sButton;
+  sButton, cxCustomData, cxFilter, cxData, StdCtrls;
 
 type
   Tf_daftar_bayar_piutang = class(TForm)

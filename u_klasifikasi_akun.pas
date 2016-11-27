@@ -4,13 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sMemo, sLabel, cxStyles, cxCustomData, cxGraphics, cxFilter,
-  cxData, cxDataStorage, cxEdit, DB, cxDBData, cxGridCustomTableView,
+  Dialogs, sLabel, cxStyles, cxGraphics, 
+  cxDataStorage, cxEdit, DB, cxDBData, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGridLevel, cxClasses, cxControls,
-  cxGridCustomView, cxGrid, sButton, ExtCtrls, sPanel, sComboBox, cxContainer,
-  cxTextEdit, cxMaskEdit, cxDropDownEdit, cxLookupEdit, cxDBLookupEdit,
+  cxGridCustomView, cxGrid, sButton, ExtCtrls, sPanel, cxContainer,
+  cxTextEdit, cxMaskEdit, cxDropDownEdit, 
   cxDBExtLookupComboBox, cxDBLookupComboBox, cxNavigator, cxDBNavigator,
-  cxDBEdit, cxCurrencyEdit;
+  cxCurrencyEdit, cxCustomData, cxFilter, cxData, cxLookupEdit,
+  cxDBLookupEdit, StdCtrls;
 
 type
   Tf_klasifikasi_akun = class(TForm)

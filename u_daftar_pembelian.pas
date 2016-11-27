@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox, sSkinProvider,
-  mySQLDbTables, StdCtrls, sButton, Buttons, sSpeedButton, ExtCtrls, sPanel,
+  mySQLDbTables, sButton, Buttons, sSpeedButton, ExtCtrls, sPanel,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxControls, cxGridCustomView, cxGrid;
+  cxClasses, cxControls, cxGridCustomView, cxGrid, cxCustomData, cxFilter,
+  cxData, StdCtrls;
 
 type
   Tf_daftar_pembelian = class(TForm)

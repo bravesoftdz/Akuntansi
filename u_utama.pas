@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, sSkinProvider, ComCtrls, sStatusBar, acHeaderControl, ToolWin,
-  sToolBar, Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan, Buttons,
-  sSpeedButton, ExtCtrls, sPanel, StdCtrls, sEdit, sBitBtn, inifiles, shellapi,
+  Dialogs, sSkinProvider, ComCtrls, sStatusBar, 
+  Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan, Buttons,
+  sSpeedButton, ExtCtrls, sPanel, StdCtrls, inifiles, shellapi,
   sTabControl;
 
 const

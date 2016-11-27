@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, mySQLDbTables, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
-  cxImageComboBox, StdCtrls, sGroupBox, sButton;
+  cxImageComboBox, sGroupBox, sButton, cxCustomData, cxFilter, cxData,
+  StdCtrls;
 
 type
   Tf_daftar_kas = class(TForm)

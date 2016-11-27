@@ -4,11 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, sLabel, sEdit, Buttons, sSpeedButton, sButton, sCurrEdit,
-  sCurrencyEdit, Grids, Mask, sMaskEdit, sCustomComboEdit, sTooledit, ExtCtrls,
-  sPanel, cxStyles, cxCustomData, cxGraphics, cxFilter, cxData, cxDataStorage,
+  Dialogs, sLabel, sEdit, Buttons, sSpeedButton, sButton, 
+  sTooledit, ExtCtrls,
+  sPanel, cxStyles, cxCustomData, cxGraphics, cxDataStorage,
   cxEdit, cxCurrencyEdit, sGroupBox, cxGridLevel, cxGridCustomTableView,
-  cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid;
+  cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
+  cxFilter, cxData, Mask, sMaskEdit, sCustomComboEdit, StdCtrls;
 
 type
   Tf_bayar_piutang = class(TForm)
