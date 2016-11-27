@@ -180,8 +180,6 @@ begin
 end;
 
 procedure TF_Login.sbClick(Sender: TObject);
-var
-  pencarian: Tf_cari;
 begin
   application.CreateForm(tf_cari, f_cari);
   with F_cari do

@@ -107,8 +107,6 @@ begin
 end;
 
 procedure TF_GJurnal.b_hapusClick(Sender: TObject);
-var
-  p: integer;
 begin
   if (MessageDlg('Yakinkah, Anda akan menghapus data ini???', mtConfirmation, [mbYes,
     mbNo], 0) = mrYes) then

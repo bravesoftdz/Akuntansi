@@ -1124,9 +1124,7 @@ procedure Tf_utama.cek_update;
 var
   versiDB, versiAPP, URLDownload: string;
   fileName, UrlDownloadLocal: string;
-  hasil: Boolean;
 begin
-  hasil := False;
 
   versiAPP := fungsi.GetVersiApp;
 
