@@ -117,8 +117,8 @@ begin
     end
     else
     begin
-      dm.kd_user := Ed_Kd_User.Text;
-      F_utama.Sb.Panels[0].Text := dm.kd_user;
+      dm.kd_pengguna := Ed_Kd_User.Text;
+      F_utama.Sb.Panels[0].Text := dm.kd_pengguna;
       F_utama.Sb.Panels[1].Text := ed_N_User.Text;
 
       dm.kd_perusahaan := sb.Panels[0].Text;
