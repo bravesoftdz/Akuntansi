@@ -353,7 +353,7 @@ object f_daftar_kirim: Tf_daftar_kirim
   object Q_rinci_kirim: TmySQLQuery
     Database = dm.db_conn
     SQL.Strings = (
-      'select * from _vw_jurnal_rinci')
+      'select * from vw_jurnal_rinci')
     Left = 512
     Top = 96
   end

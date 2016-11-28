@@ -393,7 +393,7 @@ object f_daftar_piutang: Tf_daftar_piutang
   object Q_bayar_piutang: TmySQLQuery
     Database = dm.db_conn
     SQL.Strings = (
-      'select * from _vw_jurnal_rinci')
+      'select * from vw_jurnal_rinci')
     Left = 288
     Top = 104
   end

@@ -88,7 +88,7 @@ begin
     ' and status=''belum lunas'' order by tanggal DESC', true);
 
   fungsi.SQLExec(Q_bayar_piutang,
-    'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
     [3].Text + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
 
   fungsi.SQLExec(Q_return,

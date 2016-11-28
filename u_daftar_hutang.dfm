@@ -357,7 +357,7 @@ object f_daftar_hutang: Tf_daftar_hutang
   object Q_bayar_hutang: TmySQLQuery
     Database = dm.db_conn
     SQL.Strings = (
-      'select * from _vw_jurnal_rinci')
+      'select * from vw_jurnal_rinci')
     Left = 288
     Top = 104
   end

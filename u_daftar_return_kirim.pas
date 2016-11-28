@@ -94,7 +94,7 @@ begin
     '"', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
-    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
+    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from vw_jurnal_rinci  where kd_perusahaan= ''' +
     dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
     ('ix_return_kirim').AsString + '"', true);
 
@@ -170,7 +170,7 @@ begin
     '"', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
-    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from _vw_jurnal_rinci  where kd_perusahaan= ''' +
+    'select ix_jurnal,no_urut,kd_akun,n_kiraan,debet,kredit from vw_jurnal_rinci  where kd_perusahaan= ''' +
     dm.kd_perusahaan + ''' and ix_jurnal = "' + Q_return_kirim.fieldbyname
     ('ix_return_kirim').AsString + '"', true);
 
@@ -185,7 +185,7 @@ begin
     '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
-    'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
     [3].Text + ''' and refr="RK" and bulan=''' + f_utama.sb.Panels[6].Text +
     ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
 end;
@@ -213,7 +213,7 @@ end;
 procedure Tf_daftar_return_kirim.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
+    'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and refr="RK"', true);
 

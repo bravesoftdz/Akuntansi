@@ -315,7 +315,7 @@ end;
 procedure Tf_utama.ac_neracaExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
-    'select * from _vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "' +
+    'select * from vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "' +
     dm.kd_perusahaan + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' +
     sb.Panels[7].Text + '" order by kd_kiraan', true);
 
@@ -342,7 +342,7 @@ end;
 procedure Tf_utama.ac_tBalanceExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
-    'select * from _vw_trial_balance where kd_perusahaan= "' + dm.kd_perusahaan
+    'select * from vw_trial_balance where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
@@ -726,7 +726,7 @@ end;
 procedure Tf_utama.MenuItem24Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
+    'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
     + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');

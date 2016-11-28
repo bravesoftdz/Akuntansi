@@ -67,7 +67,7 @@ begin
     + ''' and year(tgl)=''' + f_utama.sb.Panels[7].Text + '''', true);
 
   fungsi.SQLExec(Q_rinci_bayar_piutang,
-    'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
     [3].Text + ''' and refr=''PP'' and bulan=''' + f_utama.sb.Panels[6].Text +
     ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
 end;
@@ -119,7 +119,7 @@ end;
 procedure Tf_daftar_bayar_piutang.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from _vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
+    'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
     + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
     [7].Text + '" and refr="PP"', true);
 

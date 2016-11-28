@@ -84,7 +84,7 @@ fungsi.SQLExec(Q_hutang,'select * from vw_hutang where kd_perusahaan="'+
 dm.kd_perusahaan+'" order by tanggal DESC',true);
 }
   fungsi.SQLExec(Q_bayar_hutang,
-    'select * from _vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
     [3].Text + ''' and (refr=''PH'' or refr=''KJ'') and rujukan IS NOT NULL', true);
 
   fungsi.SQLExec(Q_return, 'SELECT A1.* FROM tb_return_global A1 INNER JOIN ' +

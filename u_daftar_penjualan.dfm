@@ -451,7 +451,7 @@ object f_daftar_penjualan: Tf_daftar_penjualan
   object Q_rinci_jual: TmySQLQuery
     Database = dm.db_conn
     SQL.Strings = (
-      'select * from _vw_jurnal_rinci')
+      'select * from vw_jurnal_rinci')
     Left = 512
     Top = 96
   end
