@@ -386,7 +386,7 @@ object f_daftar_piutang: Tf_daftar_piutang
   object Q_piutang: TmySQLQuery
     Database = dm.db_conn
     SQL.Strings = (
-      'select * from _vw_piutang')
+      'select * from vw_piutang')
     Left = 288
     Top = 56
   end

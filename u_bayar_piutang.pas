@@ -298,7 +298,7 @@ begin
   with F_cari do
   try
     _SQLi :=
-      'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' + dm.kd_perusahaan
+      'select tanggal, faktur, piutang from vw_piutang where kd_perusahaan="' + dm.kd_perusahaan
       + '" and pelanggan="' + kd_pelanggan + '" and status="belum lunas"';
     tblcap[0] := 'Kode';
     tblCap[1] := 'Deskripsi';
@@ -357,7 +357,7 @@ begin
       exit;
 
     fungsi.sqlExec(dm.Q_temp,
-      'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
+      'select tanggal, faktur, piutang from vw_piutang where kd_perusahaan="' +
       dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
       '" and status=''belum lunas'' and faktur =' + quotedstr(ed_code.Text) + '', true);
     if dm.Q_temp.RecordCount <> 0 then

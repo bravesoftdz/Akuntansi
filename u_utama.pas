@@ -793,7 +793,7 @@ end;
 
 procedure Tf_utama.DaftarPiutangUsaha1Click(Sender: TObject);
 begin
-  fungsi.SQLExec(dm.Q_laporan, 'select * from _vw_piutang where kd_perusahaan='
+  fungsi.SQLExec(dm.Q_laporan, 'select * from vw_piutang where kd_perusahaan='
     + quotedstr(dm.kd_perusahaan) +
     ' and status=''belum lunas'' order by tanggal DESC', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_piutang.fr3');

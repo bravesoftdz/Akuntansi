@@ -83,7 +83,7 @@ uses
 procedure Tf_daftar_piutang.segarkan;
 begin
 
-  fungsi.SQLExec(Q_piutang, 'select * from _vw_piutang where kd_perusahaan=' +
+  fungsi.SQLExec(Q_piutang, 'select * from vw_piutang where kd_perusahaan=' +
     quotedstr(dm.kd_perusahaan) +
     ' and status=''belum lunas'' order by tanggal DESC', true);
 
@@ -92,12 +92,12 @@ begin
     [3].Text + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
 
   fungsi.SQLExec(Q_return,
-    'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' + '_vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',
+    'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' + 'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',
     true);
 
   fungsi.SQLExec(Q_return_kirim,
     'SELECT A1.* FROM tb_return_kirim_global A1 INNER JOIN ' +
-    '_vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_kirim',
+    'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_kirim',
     true);
 end;
 
