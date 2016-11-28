@@ -79,10 +79,7 @@ begin
   fungsi.SQLExec(Q_hutang, 'select * from vw_hutang where kd_perusahaan="' +
     dm.kd_perusahaan +
     '" and status=''belum lunas'' order by tanggal DESC', true);
-{
-fungsi.SQLExec(Q_hutang,'select * from vw_hutang where kd_perusahaan="'+
-dm.kd_perusahaan+'" order by tanggal DESC',true);
-}
+
   fungsi.SQLExec(Q_bayar_hutang,
     'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
     dm.kd_perusahaan + ''' and (refr=''PH'' or refr=''KJ'') and rujukan IS NOT NULL', true);

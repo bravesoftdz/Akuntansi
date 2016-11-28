@@ -73,9 +73,6 @@ uses
 
 procedure Tf_daftar_asset.segarkan;
 begin
-{  fungsi.SQLExec(Q_asset,'select * from vw_asset where kd_perusahaan= '''+
-  dm.kd_perusahaan+'''',true);
-}
   fungsi.SQLExec(Q_asset, 'call sp_asset("' + dm.kd_perusahaan + '","'
     + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
     strtoint(dm.Bulan), 1)) + '")', true);

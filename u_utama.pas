@@ -548,19 +548,7 @@ end;
 procedure Tf_utama.HitungUlangSaldoAhir1Click(Sender: TObject);
 begin
   historical_balancing;
-{dm.db_conn.StartTransaction;
-try
-fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
-dm.db_conn.Commit;
-showmessage('proses Hitung Ulang saldo ahir dan penyusutan berhasil');
-
-except on e:exception do begin
-  dm.db_conn.Rollback;
-  showmessage('hitung ulang saldo ahir gagal '#10#13'' +e.Message);
-  end;
 end;
-}end;
 
 procedure Tf_utama.ac_kiraan_buku_besarExecute(Sender: TObject);
 begin
@@ -809,10 +797,6 @@ end;
 
 procedure Tf_utama.HartaTetap1Click(Sender: TObject);
 begin
-{
-fungsi.SQLExec(dm.Q_laporan,'select * from vw_asset where kd_perusahaan= "'+
-dm.kd_perusahaan+'"',true);
-}
   fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + dm.kd_perusahaan +
     '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
     strtoint(dm.Bulan), 1)) + '")', true);

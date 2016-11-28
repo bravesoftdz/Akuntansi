@@ -287,11 +287,7 @@ begin
   edMasuk.Value := masuk;
   edKeluar.Value := keluar;
   edLabaRugi.Value := masuk + keluar;
-{
-  edMasuk.Text:= FormatFloat('#,###,###;(#,###,###);0',masuk);
-  edKeluar.Text:= FormatFloat('(#,###,###);#,###,###;0',keluar);
-  edLabaRugi.Text:= FormatFloat('#,###,###;(#,###,###);0',masuk + keluar);
-}
+
   ZqLabaRugi.RecNo := posisi;
 end;
 
@@ -317,11 +313,7 @@ begin
   edAKtiva.Value := aktiv;
   edPasiva.Value := pasiv;
   edBalance.Value := aktiv + pasiv;
-{
-  edAKtiva.Text:= FormatFloat('#,###,###;(#,###,###);0',aktiv);
-  edPasiva.Text:= FormatFloat('(#,###,###);#,###,###;0',pasiv);
-  edBalance.Text:= FormatFloat('#,###,###;(#,###,###);0',aktiv + pasiv);
-}
+
   if edBalance.Text <> '0' then
     lblNotBalance.Visible := True
   else
