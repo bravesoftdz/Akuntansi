@@ -301,14 +301,6 @@ begin
   sb.Panels[4].Text := dm.Q_temp.fieldbyname('n_perusahaan').AsString;
   caption := 'Account Of Profit (' + sb.Panels[4].Text + '  )';
 
-  fungsi.SQLExec(dm.Q_temp, 'select RIGHT(periode_akun,2) as bulan, ' +
-    'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="' + sb.Panels
-    [3].Text + '"', true);
-
-  sb.Panels[6].Text := dm.Q_temp.fieldbyname('bulan').AsString;
-  sb.Panels[7].Text := dm.Q_temp.fieldbyname('tahun').AsString;
-  historical_balancing;
-
   PostMessage(Self.Handle, WM_AFTER_SHOW, 0, 0);
 end;
 
@@ -1081,9 +1073,10 @@ begin
   asli := sb.Panels[7].Text + '-' + sb.Panels[6].Text;
 
   isi_periode := TStringList.Create;
-  fungsi.SQLExec(dm.Q_temp,
-    'SELECT DISTINCT CONCAT(tahun,"-",IF(LENGTH(bulan) = 1, ' + 'CONCAT("0",bulan),bulan)) AS Periode FROM tb_jurnal_history order by tahun DESC, bulan DESC',
-    True);
+  fungsi.SQLExec(dm.Q_temp,Format('SELECT DISTINCT CONCAT(tahun,"-",LPAD(bulan,2,0)) '+
+  'AS Periode FROM tb_jurnal_history WHERE kd_perusahaan = "%s" ORDER BY tahun DESC, '+
+  'bulan DESC',[dm.kd_perusahaan]),True);
+  
   for x := 1 to dm.Q_temp.RecordCount do
   begin
     isi_periode.Add(dm.Q_temp.fieldbyname('periode').AsString);
@@ -1091,11 +1084,12 @@ begin
   end;
   periode := InputPeriode('Periode Akuntansi', 'Masukkan Periode Akuntansi',
     asli, isi_periode);
-  sb.Panels[6].Text := Copy(periode, 6, 2);
-  sb.Panels[7].Text := Copy(periode, 1, 4);
 
-  dm.PeriodAktif := sb.Panels[7].Text + sb.Panels[6].Text;
+  dm.SetPeriodeAktif(periode);
 
+  sb.Panels[6].Text := dm.Bulan;
+  sb.Panels[7].Text := dm.Tahun;
+  
   isi_periode.Free;
 end;
 
