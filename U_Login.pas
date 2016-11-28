@@ -128,11 +128,15 @@ begin
       F_utama.sb.Panels[4].Text := sb.Panels[1].Text;
       F_utama.caption := 'Account Of Profit (' + sb.Panels[1].Text + ')';
 
-      F_utama.sb.Panels[6].Text := dm.Q_temp.fieldbyname('bulan').AsString;
-      F_utama.sb.Panels[7].Text := dm.Q_temp.fieldbyname('tahun').AsString;
+      fungsi.SQLExec(dm.Q_temp, 'SELECT IFNULL(MAX(CONCAT(tahun,"-",LPAD(bulan,2,0))), '+
+      'DATE_FORMAT(NOW(),"%Y-%m")) AS periode FROM tb_jurnal_history '+
+      'WHERE kd_perusahaan = "'+ dm.kd_perusahaan +'"', true);
 
-      dm.PeriodAktif := F_utama.sb.Panels[7].Text + F_utama.sb.Panels[6].Text;
+      dm.SetPeriodeAktif(dm.Q_temp.fieldbyname('periode').AsString);
 
+      f_utama.sb.Panels[6].Text := dm.Bulan;
+      f_utama.sb.Panels[7].Text := dm.Tahun;
+      
       f_utama.panel_auto_width;
       sop := false;
       close;
