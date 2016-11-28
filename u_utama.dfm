@@ -61,12 +61,12 @@ object f_utama: Tf_utama
       end
       item
         Alignment = taCenter
-        Text = '04'
+        Text = '00'
         Width = 30
       end
       item
         Alignment = taCenter
-        Text = '2013'
+        Text = '0000'
         Width = 45
       end
       item
