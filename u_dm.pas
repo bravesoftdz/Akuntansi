@@ -40,12 +40,15 @@ type
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
   private
+    FPeriodeAktif, FBulan, FTahun: string;
     { Private declarations }
   public
-    kd_perusahaan, kd_pengguna: string;
-    Path, AppPath: string;
+    kd_perusahaan, kd_pengguna, Path, AppPath: string;
     metu_kabeh: boolean;
-    PeriodAktif: string;
+    property PeriodAktif: string read FPeriodeAktif;
+    property Bulan: string read FBulan;
+    property Tahun: string read FTahun;
+    procedure SetPeriodeAktif(PeriodeAktif: string);
     function FRObject(FastReport: TfrxReport; ObjectName: string): TObject;
     function FRMemo(FastReport: TfrxReport; ObjectName: string): TfrxMemoView;
     { Public declarations }
@@ -172,6 +175,13 @@ begin
   finally
     appINI.Free;
   end;
+end;
+
+procedure Tdm.SetPeriodeAktif(PeriodeAktif: string);
+begin
+  Self.FTahun := Copy(PeriodeAktif, 1, 4);
+  Self.FBulan := Copy(PeriodeAktif, 6, 2);
+  Self.FPeriodeAktif := Self.FTahun + Self.FBulan;
 end;
 
 end.
