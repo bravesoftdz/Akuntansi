@@ -423,13 +423,6 @@ end;
 
 procedure Tf_utama.SaldoAwalAkun1Click(Sender: TObject);
 begin
-{
-fungsi.SQLExec(dm.Q_tampil,'select * from vw_saldo_awal_akun where kd_perusahaan='+
-QuotedStr(dm.kd_perusahaan)+' and bulan='+dm.Bulan+' and tahun='+dm.Tahun+'',true);
-
-application.CreateForm(tf_saldo_awal,f_saldo_awal);
-f_saldo_awal.ShowModal;
-}
   if FSaldoAwal = nil then
   begin
     Application.CreateForm(TFSaldoAwal, FsaldoAwal);
@@ -440,6 +433,8 @@ f_saldo_awal.ShowModal;
 end;
 
 procedure Tf_utama.utupBukuAhirBulan1Click(Sender: TObject);
+var
+  BulanLocal : string;
 begin
   if dm.Bulan = '12' then
   begin
@@ -457,20 +452,15 @@ begin
   begin
     dm.db_conn.StartTransaction;
     try
-{
-fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
-}
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + dm.kd_perusahaan
-        + '",' + dm.Bulan + ',' + dm.Tahun +
-        ')', false);
+        + '",' + dm.Bulan + ',' + dm.Tahun +')', false);
 
-      dm.Bulan := inttostr(strtoint(dm.Bulan) + 1);
-      if length(dm.Bulan) = 1 then
-        dm.Bulan := '0' + dm.Bulan;
+      BulanLocal := inttostr(strtoint(dm.Bulan) + 1);
+      if length(BulanLocal) = 1 then
+        BulanLocal := '0' + BulanLocal;
 
       fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + dm.Tahun
-        + '-' + dm.Bulan + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
+        + '-' + BulanLocal + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
       dm.db_conn.Commit;
       showmessage('proses tutup buku bulanan berhasil');
@@ -486,7 +476,15 @@ formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))
 end;
 
 procedure Tf_utama.utupBukuAhirTahun1Click(Sender: TObject);
+var
+  BulanLocal, TahunLocal : string;
 begin
+  if dm.Bulan <> '12' then
+  begin
+    showmessage('sekarang Bukan ahir tahun pilih proses tutup buku ahir Bulan');
+    exit;
+  end;
+
   if messagedlg('Tutup Buku Tahun ' + dm.Tahun + ' '#10#13''#10#13'' +
     'proses tutup buku tahunan adalah proses merubah periode akuntansi '#10#13'' +
     'dan membuat saldo awal tiap perkiraan serta'#10#13'' +
@@ -497,19 +495,15 @@ begin
   begin
     dm.db_conn.StartTransaction;
     try
-{
-fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
-}
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + dm.kd_perusahaan
         + '",' + dm.Bulan + ',' + dm.Tahun +
         ')', false);
 
-      dm.Bulan := '01';
-      dm.Tahun := inttostr(strtoint(dm.Tahun) + 1);
+      BulanLocal := '01';
+      TahunLocal := inttostr(strtoint(dm.Tahun) + 1);
 
-      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + dm.Tahun
-        + '-' + dm.Bulan + '" where kd_perusahaan="' + dm.Tahun + '"', false);
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + TahunLocal
+        + '-' + BulanLocal + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
       dm.db_conn.Commit;
       showmessage('proses tutup buku Tahunan Berhasil berhasil');
