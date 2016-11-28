@@ -542,10 +542,9 @@ var
 begin
   ent := ''#10#13'';
 
-  fungsi.SQLExec(dm.Q_temp,
-    'SELECT * FROM vw_tidak_balance where kd_perusahaan="' + dm.kd_perusahaan +
-    '" and bulan="' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
-    '"', true);
+  fungsi.SQLExec(dm.Q_temp, 'SELECT no_refrensi, tgl, keterangan from tb_jurnal_global '
+    +'WHERE no_ix IN (SELECT ix_jurnal FROM tb_jurnal_rinci GROUP BY kd_perusahaan, '+
+    'ix_jurnal HAVING SUM(debet)<> SUM(kredit))', true);
   if dm.Q_temp.Eof then
     showmessage('Semua Jurnal Telah Balance...')
   else
@@ -554,8 +553,9 @@ begin
     for i := 1 to dm.Q_temp.RecordCount do
     begin
       cetak := cetak + inttostr(i) + '. ' + dm.Q_temp.fieldbyname('no_refrensi').AsString
-        + ' --> ' + dm.Q_temp.fieldbyname('keterangan').AsString + ' (' + dm.Q_temp.fieldbyname
-        ('selisih').AsString + ')' + ent;
+        + ' --> ' + ' (' + dm.Q_temp.fieldbyname('tgl').AsString + ')' + dm.Q_temp.fieldbyname
+        ('keterangan').AsString + ent;
+      dm.Q_temp.Next;
       dm.Q_temp.Next;
     end;
     showmessage('DAFTAR JURNAL YANG BELUM BALANCE' + ent + ent + cetak);
