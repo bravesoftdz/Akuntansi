@@ -65,6 +65,7 @@ type
     procedure ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     dibayar: Real;
+    kd_pelanggan: string;
     { Private declarations }
   public
     jenis: string;
@@ -128,7 +129,10 @@ begin
     tblCap[1] := 'Deskripsi';
     if ShowModal = mrOk then
     begin
-      ed_pihak_lain.Text := TblVal[0];
+      kd_pelanggan := TblVal[0];
+      ed_pihak_lain.Text := TblVal[1];
+      ed_keterangan.Text:= 'Pembayaran Piutang oleh ' +
+        ed_pihak_lain.text;
     end;
   finally
     close;
@@ -295,7 +299,7 @@ begin
   try
     _SQLi :=
       'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' + dm.kd_perusahaan
-      + '" and pelanggan="' + ed_pihak_lain.Text + '" and status="belum lunas"';
+      + '" and pelanggan="' + kd_pelanggan + '" and status="belum lunas"';
     tblcap[0] := 'Kode';
     tblCap[1] := 'Deskripsi';
     tblCap[2] := 'Piutang';
@@ -354,7 +358,7 @@ begin
 
     fungsi.sqlExec(dm.Q_temp,
       'select tanggal, faktur, piutang from _vw_piutang where kd_perusahaan="' +
-      dm.kd_perusahaan + '" and pelanggan="' + ed_pihak_lain.Text +
+      dm.kd_perusahaan + '" and pelanggan="' + kd_pelanggan +
       '" and status=''belum lunas'' and faktur =' + quotedstr(ed_code.Text) + '', true);
     if dm.Q_temp.RecordCount <> 0 then
       createrows
