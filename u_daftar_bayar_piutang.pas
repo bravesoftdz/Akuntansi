@@ -62,14 +62,14 @@ uses
 procedure Tf_daftar_bayar_piutang.segarkan;
 begin
   fungsi.SQLExec(Q_bayar_piutang,
-    'select * from tb_jurnal_global where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr=''PP'' and month(tgl)=''' + f_utama.sb.Panels[6].Text
-    + ''' and year(tgl)=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from tb_jurnal_global where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr=''PP'' and month(tgl)=''' + dm.Bulan
+    + ''' and year(tgl)=''' + dm.Tahun + '''', true);
 
   fungsi.SQLExec(Q_rinci_bayar_piutang,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr=''PP'' and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr=''PP'' and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_bayar_piutang.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -120,8 +120,8 @@ procedure Tf_daftar_bayar_piutang.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="PP"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="PP"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL BAYAR PIUTANG';

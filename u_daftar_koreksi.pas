@@ -83,8 +83,8 @@ procedure Tf_daftar_koreksi.segarkan;
 begin
   fungsi.SQLExec(Q_koreksi,
     'select *,IF(IFNULL(ix_koreksi,0)=0,0,1) as posted from tb_koreksi_global where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tgl_koreksi)="' + f_utama.sb.Panels
-    [6].Text + '" and year(tgl_koreksi)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tgl_koreksi)="' + 
+    dm.Bulan + '" and year(tgl_koreksi)="' + dm.Tahun +
     '" order by tgl_koreksi DESC', true);
 
   fungsi.SQLExec(Q_daftar_koreksi,
@@ -178,13 +178,13 @@ procedure Tf_daftar_koreksi.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_koreksi,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="OJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="OJ" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_koreksi,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr="OJ" and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr="OJ" and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_koreksi.sButton2Click(Sender: TObject);
@@ -210,8 +210,8 @@ procedure Tf_daftar_koreksi.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="OJ"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="OJ"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL STOCK OPNAME';

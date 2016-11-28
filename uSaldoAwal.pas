@@ -246,15 +246,15 @@ procedure TFSaldoAwal.FormShow(Sender: TObject);
 var
   bl, dy: integer;
 begin
-  if f_utama.sb.Panels[6].Text = '01' then
+  if dm.Bulan = '01' then
     bl := 12
   else
-    bl := strtoint(f_utama.sb.Panels[6].Text) - 1;
-  dy := MonthDays[IsLeapYear(strtoint(f_utama.sb.Panels[7].Text)), bl];
+    bl := strtoint(dm.Bulan) - 1;
+  dy := MonthDays[IsLeapYear(strtoint(dm.Tahun)), bl];
 
   pnlatas.Caption := 'Saldo Awal Akun ' + f_utama.sb.Panels[4].Text +
-    ' per Tanggal ' + formatdatetime('dd mmmm YYYY', EncodeDate(strtoint(f_utama.sb.Panels
-    [7].Text), bl, dy));
+    ' per Tanggal ' + formatdatetime('dd mmmm YYYY', EncodeDate(strtoint(
+    dm.Tahun), bl, dy));
   FSaldoAwal.WindowState := wsMaximized;
 end;
 
@@ -333,14 +333,14 @@ end;
 procedure TFSaldoAwal.segarkan;
 begin
   fungsi.SQLExec(zqNeraca,
-    'select * from vw_saldo_awal_akun where kd_perusahaan="' + f_utama.sb.Panels
-    [3].Text + '" and bulan=' + f_utama.sb.Panels[6].Text + ' and tahun=' +
-    f_utama.sb.Panels[7].Text + ' and kd_kiraan <40000 and kd_kiraan <>32999', true);
+    'select * from vw_saldo_awal_akun where kd_perusahaan="' + 
+    dm.kd_perusahaan + '" and bulan=' + dm.Bulan + ' and tahun=' +
+    dm.Tahun + ' and kd_kiraan <40000 and kd_kiraan <>32999', true);
 
   fungsi.SQLExec(ZqLabaRugi,
-    'select * from vw_saldo_awal_akun where kd_perusahaan="' + f_utama.sb.Panels
-    [3].Text + '" and bulan=' + f_utama.sb.Panels[6].Text + ' and tahun=' +
-    f_utama.sb.Panels[7].Text + ' and kd_kiraan >=40000', true);
+    'select * from vw_saldo_awal_akun where kd_perusahaan="' + 
+    dm.Kd_perusahaan + '" and bulan=' + dm.Bulan + ' and tahun=' +
+    dm.Tahun + ' and kd_kiraan >=40000', true);
 
   HitungNeraca;
   HitungLabaRugi;

@@ -275,9 +275,9 @@ procedure Tf_utama.historical_balancing;
 begin
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_Exe, 'call sp_historical_balancing("' + f_utama.sb.Panels
-      [3].Text + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(sb.Panels
-      [7].Text), strtoint(sb.Panels[6].Text), 1)) + '")', false);
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
+    + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
+    strtoint(dm.Bulan), 1)) + '")', false);
     dm.db_conn.Commit;
   except
     dm.db_conn.Rollback;
@@ -308,13 +308,13 @@ procedure Tf_utama.ac_neracaExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
     'select * from vw_trial_balance where kd_kiraan like ''1%'' and kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' +
-    sb.Panels[7].Text + '" order by kd_kiraan', true);
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' +
+    dm.Tahun + '" order by kd_kiraan', true);
 
   fungsi.SQLExec(dm.Q_trial_balance2,
     'select * from vw_trial_balance_kredit where (kd_kiraan like "' + '2' +
     '%" or kd_kiraan like "' + '3' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun
     + '" order by kd_kiraan', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_neraca.fr3');
@@ -325,7 +325,7 @@ procedure Tf_utama.ac_bk_besarExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_buku_besar,
     'select * from vw_buku_besar where kd_perusahaan= "' + dm.kd_perusahaan +
-    '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
+    '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun +
     '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
   dm.laporan.ShowReport;
@@ -335,7 +335,7 @@ procedure Tf_utama.ac_tBalanceExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
     'select * from vw_trial_balance where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun
     + '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_trial_balance.fr3');
   dm.laporan.ShowReport;
@@ -346,14 +346,14 @@ begin
   fungsi.SQLExec(dm.Q_Trial_balance1,
     'select * from vw_laba_rugi_kredit where (kd_kiraan like "' + '4' +
     '%" or kd_kiraan like "' + '8' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun
     + '" order by kd_kiraan', true);
 
   fungsi.SQLExec(dm.Q_trial_balance2,
     'select * from vw_laba_rugi where (kd_kiraan like "' + '5' +
     '%" or kd_kiraan like "' + '6' + '%" or kd_kiraan like "' + '7' +
     '%" or kd_kiraan like "' + '9' + '%") and kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun
     + '" order by kd_kiraan', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_laba_rugi.fr3');
   dm.laporan.ShowReport;
@@ -425,7 +425,7 @@ procedure Tf_utama.SaldoAwalAkun1Click(Sender: TObject);
 begin
 {
 fungsi.SQLExec(dm.Q_tampil,'select * from vw_saldo_awal_akun where kd_perusahaan='+
-QuotedStr(dm.kd_perusahaan)+' and bulan='+sb.Panels[6].Text+' and tahun='+sb.Panels[7].Text+'',true);
+QuotedStr(dm.kd_perusahaan)+' and bulan='+dm.Bulan+' and tahun='+dm.Tahun+'',true);
 
 application.CreateForm(tf_saldo_awal,f_saldo_awal);
 f_saldo_awal.ShowModal;
@@ -441,14 +441,13 @@ end;
 
 procedure Tf_utama.utupBukuAhirBulan1Click(Sender: TObject);
 begin
-  if sb.Panels[6].Text = '12' then
+  if dm.Bulan = '12' then
   begin
     showmessage('sekarang sudah ahir tahun pilih proses tutup buku ahir tahun');
     exit;
   end;
 
-  if messagedlg('Tutup Buku Periode ke-' + sb.Panels[6].Text + ' Tahun ' + sb.Panels
-    [7].Text + ' '#10#13''#10#13'' +
+  if messagedlg('Tutup Buku Periode ke-' + dm.Bulan + ' Tahun ' + dm.Bulan + ' '#10#13''#10#13'' +
     'proses tutup buku bulanan adalah proses merubah periode akuntansi '#10#13'' +
     'dan membuat saldo awal tiap perkiraan serta'#10#13'' +
     'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13'' +
@@ -460,19 +459,18 @@ begin
     try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
+formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
 }
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + dm.kd_perusahaan
-        + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
+        + '",' + dm.Bulan + ',' + dm.Tahun +
         ')', false);
 
-      sb.Panels[6].Text := inttostr(strtoint(sb.Panels[6].Text) + 1);
-      if length(sb.Panels[6].Text) = 1 then
-        sb.Panels[6].Text := '0' + sb.Panels[6].Text;
+      dm.Bulan := inttostr(strtoint(dm.Bulan) + 1);
+      if length(dm.Bulan) = 1 then
+        dm.Bulan := '0' + dm.Bulan;
 
-      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + sb.Panels
-        [7].Text + '-' + sb.Panels[6].Text + '" where kd_perusahaan="' + sb.Panels
-        [3].Text + '"', false);
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + dm.Tahun
+        + '-' + dm.Bulan + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
       dm.db_conn.Commit;
       showmessage('proses tutup buku bulanan berhasil');
@@ -489,7 +487,7 @@ end;
 
 procedure Tf_utama.utupBukuAhirTahun1Click(Sender: TObject);
 begin
-  if messagedlg('Tutup Buku Tahun ' + sb.Panels[7].Text + ' '#10#13''#10#13'' +
+  if messagedlg('Tutup Buku Tahun ' + dm.Tahun + ' '#10#13''#10#13'' +
     'proses tutup buku tahunan adalah proses merubah periode akuntansi '#10#13'' +
     'dan membuat saldo awal tiap perkiraan serta'#10#13'' +
     'membuat jurnal penyesuaian dengan memindahkan saldo '#10#13'' +
@@ -501,18 +499,17 @@ begin
     try
 {
 fungsi.SQLExec(dm.Q_Exe,'call sp_historical_balancing("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
+formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
 }
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + dm.kd_perusahaan
-        + '",' + f_utama.sb.Panels[6].Text + ',' + f_utama.sb.Panels[7].Text +
+        + '",' + dm.Bulan + ',' + dm.Tahun +
         ')', false);
 
-      sb.Panels[6].Text := '01';
-      sb.Panels[7].Text := inttostr(strtoint(sb.Panels[7].Text) + 1);
+      dm.Bulan := '01';
+      dm.Tahun := inttostr(strtoint(dm.Tahun) + 1);
 
-      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + sb.Panels
-        [7].Text + '-' + sb.Panels[6].Text + '" where kd_perusahaan="' + sb.Panels
-        [3].Text + '"', false);
+      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + dm.Tahun
+        + '-' + dm.Bulan + '" where kd_perusahaan="' + dm.Tahun + '"', false);
 
       dm.db_conn.Commit;
       showmessage('proses tutup buku Tahunan Berhasil berhasil');
@@ -560,7 +557,7 @@ begin
 {dm.db_conn.StartTransaction;
 try
 fungsi.SQLExec(dm.Q_Exe,'call sp_penyusutan("'+dm.kd_perusahaan+'","'+
-formatdatetime('yyyy-MM-dd',encodedate(strtoint(sb.Panels[7].Text),strtoint(sb.Panels[6].Text),1))+'")',false);
+formatdatetime('yyyy-MM-dd',encodedate(strtoint(dm.Tahun),strtoint(dm.Bulan),1))+'")',false);
 dm.db_conn.Commit;
 showmessage('proses Hitung Ulang saldo ahir dan penyusutan berhasil');
 
@@ -719,7 +716,7 @@ procedure Tf_utama.MenuItem24Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun
     + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL GLOBAL';
@@ -736,9 +733,8 @@ end;
 procedure Tf_utama.JurnalUmum3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''GJ'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''GJ'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_umum.fr3');
   dm.laporan.ShowReport;
 end;
@@ -746,9 +742,8 @@ end;
 procedure Tf_utama.JurnalKasMasuk1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''KD'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''KD'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_masuk.fr3');
   dm.laporan.ShowReport;
 end;
@@ -756,9 +751,8 @@ end;
 procedure Tf_utama.JurnalKasKeluar1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''KK'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''KK'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_kas_keluar.fr3');
   dm.laporan.ShowReport;
 end;
@@ -767,7 +761,7 @@ procedure Tf_utama.Pembelian1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_pembelian where kd_perusahaan= "' + dm.kd_perusahaan +
-    '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels[7].Text +
+    '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun +
     '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembelian.fr3');
   dm.laporan.ShowReport;
@@ -795,9 +789,8 @@ end;
 procedure Tf_utama.PenJualan1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''TJ'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''TJ'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_penjualan.fr3');
   dm.laporan.ShowReport;
 end;
@@ -805,9 +798,8 @@ end;
 procedure Tf_utama.JurnalPembayaranHutangUsaha1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''PH'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''PH'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_hutang.fr3');
   dm.laporan.ShowReport;
 end;
@@ -815,9 +807,8 @@ end;
 procedure Tf_utama.JurnalPembayaranPiutangUsaha1Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
-    'select * from vw_jurnal_global where refr=''PP'' and kd_perusahaan= "' + sb.Panels
-    [3].Text + '" and bulan= "' + sb.Panels[6].Text + '" and tahun="' + sb.Panels
-    [7].Text + '"', true);
+    'select * from vw_jurnal_global where refr=''PP'' and kd_perusahaan= "' +
+    dm.kd_perusahaan + '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_pembayaran_piutang.fr3');
   dm.laporan.ShowReport;
 end;
@@ -829,8 +820,8 @@ fungsi.SQLExec(dm.Q_laporan,'select * from vw_asset where kd_perusahaan= "'+
 dm.kd_perusahaan+'"',true);
 }
   fungsi.SQLExec(dm.Q_laporan, 'call sp_asset("' + dm.kd_perusahaan +
-    '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
-    strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', true);
+    '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
+    strtoint(dm.Bulan), 1)) + '")', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_asset.fr3');
   dm.laporan.ShowReport;
@@ -1070,7 +1061,7 @@ begin
     exit;
   end;
 
-  asli := sb.Panels[7].Text + '-' + sb.Panels[6].Text;
+  asli := dm.Tahun + '-' + dm.Bulan;
 
   isi_periode := TStringList.Create;
   fungsi.SQLExec(dm.Q_temp,Format('SELECT DISTINCT CONCAT(tahun,"-",LPAD(bulan,2,0)) '+
@@ -1145,8 +1136,8 @@ begin
   dm.db_conn.StartTransaction;
   try
     fungsi.SQLExec(dm.Q_Exe, 'call sp_saldo_awal_akun("' + dm.kd_perusahaan
-      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(sb.Panels[7].Text),
-      strtoint(sb.Panels[6].Text), 1)) + '")', false);
+      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
+      strtoint(dm.Bulan), 1)) + '")', false);
 
     dm.db_conn.Commit;
   except

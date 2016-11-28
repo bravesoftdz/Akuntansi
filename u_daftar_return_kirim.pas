@@ -84,8 +84,8 @@ procedure Tf_daftar_return_kirim.segarkan;
 begin
   fungsi.SQLExec(Q_return_kirim,
     'select *,IF(IFNULL(ix_return_kirim,0)=0,0,1) as posted from vw_list_return_kirim where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tgl_return_kirim)="' + f_utama.sb.Panels
-    [6].Text + '" and year(tgl_return_kirim)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tgl_return_kirim)="' + 
+    dm.Bulan + '" and year(tgl_return_kirim)="' + dm.Tahun +
     '" order by tgl_return_kirim DESC', true);
 
   fungsi.SQLExec(Q_daftar_return_kirim,
@@ -181,21 +181,21 @@ procedure Tf_daftar_return_kirim.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_return_kirim,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="RK" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="RK" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_return_kirim,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr="RK" and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr="RK" and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_return_kirim.sButton2Click(Sender: TObject);
 begin
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_Exe, 'call sp_jurnal_return_kirim("' + f_utama.sb.Panels
-      [3].Text + '","' + Q_return_kirim.fieldbyname('kd_return_kirim').AsString
+    fungsi.SQLExec(dm.Q_Exe, 'call sp_jurnal_return_kirim("' + 
+      dm.kd_perusahaan + '","' + Q_return_kirim.fieldbyname('kd_return_kirim').AsString
       + '")', False);
     dm.db_conn.commit;
     ShowMessage('Proses Posting jurnal Return kirim Pembelian Berhasil....');
@@ -214,8 +214,8 @@ procedure Tf_daftar_return_kirim.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="RK"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="RK"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL RETURN KIRIM';

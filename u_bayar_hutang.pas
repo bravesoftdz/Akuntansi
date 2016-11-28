@@ -257,8 +257,8 @@ begin
       '","' + inttostr(tableview.DataController.RecordCount + 1) + '","' +
       ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
 
-    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + f_utama.sb.Panels
-      [3].Text + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
+    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
+    + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
     dm.db_conn.Commit;
 
     showmessage('Penyimpanan Data Sukses...'#10#13'Tekan Enter Untuk Melakukan Transaksi Baru...');

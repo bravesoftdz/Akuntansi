@@ -87,8 +87,8 @@ procedure tf_daftar_penjualan.segarkan;
 begin
   fungsi.SQLExec(Q_setor,
     'select *,IF(IFNULL(ix_setor,0)=0,0,1) as posted from tb_login_kasir where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tanggal)="' + f_utama.sb.Panels[6].Text
-    + '" and year(tanggal)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tanggal)="' + dm.Bulan
+    + '" and year(tanggal)="' + dm.Tahun +
     '" order by tanggal DESC', true);
 
   fungsi.SQLExec(Q_daftar_jual,
@@ -182,13 +182,13 @@ procedure Tf_daftar_penjualan.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_jual,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="TJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="TJ" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_jual,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr=''TJ'' and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr=''TJ'' and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_penjualan.sButton2Click(Sender: TObject);
@@ -222,8 +222,8 @@ procedure Tf_daftar_penjualan.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="TJ"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="TJ"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL PENJUALAN';

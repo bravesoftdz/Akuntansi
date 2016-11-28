@@ -87,8 +87,8 @@ procedure Tf_daftar_pembelian.segarkan;
 begin
   fungsi.SQLExec(Q_beli,
     'select *,IF(IFNULL(ix_receipt,0)=0,0,1) as posted from vw_list_receipt where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tgl_receipt)="' + f_utama.sb.Panels
-    [6].Text + '" and year(tgl_receipt)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tgl_receipt)="' + 
+    dm.Bulan + '" and year(tgl_receipt)="' + dm.Tahun +
     '" order by tgl_receipt DESC', true);
 
   fungsi.SQLExec(Q_daftar_beli,
@@ -168,13 +168,13 @@ procedure Tf_daftar_pembelian.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_beli,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="RJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="RJ" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_beli,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr=''RJ'' and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr=''RJ'' and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 
 end;
 
@@ -182,8 +182,8 @@ procedure Tf_daftar_pembelian.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="RJ"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="RJ"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL PEMBELIAN';

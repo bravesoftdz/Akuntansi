@@ -88,8 +88,8 @@ begin
     ' and status=''belum lunas'' order by tanggal DESC', true);
 
   fungsi.SQLExec(Q_bayar_piutang,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
 
   fungsi.SQLExec(Q_return,
     'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' + 'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',

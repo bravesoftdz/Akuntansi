@@ -83,8 +83,8 @@ procedure Tf_daftar_kirim.segarkan;
 begin
   fungsi.SQLExec(Q_kirim,
     'select *,IF(IFNULL(ix_kirim,0)=0,0,1) as posted from vw_list_kirim where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tgl_kirim)="' + f_utama.sb.Panels[6].Text
-    + '" and year(tgl_kirim)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tgl_kirim)="' + dm.Bulan
+    + '" and year(tgl_kirim)="' + dm.Tahun +
     '" order by tgl_kirim DESC', true);
 
   fungsi.SQLExec(Q_daftar_kirim,
@@ -178,13 +178,13 @@ procedure Tf_daftar_kirim.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_kirim,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="KR" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="KR" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_kirim,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr="KR" and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr="KR" and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_kirim.sButton2Click(Sender: TObject);
@@ -210,8 +210,8 @@ procedure Tf_daftar_kirim.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="KR"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="KR"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL KIRIM BARANG';

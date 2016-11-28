@@ -85,8 +85,8 @@ procedure Tf_daftar_return.segarkan;
 begin
   fungsi.SQLExec(Q_return,
     'select *,IF(IFNULL(ix_return,0)=0,0,1) as posted from vw_list_return where kd_perusahaan= "' +
-    dm.kd_perusahaan + '" and month(tgl_return)="' + f_utama.sb.Panels[6].Text
-    + '" and year(tgl_return)="' + f_utama.sb.Panels[7].Text +
+    dm.kd_perusahaan + '" and month(tgl_return)="' + dm.Bulan
+    + '" and year(tgl_return)="' + dm.Tahun +
     '" order by tgl_return DESC', true);
 
   fungsi.SQLExec(Q_daftar_return,
@@ -180,13 +180,13 @@ procedure Tf_daftar_return.sButton1Click(Sender: TObject);
 begin
   fungsi.SQLExec(Q_daftar_return,
     'select * from tb_jurnal_global where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and refr="KJ" and month(tgl)="' + f_utama.sb.Panels[6].Text +
-    '" and year(tgl)="' + f_utama.sb.Panels[7].Text + '" order by tgl DESC', true);
+    + '" and refr="KJ" and month(tgl)="' + dm.Bulan +
+    '" and year(tgl)="' + dm.Tahun + '" order by tgl DESC', true);
 
   fungsi.SQLExec(Q_rinci_return,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + f_utama.sb.Panels
-    [3].Text + ''' and refr="KJ" and bulan=''' + f_utama.sb.Panels[6].Text +
-    ''' and tahun=''' + f_utama.sb.Panels[7].Text + '''', true);
+    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
+    dm.kd_perusahaan + ''' and refr="KJ" and bulan=''' + dm.Bulan +
+    ''' and tahun=''' + dm.Tahun + '''', true);
 end;
 
 procedure Tf_daftar_return.sButton2Click(Sender: TObject);
@@ -212,8 +212,8 @@ procedure Tf_daftar_return.sButton3Click(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_laporan,
     'select * from vw_jurnal_rinci where kd_perusahaan= "' + dm.kd_perusahaan
-    + '" and bulan= "' + f_utama.sb.Panels[6].Text + '" and tahun="' + f_utama.sb.Panels
-    [7].Text + '" and refr="KJ"', true);
+    + '" and bulan= "' + dm.Bulan + '" and tahun="' + 
+    dm.Tahun + '" and refr="KJ"', true);
 
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_jurnal_global.fr3');
   dm.FRMemo(dm.laporan, 'Memo2').Text := 'TRANSAKSI JURNAL RETURN PEMBELIAN';

@@ -77,8 +77,8 @@ begin
   dm.kd_perusahaan+'''',true);
 }
   fungsi.SQLExec(Q_asset, 'call sp_asset("' + dm.kd_perusahaan + '","'
-    + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels[7].Text),
-    strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', true);
+    + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
+    strtoint(dm.Bulan), 1)) + '")', true);
 end;
 
 procedure Tf_daftar_asset.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -180,8 +180,8 @@ begin
   dm.db_conn.StartTransaction;
   try
     fungsi.SQLExec(dm.Q_Exe, 'call sp_penyusutan("' + dm.kd_perusahaan
-      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(f_utama.sb.Panels
-      [7].Text), strtoint(f_utama.sb.Panels[6].Text), 1)) + '")', false);
+      + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(
+      dm.Tahun), strtoint(dm.Bulan), 1)) + '")', false);
     dm.db_conn.Commit;
     showmessage('proses Posting Daftar Harta Tetap kedalam Jurnal berhasil.....');
 

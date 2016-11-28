@@ -225,8 +225,8 @@ begin
         ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
     end;
 
-    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + f_utama.sb.Panels
-      [3].Text + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
+    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
+    + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
 
     dm.db_conn.Commit;
 
