@@ -64,7 +64,8 @@ uses
 
 procedure Tf_akun_penting.segarkan;
 begin
-  fungsi.SQLExec(Q_akun_penting, 'select * from vw_akun_penting', true);
+  fungsi.SQLExec(Q_akun_penting, 'SELECT 	ka.no_ix, ka.kd_akun, ka.Keterangan, kr.n_kiraan ' +
+    'FROM tb_konfig_akun ka LEFT JOIN tb_kiraan kr ON ka.kd_akun = kr.kd_kiraan', true);
 end;
 
 procedure Tf_akun_penting.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
