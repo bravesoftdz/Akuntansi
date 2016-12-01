@@ -115,10 +115,12 @@ begin
 
   de_tanggal.Date := now;
   tableview.DataController.RecordCount := 0;
+  sb_1.Enabled:= True;
 end;
 
 procedure Tf_bayar_piutang.sb_1Click(Sender: TObject);
 begin
+  if sb_1.Enabled = False then Exit;
   ed_pihak_lain.SetFocus;
   application.CreateForm(tf_cari, f_cari);
   with F_cari do
@@ -324,6 +326,7 @@ var
   baris_baru: integer;
   f: integer;
 begin
+  sb_1.Enabled:= False;
   if tableview.DataController.RecordCount <> 0 then
   begin
     for f := 0 to tableview.DataController.RecordCount - 1 do
