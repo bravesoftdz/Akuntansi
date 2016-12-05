@@ -275,9 +275,9 @@ procedure Tf_utama.historical_balancing;
 begin
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_Exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
-    + '","' + formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
-    strtoint(dm.Bulan), 1)) + '")', false);
+    fungsi.SQLExec(dm.Q_Exe, Format('call sp_historical_balancing("%s","%s")',
+    [dm.kd_perusahaan, formatdatetime('yyyy-MM-dd', encodedate(strtoint(dm.Tahun),
+    strtoint(dm.Bulan), 1))]), false);
     dm.db_conn.Commit;
   except
     dm.db_conn.Rollback;
