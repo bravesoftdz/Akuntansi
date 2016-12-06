@@ -108,9 +108,12 @@ object f_daftar_hutang: Tf_daftar_hutang
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    LevelTabs.Style = 10
+    LevelTabs.Slants.Positions = [spRight]
+    LevelTabs.Style = 9
     LookAndFeel.Kind = lfOffice11
-    object t_data0: TcxGridDBTableView
+    RootLevelOptions.DetailTabsPosition = dtpTop
+    OnActiveTabChanged = gridActiveTabChanged
+    object Table0: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -118,22 +121,22 @@ object f_daftar_hutang: Tf_daftar_hutang
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data0hutang_awal
+          Column = tvTable0hutang_awal
         end
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data0dibayar
+          Column = tvTable0dibayar
         end
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data0return_beli
+          Column = tvTable0return_beli
         end
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data0hutang
+          Column = tvTable0hutang
         end>
       DataController.Summary.SummaryGroups = <>
       OptionsBehavior.CellHints = True
@@ -149,27 +152,27 @@ object f_daftar_hutang: Tf_daftar_hutang
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
       Styles.Selection = dm.cxstyl1
-      object t_data0faktur: TcxGridDBColumn
+      object tvTable0faktur: TcxGridDBColumn
         Caption = 'Kode Faktur'
         DataBinding.FieldName = 'faktur'
         Width = 120
       end
-      object t_data0tanggal: TcxGridDBColumn
+      object tvTable0tanggal: TcxGridDBColumn
         Caption = 'Tanggal'
         DataBinding.FieldName = 'tanggal'
         Width = 66
       end
-      object t_data0jatuh_tempo: TcxGridDBColumn
+      object tvTable0jatuh_tempo: TcxGridDBColumn
         Caption = 'Jatuh Tempo'
         DataBinding.FieldName = 'jatuh_tempo'
         Width = 65
       end
-      object t_data0n_supp: TcxGridDBColumn
+      object tvTable0n_supp: TcxGridDBColumn
         Caption = 'Supplier'
         DataBinding.FieldName = 'n_supp'
         Width = 308
       end
-      object t_data0hutang_awal: TcxGridDBColumn
+      object tvTable0hutang_awal: TcxGridDBColumn
         Caption = 'Hutang Awal'
         DataBinding.FieldName = 'hutang_awal'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -177,7 +180,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 86
       end
-      object t_data0dibayar: TcxGridDBColumn
+      object tvTable0dibayar: TcxGridDBColumn
         Caption = 'diBayar'
         DataBinding.FieldName = 'dibayar'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -185,7 +188,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 63
       end
-      object t_data0return_beli: TcxGridDBColumn
+      object tvTable0return_beli: TcxGridDBColumn
         Caption = 'Return'
         DataBinding.FieldName = 'return_beli'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -193,7 +196,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 88
       end
-      object t_data0hutang: TcxGridDBColumn
+      object tvTable0hutang: TcxGridDBColumn
         Caption = 'Sisa Hutang'
         DataBinding.FieldName = 'hutang'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -201,24 +204,21 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 83
       end
-      object t_data0user: TcxGridDBColumn
+      object tvTable0user: TcxGridDBColumn
         Caption = 'User'
         DataBinding.FieldName = 'user'
         Width = 77
       end
     end
-    object t_data2: TcxGridDBTableView
+    object Table1: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_bayar_hutang
-      DataController.DetailKeyFieldNames = 'rujukan'
-      DataController.KeyFieldNames = 'rujukan'
-      DataController.MasterKeyFieldNames = 'faktur'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data2Column4
+          Column = tvTable1Column4
         end
         item
           Format = '###,###,##0;(###,###,##0);0'
@@ -230,25 +230,26 @@ object f_daftar_hutang: Tf_daftar_hutang
       OptionsData.Deleting = False
       OptionsData.Editing = False
       OptionsData.Inserting = False
+      OptionsView.ColumnAutoWidth = True
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
       Styles.Selection = dm.cxstyl1
-      object t_data2tgl: TcxGridDBColumn
+      object tvTable1tgl: TcxGridDBColumn
         DataBinding.FieldName = 'tgl'
         Width = 69
       end
-      object t_data2no_refrensi: TcxGridDBColumn
+      object tvTable1no_refrensi: TcxGridDBColumn
         Caption = 'Refrensi'
         DataBinding.FieldName = 'no_refrensi'
         Width = 77
       end
-      object t_data2keterangan: TcxGridDBColumn
+      object tvTable1keterangan: TcxGridDBColumn
         Caption = 'Keterangan'
         DataBinding.FieldName = 'keterangan'
         Width = 451
       end
-      object t_data2Column4: TcxGridDBColumn
+      object tvTable1Column4: TcxGridDBColumn
         Caption = 'Nilai'
         DataBinding.FieldName = 'debet'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -258,43 +259,41 @@ object f_daftar_hutang: Tf_daftar_hutang
         Width = 70
       end
     end
-    object t_data3: TcxGridDBTableView
+    object Table2: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_return
-      DataController.DetailKeyFieldNames = 'faktur_receipt'
-      DataController.KeyFieldNames = 'faktur_receipt'
-      DataController.MasterKeyFieldNames = 'faktur'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data3disk_rp
+          Column = tvTable2disk_rp
         end
         item
           Format = '###,###,##0;(###,###,##0);0'
           Kind = skSum
-          Column = t_data3nilai_faktur
+          Column = tvTable2nilai_faktur
         end>
       DataController.Summary.SummaryGroups = <>
       OptionsData.Deleting = False
       OptionsData.Editing = False
       OptionsData.Inserting = False
+      OptionsView.ColumnAutoWidth = True
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
       Styles.Selection = dm.cxstyl1
-      object t_data3kd_return: TcxGridDBColumn
+      object tvTable2kd_return: TcxGridDBColumn
         Caption = 'Kode Return'
         DataBinding.FieldName = 'kd_return'
         Width = 124
       end
-      object t_data3tgl_return: TcxGridDBColumn
+      object tvTable2tgl_return: TcxGridDBColumn
         Caption = 'Tanggal'
         DataBinding.FieldName = 'tgl_return'
         Width = 129
       end
-      object t_data3disk_rp: TcxGridDBColumn
+      object tvTable2disk_rp: TcxGridDBColumn
         Caption = 'Diskon'
         DataBinding.FieldName = 'disk_rp'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -305,7 +304,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 99
       end
-      object t_data3nilai_faktur: TcxGridDBColumn
+      object tvTable2nilai_faktur: TcxGridDBColumn
         Caption = 'Nilai'
         DataBinding.FieldName = 'nilai_faktur'
         PropertiesClassName = 'TcxCurrencyEditProperties'
@@ -316,26 +315,25 @@ object f_daftar_hutang: Tf_daftar_hutang
         HeaderAlignmentHorz = taRightJustify
         Width = 85
       end
-      object t_data3pengguna: TcxGridDBColumn
+      object tvTable2pengguna: TcxGridDBColumn
         Caption = 'User'
         DataBinding.FieldName = 'pengguna'
         Width = 64
       end
     end
-    object l_data0: TcxGridLevel
-      GridView = t_data0
+    object Level0: TcxGridLevel
+      Caption = 'Daftar Hutang'
+      GridView = Table0
       Options.DetailTabsPosition = dtpTop
       Options.TabsForEmptyDetails = False
-      object l_data2: TcxGridLevel
-        Caption = 'Pembayaran Hutang'
-        GridView = t_data2
-        Options.DetailTabsPosition = dtpTop
-      end
-      object l_data3: TcxGridLevel
-        Caption = 'Return Pembelian'
-        GridView = t_data3
-        Options.DetailTabsPosition = dtpTop
-      end
+    end
+    object Level1: TcxGridLevel
+      Caption = 'Bayar Hutang'
+      GridView = Table1
+    end
+    object Level2: TcxGridLevel
+      Caption = 'Return Pembelian'
+      GridView = Table2
     end
   end
   object sknprvdr1: TsSkinProvider

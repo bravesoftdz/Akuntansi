@@ -24,32 +24,32 @@ type
     ds_hutang: TDataSource;
     Q_hutang: TmySQLQuery;
     grid: TcxGrid;
-    t_data0: TcxGridDBTableView;
-    t_data2: TcxGridDBTableView;
-    t_data2Column4: TcxGridDBColumn;
-    l_data0: TcxGridLevel;
-    l_data2: TcxGridLevel;
-    t_data0faktur: TcxGridDBColumn;
-    t_data0tanggal: TcxGridDBColumn;
-    t_data0hutang_awal: TcxGridDBColumn;
-    t_data0dibayar: TcxGridDBColumn;
-    t_data0return_beli: TcxGridDBColumn;
-    t_data0hutang: TcxGridDBColumn;
-    t_data0n_supp: TcxGridDBColumn;
-    t_data0jatuh_tempo: TcxGridDBColumn;
-    t_data0user: TcxGridDBColumn;
-    t_data2tgl: TcxGridDBColumn;
-    t_data2keterangan: TcxGridDBColumn;
-    t_data2no_refrensi: TcxGridDBColumn;
+    Table0: TcxGridDBTableView;
+    Table1: TcxGridDBTableView;
+    tvTable1Column4: TcxGridDBColumn;
+    Level0: TcxGridLevel;
+    tvTable0faktur: TcxGridDBColumn;
+    tvTable0tanggal: TcxGridDBColumn;
+    tvTable0hutang_awal: TcxGridDBColumn;
+    tvTable0dibayar: TcxGridDBColumn;
+    tvTable0return_beli: TcxGridDBColumn;
+    tvTable0hutang: TcxGridDBColumn;
+    tvTable0n_supp: TcxGridDBColumn;
+    tvTable0jatuh_tempo: TcxGridDBColumn;
+    tvTable0user: TcxGridDBColumn;
+    tvTable1tgl: TcxGridDBColumn;
+    tvTable1keterangan: TcxGridDBColumn;
+    tvTable1no_refrensi: TcxGridDBColumn;
     Q_return: TmySQLQuery;
     ds_return: TDataSource;
-    l_data3: TcxGridLevel;
-    t_data3: TcxGridDBTableView;
-    t_data3kd_return: TcxGridDBColumn;
-    t_data3tgl_return: TcxGridDBColumn;
-    t_data3disk_rp: TcxGridDBColumn;
-    t_data3nilai_faktur: TcxGridDBColumn;
-    t_data3pengguna: TcxGridDBColumn;
+    Table2: TcxGridDBTableView;
+    tvTable2kd_return: TcxGridDBColumn;
+    tvTable2tgl_return: TcxGridDBColumn;
+    tvTable2disk_rp: TcxGridDBColumn;
+    tvTable2nilai_faktur: TcxGridDBColumn;
+    tvTable2pengguna: TcxGridDBColumn;
+    Level1: TcxGridLevel;
+    Level2: TcxGridLevel;
     procedure segarkan;
     procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE); message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -57,6 +57,8 @@ type
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
+    procedure gridActiveTabChanged(Sender: TcxCustomGrid;
+      ALevel: TcxGridLevel);
   private
     { Private declarations }
   public
@@ -75,18 +77,8 @@ uses
 
 procedure Tf_daftar_hutang.segarkan;
 begin
-
-  fungsi.SQLExec(Q_hutang, 'select * from vw_hutang where kd_perusahaan="' +
-    dm.kd_perusahaan +
-    '" and status=''belum lunas'' order by tanggal DESC', true);
-
-  fungsi.SQLExec(Q_bayar_hutang,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
-    dm.kd_perusahaan + ''' and (refr=''PH'' or refr=''KJ'') and rujukan IS NOT NULL', true);
-
-  fungsi.SQLExec(Q_return, 'SELECT A1.* FROM tb_return_global A1 INNER JOIN ' +
-    'vw_hutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.faktur_receipt',
-    true);
+  fungsi.SQLExec(Q_hutang, Format('SELECT * FROM vw_hutang where kd_perusahaan = "%s" '+
+  'AND status="belum lunas" order by tanggal DESC', [dm.kd_perusahaan]), true);
 end;
 
 procedure Tf_daftar_hutang.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -128,9 +120,9 @@ procedure Tf_daftar_hutang.sb_2Click(Sender: TObject);
 var
   posisi: Integer;
 begin
-  posisi := t_data0.DataController.DataSource.DataSet.RecNo;
+  posisi := Table0.DataController.DataSource.DataSet.RecNo;
   segarkan;
-  t_data0.DataController.DataSource.DataSet.RecNo := posisi;
+  Table0.DataController.DataSource.DataSet.RecNo := posisi;
 end;
 
 procedure Tf_daftar_hutang.sButton3Click(Sender: TObject);
@@ -142,6 +134,22 @@ begin
   dm.FRMemo(dm.laporan, 'Memo9').Text := MyTerbilang(dm.Q_laporan.fieldbyname('nilai_faktur').AsFloat)
     + 'Rupiah';
   dm.laporan.ShowReport;
+end;
+
+procedure Tf_daftar_hutang.gridActiveTabChanged(Sender: TcxCustomGrid;
+  ALevel: TcxGridLevel);
+begin
+  if ALevel = Level1 then
+  fungsi.SQLExec(Q_bayar_hutang, Format('SELECT a.tgl, a.no_refrensi, a.keterangan, '+
+    'b.rujukan, b.debet FROM tb_jurnal_rinci b INNER JOIN tb_jurnal_global a '+
+    'ON(a.no_ix = b.ix_jurnal) AND (a.kd_perusahaan = b.kd_perusahaan) '+
+    'WHERE a.kd_perusahaan = "%s" AND rujukan = "%s"',[dm.kd_perusahaan,
+    Q_hutang.fieldbyname('faktur').AsString]), true)
+  else
+  if ALevel = Level2 then
+  fungsi.SQLExec(Q_return, Format('SELECT * FROM tb_return_global WHERE '+
+    'kd_perusahaan = "%s" AND faktur_receipt = "%s"',[dm.kd_perusahaan,
+    Q_hutang.fieldbyname('faktur').AsString]), true);
 end;
 
 end.
