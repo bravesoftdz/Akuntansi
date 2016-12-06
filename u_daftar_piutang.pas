@@ -19,25 +19,23 @@ type
     sButton3: TsButton;
     sknprvdr1: TsSkinProvider;
     grid: TcxGrid;
-    t_data0: TcxGridDBTableView;
-    t_data0faktur: TcxGridDBColumn;
-    t_data0tanggal: TcxGridDBColumn;
-    t_data0jatuh_tempo: TcxGridDBColumn;
-    t_data0n_supp: TcxGridDBColumn;
-    t_data0hutang_awal: TcxGridDBColumn;
-    t_data0dibayar: TcxGridDBColumn;
-    t_data0return_beli: TcxGridDBColumn;
-    t_data0hutang: TcxGridDBColumn;
-    t_data0user: TcxGridDBColumn;
-    t_data2: TcxGridDBTableView;
-    t_data2tgl: TcxGridDBColumn;
-    t_data2no_refrensi: TcxGridDBColumn;
-    t_data2keterangan: TcxGridDBColumn;
-    t_data2Column4: TcxGridDBColumn;
-    t_data3: TcxGridDBTableView;
-    l_data0: TcxGridLevel;
-    l_data2: TcxGridLevel;
-    l_data3: TcxGridLevel;
+    Table0: TcxGridDBTableView;
+    tvTable0faktur: TcxGridDBColumn;
+    tvTable0tanggal: TcxGridDBColumn;
+    tvTable0jatuh_tempo: TcxGridDBColumn;
+    tvTable0n_supp: TcxGridDBColumn;
+    tvTable0hutang_awal: TcxGridDBColumn;
+    tvTable0dibayar: TcxGridDBColumn;
+    tvTable0return_beli: TcxGridDBColumn;
+    tvTable0hutang: TcxGridDBColumn;
+    tvTable0user: TcxGridDBColumn;
+    Table1: TcxGridDBTableView;
+    tvTable1tgl: TcxGridDBColumn;
+    tvTable1no_refrensi: TcxGridDBColumn;
+    tvTable1keterangan: TcxGridDBColumn;
+    tvTable1Column4: TcxGridDBColumn;
+    Table2: TcxGridDBTableView;
+    Level0: TcxGridLevel;
     Q_piutang: TmySQLQuery;
     Q_bayar_piutang: TmySQLQuery;
     Q_return: TmySQLQuery;
@@ -46,17 +44,19 @@ type
     ds_hutang: TDataSource;
     Q_return_kirim: TmySQLQuery;
     ds_return_kirim: TDataSource;
-    l_data4: TcxGridLevel;
-    t_data4: TcxGridDBTableView;
-    t_data4kd_return_kirim: TcxGridDBColumn;
-    t_data4tgl_return_kirim: TcxGridDBColumn;
-    t_data4nilai_faktur: TcxGridDBColumn;
-    t_data4pengguna: TcxGridDBColumn;
-    t_data3kd_return_jual: TcxGridDBColumn;
-    t_data3nilai_faktur: TcxGridDBColumn;
-    t_data3pengguna: TcxGridDBColumn;
-    t_data3pengawas: TcxGridDBColumn;
-    t_data3simpan_pada: TcxGridDBColumn;
+    Table3: TcxGridDBTableView;
+    tvTable3kd_return_kirim: TcxGridDBColumn;
+    tvTable3tgl_return_kirim: TcxGridDBColumn;
+    tvTable3nilai_faktur: TcxGridDBColumn;
+    tvTable3pengguna: TcxGridDBColumn;
+    tvTable_data3kd_return_jual: TcxGridDBColumn;
+    tvTable_data3nilai_faktur: TcxGridDBColumn;
+    tvTable_data3pengguna: TcxGridDBColumn;
+    tvTable_data3pengawas: TcxGridDBColumn;
+    tvTable_data3simpan_pada: TcxGridDBColumn;
+    Level1: TcxGridLevel;
+    Level2: TcxGridLevel;
+    Level3: TcxGridLevel;
     procedure segarkan;
     procedure WMMDIACTIVATE(var msg: TWMMDIACTIVATE); message WM_MDIACTIVATE;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -92,7 +92,8 @@ begin
     dm.kd_perusahaan + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
 
   fungsi.SQLExec(Q_return,
-    'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' + 'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',
+    'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' +
+    'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',
     true);
 
   fungsi.SQLExec(Q_return_kirim,
