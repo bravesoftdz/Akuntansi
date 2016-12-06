@@ -104,9 +104,7 @@ var
 begin
   if ed_n_user.Text <> '' then
   begin
-    sql := Format('select md5("%s")as passs, RIGHT(periode_akun,2) as bulan, ' +
-      'left(periode_akun,4) as tahun from tb_company where kd_perusahaan="%s"',
-      [ed_password.Text, dm.kd_perusahaan]);
+    sql := Format('SELECT md5("%s") as passs', [ed_password.Text, dm.kd_perusahaan]);
       
     fungsi.SQLExec(dm.Q_temp, sql, true);
     passs := dm.Q_temp.fieldbyname('passs').AsString;

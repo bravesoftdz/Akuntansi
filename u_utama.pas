@@ -433,8 +433,6 @@ begin
 end;
 
 procedure Tf_utama.utupBukuAhirBulan1Click(Sender: TObject);
-var
-  BulanLocal : string;
 begin
   if dm.Bulan = '12' then
   begin
@@ -455,13 +453,6 @@ begin
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_bulan("' + dm.kd_perusahaan
         + '",' + dm.Bulan + ',' + dm.Tahun +')', false);
 
-      BulanLocal := inttostr(strtoint(dm.Bulan) + 1);
-      if length(BulanLocal) = 1 then
-        BulanLocal := '0' + BulanLocal;
-
-      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + dm.Tahun
-        + '-' + BulanLocal + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
-
       dm.db_conn.Commit;
       showmessage('proses tutup buku bulanan berhasil');
       close;
@@ -476,8 +467,6 @@ begin
 end;
 
 procedure Tf_utama.utupBukuAhirTahun1Click(Sender: TObject);
-var
-  BulanLocal, TahunLocal : string;
 begin
   if dm.Bulan <> '12' then
   begin
@@ -498,12 +487,6 @@ begin
       fungsi.SQLExec(dm.Q_Exe, 'call sp_tutup_buku_tahun("' + dm.kd_perusahaan
         + '",' + dm.Bulan + ',' + dm.Tahun +
         ')', false);
-
-      BulanLocal := '01';
-      TahunLocal := inttostr(strtoint(dm.Tahun) + 1);
-
-      fungsi.SQLExec(dm.Q_Exe, 'update tb_company set periode_akun="' + TahunLocal
-        + '-' + BulanLocal + '" where kd_perusahaan="' + dm.kd_perusahaan + '"', false);
 
       dm.db_conn.Commit;
       showmessage('proses tutup buku Tahunan Berhasil berhasil');
