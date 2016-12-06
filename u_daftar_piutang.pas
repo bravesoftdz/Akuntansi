@@ -64,6 +64,8 @@ type
     procedure sb_1Click(Sender: TObject);
     procedure sb_2Click(Sender: TObject);
     procedure sButton3Click(Sender: TObject);
+    procedure gridActiveTabChanged(Sender: TcxCustomGrid;
+      ALevel: TcxGridLevel);
   private
     { Private declarations }
   public
@@ -82,24 +84,8 @@ uses
 
 procedure Tf_daftar_piutang.segarkan;
 begin
-
-  fungsi.SQLExec(Q_piutang, 'select * from vw_piutang where kd_perusahaan=' +
-    quotedstr(dm.kd_perusahaan) +
-    ' and status=''belum lunas'' order by tanggal DESC', true);
-
-  fungsi.SQLExec(Q_bayar_piutang,
-    'select * from vw_jurnal_rinci  where kd_perusahaan= ''' + 
-    dm.kd_perusahaan + ''' and refr=''PP'' and rujukan IS NOT NULL', true);
-
-  fungsi.SQLExec(Q_return,
-    'SELECT A1.* FROM tb_return_jual_global A1 INNER JOIN ' +
-    'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_transaksi',
-    true);
-
-  fungsi.SQLExec(Q_return_kirim,
-    'SELECT A1.* FROM tb_return_kirim_global A1 INNER JOIN ' +
-    'vw_piutang A2 ON A2.kd_perusahaan = A1.kd_perusahaan AND A2.faktur = A1.kd_kirim',
-    true);
+  fungsi.SQLExec(Q_piutang, Format('SELECT * FROM vw_piutang where kd_perusahaan = "%s" '+
+    'AND status="belum lunas" order by tanggal DESC',[dm.kd_perusahaan]), true);
 end;
 
 procedure Tf_daftar_piutang.WMMDIACTIVATE(var msg: TWMMDIACTIVATE);
@@ -168,6 +154,27 @@ begin
       + 'Rupiah';
     dm.laporan.ShowReport;
   end;
+end;
+
+procedure Tf_daftar_piutang.gridActiveTabChanged(Sender: TcxCustomGrid;
+  ALevel: TcxGridLevel);
+begin
+  if ALevel = Level1 then
+  fungsi.SQLExec(Q_bayar_piutang, Format('SELECT a.tgl, a.no_refrensi, a.keterangan, '+
+    'b.rujukan, b.kredit FROM tb_jurnal_rinci b INNER JOIN tb_jurnal_global a '+
+    'ON(a.no_ix = b.ix_jurnal) AND (a.kd_perusahaan = b.kd_perusahaan) '+
+    'WHERE a.kd_perusahaan = "%s" AND rujukan = "%s"',[dm.kd_perusahaan,
+    Q_piutang.fieldbyname('faktur').AsString]), true)
+  else
+  if ALevel = Level2 then
+  fungsi.SQLExec(Q_return, Format('SELECT * FROM tb_return_jual_global where '+
+    'kd_perusahaan = "%s" AND kd_transaksi = "%s"',[dm.kd_perusahaan,
+    Q_piutang.fieldbyname('faktur').AsString]), true)
+  else
+  if ALevel = Level3 then
+  fungsi.SQLExec(Q_return_kirim, Format('SELECT * FROM tb_return_kirim_global '+
+    'WHERE kd_perusahaan = "%s" AND kd_kirim = "%s"',[dm.kd_perusahaan,
+    Q_piutang.fieldbyname('faktur').AsString]), true);
 end;
 
 end.

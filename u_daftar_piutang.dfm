@@ -112,6 +112,7 @@ object f_daftar_piutang: Tf_daftar_piutang
     LevelTabs.Style = 9
     LookAndFeel.Kind = lfOffice11
     RootLevelOptions.DetailTabsPosition = dtpTop
+    OnActiveTabChanged = gridActiveTabChanged
     object Table0: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_hutang
@@ -212,9 +213,6 @@ object f_daftar_piutang: Tf_daftar_piutang
     object Table1: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_bayar_hutang
-      DataController.DetailKeyFieldNames = 'rujukan'
-      DataController.KeyFieldNames = 'rujukan'
-      DataController.MasterKeyFieldNames = 'faktur'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -233,6 +231,7 @@ object f_daftar_piutang: Tf_daftar_piutang
       OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsView.ColumnAutoWidth = True
+      OptionsView.ExpandButtonsForEmptyDetails = False
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
@@ -262,9 +261,6 @@ object f_daftar_piutang: Tf_daftar_piutang
     object Table2: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_return
-      DataController.DetailKeyFieldNames = 'kd_transaksi'
-      DataController.KeyFieldNames = 'kd_transaksi'
-      DataController.MasterKeyFieldNames = 'faktur'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -279,6 +275,7 @@ object f_daftar_piutang: Tf_daftar_piutang
       OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsView.ColumnAutoWidth = True
+      OptionsView.ExpandButtonsForEmptyDetails = False
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
@@ -312,9 +309,6 @@ object f_daftar_piutang: Tf_daftar_piutang
     object Table3: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_return_kirim
-      DataController.DetailKeyFieldNames = 'kd_kirim'
-      DataController.KeyFieldNames = 'kd_kirim'
-      DataController.MasterKeyFieldNames = 'faktur'
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -327,6 +321,7 @@ object f_daftar_piutang: Tf_daftar_piutang
       OptionsData.Editing = False
       OptionsData.Inserting = False
       OptionsView.ColumnAutoWidth = True
+      OptionsView.ExpandButtonsForEmptyDetails = False
       OptionsView.Footer = True
       OptionsView.GroupByBox = False
       Styles.Inactive = dm.cxstyl1
@@ -360,19 +355,24 @@ object f_daftar_piutang: Tf_daftar_piutang
       Caption = 'Daftar Piutang'
       GridView = Table0
       Options.DetailTabsPosition = dtpTop
-      Options.TabsForEmptyDetails = False
     end
     object Level1: TcxGridLevel
       Caption = 'Bayar Piutang'
       GridView = Table1
+      Options.DetailTabsPosition = dtpTop
+      Options.TabsForEmptyDetails = False
     end
     object Level2: TcxGridLevel
       Caption = 'Return Penjualan'
       GridView = Table2
+      Options.DetailTabsPosition = dtpTop
+      Options.TabsForEmptyDetails = False
     end
     object Level3: TcxGridLevel
       Caption = 'Return Kirim'
       GridView = Table3
+      Options.DetailTabsPosition = dtpTop
+      Options.TabsForEmptyDetails = False
     end
   end
   object sknprvdr1: TsSkinProvider
