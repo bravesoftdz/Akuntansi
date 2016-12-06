@@ -141,9 +141,9 @@ procedure Tf_daftar_piutang.sb_2Click(Sender: TObject);
 var
   posisi: Integer;
 begin
-  posisi := t_data0.DataController.DataSource.DataSet.RecNo;
+  posisi := Table0.DataController.DataSource.DataSet.RecNo;
   segarkan;
-  t_data0.DataController.DataSource.DataSet.RecNo := posisi;
+  Table0.DataController.DataSource.DataSet.RecNo := posisi;
 end;
 
 procedure Tf_daftar_piutang.sButton3Click(Sender: TObject);
