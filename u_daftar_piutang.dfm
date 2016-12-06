@@ -108,8 +108,10 @@ object f_daftar_piutang: Tf_daftar_piutang
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    LevelTabs.Style = 10
+    LevelTabs.Slants.Positions = [spRight]
+    LevelTabs.Style = 9
     LookAndFeel.Kind = lfOffice11
+    RootLevelOptions.DetailTabsPosition = dtpTop
     object Table0: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_hutang
@@ -361,12 +363,15 @@ object f_daftar_piutang: Tf_daftar_piutang
       Options.TabsForEmptyDetails = False
     end
     object Level1: TcxGridLevel
+      Caption = 'Bayar Piutang'
       GridView = Table1
     end
     object Level2: TcxGridLevel
+      Caption = 'Return Penjualan'
       GridView = Table2
     end
     object Level3: TcxGridLevel
+      Caption = 'Return Kirim'
       GridView = Table3
     end
   end
