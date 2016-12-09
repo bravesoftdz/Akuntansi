@@ -237,7 +237,7 @@ begin
       fungsi.SQLExec(dm.Q_exe, 'update tb_hutang set dibayar=dibayar+' +
         floattostr(TableView.DataController.GetValue(x, 3)) +
         ',`update`=date(now()) where faktur="' + TableView.DataController.GetDisplayText
-        (x, 0) + '"', false);
+        (x, 0) + '" and kd_perusahaan = "'+dm.kd_perusahaan+'"', false);
     end;
     delete(isi_sql, length(isi_sql), 1);
 
