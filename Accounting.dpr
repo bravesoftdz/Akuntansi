@@ -4,7 +4,7 @@ uses
   Forms,
   u_cari in 'u_cari.pas' {f_cari},
   u_dm in 'u_dm.pas' {dm: TDataModule},
-  UFungsi in 'UFungsi.pas',
+  UFungsi in '..\tools\pascal\UFungsi.pas',
   u_GJurnal in 'u_GJurnal.pas' {F_GJurnal},
   u_Jurnal_Kas in 'u_Jurnal_Kas.pas' {f_Jurnal_Kas},
   u_utama in 'u_utama.pas' {f_utama},
