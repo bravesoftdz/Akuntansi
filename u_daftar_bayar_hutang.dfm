@@ -239,8 +239,8 @@ object f_daftar_bayar_hutang: Tf_daftar_bayar_hutang
     Left = 360
     Top = 104
   end
-  object Q_rinci_bayar_hutang: TmySQLQuery
-    Database = dm.db_conn
+  object Q_rinci_bayar_hutang: TMyQuery
+    Connection = dm.db_conn
     Left = 288
     Top = 104
   end
@@ -249,8 +249,8 @@ object f_daftar_bayar_hutang: Tf_daftar_bayar_hutang
     Left = 360
     Top = 56
   end
-  object Q_bayar_hutang: TmySQLQuery
-    Database = dm.db_conn
+  object Q_bayar_hutang: TMyQuery
+    Connection = dm.db_conn
     Left = 288
     Top = 56
   end

@@ -7,9 +7,9 @@ uses
   Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, mySQLDbTables, sSkinProvider, sButton, Buttons, sSpeedButton,
-  ExtCtrls, sPanel, uTerbilang, cxCustomData, cxFilter, cxData,
-  StdCtrls;
+  cxGrid, sSkinProvider, sButton, Buttons, sSpeedButton,
+  ExtCtrls, sPanel, uTerbilang, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_hutang = class(TForm)
@@ -20,9 +20,9 @@ type
     sButton3: TsButton;
     sknprvdr1: TsSkinProvider;
     ds_bayar_hutang: TDataSource;
-    Q_bayar_hutang: TmySQLQuery;
+    Q_bayar_hutang: TMyQuery;
     ds_hutang: TDataSource;
-    Q_hutang: TmySQLQuery;
+    Q_hutang: TMyQuery;
     grid: TcxGrid;
     Table0: TcxGridDBTableView;
     Table1: TcxGridDBTableView;
@@ -40,7 +40,7 @@ type
     tvTable1tgl: TcxGridDBColumn;
     tvTable1keterangan: TcxGridDBColumn;
     tvTable1no_refrensi: TcxGridDBColumn;
-    Q_return: TmySQLQuery;
+    Q_return: TMyQuery;
     ds_return: TDataSource;
     Table2: TcxGridDBTableView;
     tvTable2kd_return: TcxGridDBColumn;

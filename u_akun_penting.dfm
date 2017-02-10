@@ -222,8 +222,8 @@ object f_akun_penting: Tf_akun_penting
     Left = 352
     Top = 96
   end
-  object Q_akun_penting: TmySQLQuery
-    Database = dm.db_conn
+  object Q_akun_penting: TMyQuery
+    Connection = dm.db_conn
     Left = 520
     Top = 64
   end

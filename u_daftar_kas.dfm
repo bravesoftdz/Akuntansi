@@ -274,8 +274,8 @@ object f_daftar_kas: Tf_daftar_kas
     Left = 360
     Top = 104
   end
-  object Q_rinci_kas: TmySQLQuery
-    Database = dm.db_conn
+  object Q_rinci_kas: TMyQuery
+    Connection = dm.db_conn
     Left = 288
     Top = 104
   end
@@ -284,8 +284,8 @@ object f_daftar_kas: Tf_daftar_kas
     Left = 360
     Top = 56
   end
-  object Q_kas: TmySQLQuery
-    Database = dm.db_conn
+  object Q_kas: TMyQuery
+    Connection = dm.db_conn
     Left = 288
     Top = 56
   end

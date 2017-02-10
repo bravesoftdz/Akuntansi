@@ -3,40 +3,40 @@ unit u_dm;
 interface
 
 uses
-  SysUtils, Classes, mySQLDbTables, DB, sSkinManager, dialogs, forms, ImgList,
+  SysUtils, Classes, DB, sSkinManager, dialogs, forms, ImgList,
   Controls, acAlphaImageList, frxClass, frxDBSet, inifiles, Windows, cxStyles,
-  SHFolder;
+  SHFolder, MemDS, DBAccess, MyAccess;
 
 type
   Tdm = class(TDataModule)
-    db_conn: TmySQLDatabase;
+    db_conn: TMyConnection;
     ds_show: TDataSource;
-    Q_Exe: TmySQLQuery;
-    Q_Show: TmySQLQuery;
+    Q_Exe: TMyQuery;
+    Q_Show: TMyQuery;
     sm: TsSkinManager;
-    Q_temp: TmySQLQuery;
+    Q_temp: TMyQuery;
     gambar: TsAlphaImageList;
-    Q_buku_besar: TmySQLQuery;
+    Q_buku_besar: TMyQuery;
     R_buku_besar: TfrxDBDataset;
     Laporan: TfrxReport;
-    Q_Trial_balance1: TmySQLQuery;
+    Q_Trial_balance1: TMyQuery;
     R_Trial_Balance1: TfrxDBDataset;
-    Q_trial_balance2: TmySQLQuery;
+    Q_trial_balance2: TMyQuery;
     R_trial_balance2: TfrxDBDataset;
-    Q_laporan: TmySQLQuery;
+    Q_laporan: TMyQuery;
     db_Laporan: TfrxDBDataset;
     image: TsAlphaImageList;
     ds_TShow: TDataSource;
     ds_kiraan: TDataSource;
     ds_subklas: TDataSource;
     ds_klas: TDataSource;
-    Q_klas: TmySQLQuery;
-    Q_subklas: TmySQLQuery;
-    Q_kiraan: TmySQLQuery;
-    Q_tampil: TmySQLQuery;
+    Q_klas: TMyQuery;
+    Q_subklas: TMyQuery;
+    Q_kiraan: TMyQuery;
+    Q_tampil: TMyQuery;
     stl_focus: TcxStyleRepository;
     cxstyl1: TcxStyle;
-    Q_koneksi: TmySQLQuery;
+    Q_koneksi: TMyQuery;
     procedure DataModuleCreate(Sender: TObject);
     procedure smAfterChange(Sender: TObject);
   private
@@ -127,14 +127,12 @@ begin
     readln(X, nama);
     readln(X, kata);
     closefile(X);
-    db_conn.Host := krupuk(pusat, 6);
-    db_conn.DatabaseName := krupuk(data, 6);
+    db_conn.Server := krupuk(pusat, 6);
+    db_conn.Database := krupuk(data, 6);
     jalur1 := krupuk(jalur2, 6);
     db_conn.Port := strtoint(jalur1);
-    db_conn.UserName := krupuk(nama, 6);
-    db_conn.UserPassword := krupuk(kata, 6);
-    db_conn.Connected := true;
-
+    db_conn.Username := krupuk(nama, 6);
+    db_conn.Password := krupuk(kata, 6);
   except
     on E: exception do
     begin

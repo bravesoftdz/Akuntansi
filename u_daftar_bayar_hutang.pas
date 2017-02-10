@@ -7,8 +7,9 @@ uses
   Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, mySQLDbTables, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
-  sButton, cxCustomData, cxFilter, cxData, StdCtrls;
+  cxGrid, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
+  sButton, StdCtrls, MemDS, DBAccess,
+  MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_bayar_hutang = class(TForm)
@@ -17,9 +18,9 @@ type
     sb_2: TsSpeedButton;
     sknprvdr1: TsSkinProvider;
     ds_rinci_bayar_hutang: TDataSource;
-    Q_rinci_bayar_hutang: TmySQLQuery;
+    Q_rinci_bayar_hutang: TMyQuery;
     ds_bayar_hutang: TDataSource;
-    Q_bayar_hutang: TmySQLQuery;
+    Q_bayar_hutang: TMyQuery;
     grid: TcxGrid;
     t_data0: TcxGridDBTableView;
     t_data0tgl: TcxGridDBColumn;

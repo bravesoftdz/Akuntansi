@@ -386,22 +386,22 @@ object f_daftar_piutang: Tf_daftar_piutang
     Left = 8
     Top = 24
   end
-  object Q_piutang: TmySQLQuery
-    Database = dm.db_conn
+  object Q_piutang: TMyQuery
+    Connection = dm.db_conn
     SQL.Strings = (
       'select * from vw_piutang')
     Left = 288
     Top = 56
   end
-  object Q_bayar_piutang: TmySQLQuery
-    Database = dm.db_conn
+  object Q_bayar_piutang: TMyQuery
+    Connection = dm.db_conn
     SQL.Strings = (
       'select * from vw_jurnal_rinci')
     Left = 288
     Top = 104
   end
-  object Q_return: TmySQLQuery
-    Database = dm.db_conn
+  object Q_return: TMyQuery
+    Connection = dm.db_conn
     SQL.Strings = (
       'select * from tb_return_jual_global')
     Left = 288
@@ -422,8 +422,8 @@ object f_daftar_piutang: Tf_daftar_piutang
     Left = 360
     Top = 56
   end
-  object Q_return_kirim: TmySQLQuery
-    Database = dm.db_conn
+  object Q_return_kirim: TMyQuery
+    Connection = dm.db_conn
     SQL.Strings = (
       'SELECT * FROM tb_return_kirim_global')
     Left = 288

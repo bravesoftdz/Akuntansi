@@ -7,9 +7,9 @@ uses
   Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, mySQLDbTables, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
-  cxImageComboBox, sGroupBox, sButton, cxCustomData, cxFilter, cxData,
-  StdCtrls;
+  cxGrid, sSkinProvider, Buttons, sSpeedButton, ExtCtrls, sPanel,
+  cxImageComboBox, sGroupBox, sButton, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_kas = class(TForm)
@@ -18,9 +18,9 @@ type
     sb_2: TsSpeedButton;
     sknprvdr1: TsSkinProvider;
     ds_rinci_kas: TDataSource;
-    Q_rinci_kas: TmySQLQuery;
+    Q_rinci_kas: TMyQuery;
     ds_kas: TDataSource;
-    Q_kas: TmySQLQuery;
+    Q_kas: TMyQuery;
     grid: TcxGrid;
     t_data0: TcxGridDBTableView;
     t_data0tgl: TcxGridDBColumn;

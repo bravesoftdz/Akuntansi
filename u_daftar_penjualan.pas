@@ -8,8 +8,8 @@ uses
   cxEdit, DB, cxDBData, Buttons, ExtCtrls,
   sPanel, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxMaskEdit, cxCurrencyEdit,
-  sSpeedButton, mySQLDbTables, sSkinProvider, cxImageComboBox, sButton,
-  cxCustomData, cxFilter, cxData, StdCtrls;
+  sSpeedButton, sSkinProvider, cxImageComboBox, sButton,
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_penjualan = class(TForm)
@@ -27,14 +27,14 @@ type
     sb_1: TsSpeedButton;
     sb_2: TsSpeedButton;
     ds_daftar_jual: TDataSource;
-    Q_daftar_jual: TmySQLQuery;
-    Q_rinci_jual: TmySQLQuery;
+    Q_daftar_jual: TMyQuery;
+    Q_rinci_jual: TMyQuery;
     ds_rinci_jual: TDataSource;
     sknprvdr1: TsSkinProvider;
     l_data0: TcxGridLevel;
     t_data0: TcxGridDBTableView;
     ds_setor: TDataSource;
-    Q_setor: TmySQLQuery;
+    Q_setor: TMyQuery;
     t_data0user: TcxGridDBColumn;
     t_data0kd_jaga: TcxGridDBColumn;
     t_data0tanggal: TcxGridDBColumn;

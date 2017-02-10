@@ -7,8 +7,9 @@ uses
   Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, Buttons, sSpeedButton, ExtCtrls, sPanel,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, sSkinProvider, mySQLDbTables,
-  sButton, cxCustomData, cxFilter, cxData, StdCtrls;
+  cxClasses, cxControls, cxGridCustomView, cxGrid, sSkinProvider, 
+  sButton, StdCtrls, MemDS, DBAccess,
+  MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_jurnal_umum = class(TForm)
@@ -31,9 +32,9 @@ type
     sb_2: TsSpeedButton;
     sknprvdr1: TsSkinProvider;
     ds_jurnal_umum: TDataSource;
-    Q_jurnal_umum: TmySQLQuery;
+    Q_jurnal_umum: TMyQuery;
     ds_rinci: TDataSource;
-    Q_rinci: TmySQLQuery;
+    Q_rinci: TMyQuery;
     p1: TsPanel;
     sButton3: TsButton;
     procedure segarkan;

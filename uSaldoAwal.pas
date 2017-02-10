@@ -5,12 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Graphics, Forms, Dialogs, DB, 
   StdCtrls, ComCtrls, Controls, Buttons, Classes, ExtCtrls,
-  mySQLDbTables, sEdit, cxStyles, cxGraphics, 
+  sEdit, cxStyles, cxGraphics, 
   cxDataStorage, cxEdit, cxDBData, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, sCurrEdit, sCurrencyEdit,
   sSpeedButton, sSkinProvider, sPanel, 
-  Mask, sMaskEdit, sCustomComboEdit, cxCustomData, cxFilter, cxData;
+  Mask, sMaskEdit, sCustomComboEdit, MemDS,
+  DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   TFSaldoAwal = class(TForm)
@@ -29,8 +30,8 @@ type
     lblNotBalance: TLabel;
     lbl5: TLabel;
     lbl6: TLabel;
-    ZqNeraca: TmySQLQuery;
-    ZqLabaRugi: TmySQLQuery;
+    ZqNeraca: TMyQuery;
+    ZqLabaRugi: TMyQuery;
     edUbahNeraca: TsEdit;
     edUbahLabaRugi: TsEdit;
     GridLabaRugi: TcxGrid;

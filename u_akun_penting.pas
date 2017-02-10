@@ -8,8 +8,8 @@ uses
   cxEdit, DB, cxDBData, cxGridLevel, cxGridCustomTableView, cxGridTableView,
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, 
   ExtCtrls, sPanel, sSkinProvider, Buttons, cxDBLookupComboBox,
-  cxCurrencyEdit, sSpeedButton, mySQLDbTables, sButton, cxCustomData,
-  cxFilter, cxData, StdCtrls;
+  cxCurrencyEdit, sSpeedButton, sButton, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_akun_penting = class(TForm)
@@ -31,7 +31,7 @@ type
     t_assetnilai_buku: TcxGridDBColumn;
     l_data: TcxGridLevel;
     sb_1: TsSpeedButton;
-    Q_akun_penting: TmySQLQuery;
+    Q_akun_penting: TMyQuery;
     ds_akun_penting: TDataSource;
     sb_2: TsSpeedButton;
     p1: TsPanel;

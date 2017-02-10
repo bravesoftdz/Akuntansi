@@ -5,12 +5,8 @@ object dm: Tdm
   Top = 51
   Height = 649
   Width = 967
-  object db_conn: TmySQLDatabase
+  object db_conn: TMyConnection
     Port = 0
-    ConnectOptions = []
-    Params.Strings = (
-      'Port=0'
-      'TIMEOUT=30')
     Left = 8
     Top = 8
   end
@@ -19,13 +15,13 @@ object dm: Tdm
     Left = 72
     Top = 56
   end
-  object Q_Exe: TmySQLQuery
-    Database = db_conn
+  object Q_Exe: TMyQuery
+    Connection = db_conn
     Left = 72
     Top = 8
   end
-  object Q_Show: TmySQLQuery
-    Database = db_conn
+  object Q_Show: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       'select * from tb_klas')
     Left = 8
@@ -68,8 +64,8 @@ object dm: Tdm
     Left = 64
     Top = 296
   end
-  object Q_temp: TmySQLQuery
-    Database = db_conn
+  object Q_temp: TMyQuery
+    Connection = db_conn
     Left = 120
     Top = 8
   end
@@ -8809,8 +8805,8 @@ object dm: Tdm
     Top = 296
     Bitmap = {}
   end
-  object Q_buku_besar: TmySQLQuery
-    Database = db_conn
+  object Q_buku_besar: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       '')
     Left = 208
@@ -9451,8 +9447,8 @@ object dm: Tdm
       end
     end
   end
-  object Q_Trial_balance1: TmySQLQuery
-    Database = db_conn
+  object Q_Trial_balance1: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       '')
     Left = 208
@@ -9466,8 +9462,8 @@ object dm: Tdm
     Left = 304
     Top = 160
   end
-  object Q_trial_balance2: TmySQLQuery
-    Database = db_conn
+  object Q_trial_balance2: TMyQuery
+    Connection = db_conn
     SQL.Strings = (
       ''
       '')
@@ -9482,8 +9478,8 @@ object dm: Tdm
     Left = 296
     Top = 200
   end
-  object Q_laporan: TmySQLQuery
-    Database = db_conn
+  object Q_laporan: TMyQuery
+    Connection = db_conn
     Left = 208
     Top = 56
   end
@@ -9835,23 +9831,23 @@ object dm: Tdm
     Left = 384
     Top = 8
   end
-  object Q_klas: TmySQLQuery
-    Database = db_conn
+  object Q_klas: TMyQuery
+    Connection = db_conn
     Left = 344
     Top = 8
   end
-  object Q_subklas: TmySQLQuery
-    Database = db_conn
+  object Q_subklas: TMyQuery
+    Connection = db_conn
     Left = 432
     Top = 8
   end
-  object Q_kiraan: TmySQLQuery
-    Database = db_conn
+  object Q_kiraan: TMyQuery
+    Connection = db_conn
     Left = 544
     Top = 8
   end
-  object Q_tampil: TmySQLQuery
-    Database = db_conn
+  object Q_tampil: TMyQuery
+    Connection = db_conn
     Left = 424
     Top = 264
   end
@@ -9865,8 +9861,8 @@ object dm: Tdm
       TextColor = clHighlightText
     end
   end
-  object Q_koneksi: TmySQLQuery
-    Database = db_conn
+  object Q_koneksi: TMyQuery
+    Connection = db_conn
     Left = 120
     Top = 64
   end

@@ -8,8 +8,8 @@ uses
   cxEdit, DB, cxDBData, cxCalendar, cxCurrencyEdit, sButton, Buttons,
   sSpeedButton, ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
-  cxGrid, sSkinProvider, mySQLDbTables, cxCustomData, cxFilter, cxData,
-  StdCtrls;
+  cxGrid, sSkinProvider, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_asset = class(TForm)
@@ -39,7 +39,7 @@ type
     sButton3: TsButton;
     sknprvdr1: TsSkinProvider;
     ds_asset: TDataSource;
-    Q_asset: TmySQLQuery;
+    Q_asset: TMyQuery;
     p2: TsPanel;
     sButton4: TsButton;
     procedure segarkan;

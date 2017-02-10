@@ -8,18 +8,18 @@ uses
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, sButton, Buttons, sSpeedButton,
-  ExtCtrls, sPanel, mySQLDbTables, sSkinProvider, cxCustomData, cxFilter,
-  cxData, StdCtrls;
+  ExtCtrls, sPanel, sSkinProvider, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_kirim = class(TForm)
     sknprvdr1: TsSkinProvider;
     ds_rinci_kirim: TDataSource;
-    Q_rinci_kirim: TmySQLQuery;
+    Q_rinci_kirim: TMyQuery;
     ds_kirim: TDataSource;
-    Q_kirim: TmySQLQuery;
+    Q_kirim: TMyQuery;
     ds_daftar_kirim: TDataSource;
-    Q_daftar_kirim: TmySQLQuery;
+    Q_daftar_kirim: TMyQuery;
     panel1: TsPanel;
     sb_1: TsSpeedButton;
     sb_2: TsSpeedButton;

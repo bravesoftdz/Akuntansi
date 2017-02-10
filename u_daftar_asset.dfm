@@ -337,8 +337,8 @@ object f_daftar_asset: Tf_daftar_asset
     Left = 488
     Top = 112
   end
-  object Q_asset: TmySQLQuery
-    Database = dm.db_conn
+  object Q_asset: TMyQuery
+    Connection = dm.db_conn
     Left = 528
     Top = 112
   end

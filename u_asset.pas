@@ -8,8 +8,8 @@ uses
   sTooledit, sLabel, sEdit, sButton, sGroupBox,
   cxGraphics, cxControls, cxContainer, cxEdit, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxDBLookupComboBox, DB,
-  mySQLDbTables, cxLookupEdit, cxDBLookupEdit, StdCtrls, Mask, sMaskEdit,
-  sCustomComboEdit;
+  cxLookupEdit, cxDBLookupEdit, StdCtrls, Mask, sMaskEdit,
+  sCustomComboEdit, MemDS, DBAccess, MyAccess;
 
 type
   TF_asset = class(TForm)
@@ -40,7 +40,7 @@ type
     ce_res: TsCurrencyEdit;
     sLabel11: TsLabel;
     ds_kiraan: TDataSource;
-    Q_kiraan: TmySQLQuery;
+    Q_kiraan: TMyQuery;
     procedure baru;
     procedure ubah;
     procedure b_simpanClick(Sender: TObject);

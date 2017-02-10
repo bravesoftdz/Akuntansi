@@ -6,10 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, cxStyles, cxGraphics, cxDataStorage,
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox, sSkinProvider,
-  mySQLDbTables, sButton, Buttons, sSpeedButton, ExtCtrls, sPanel,
+  sButton, Buttons, sSpeedButton, ExtCtrls, sPanel,
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
-  cxClasses, cxControls, cxGridCustomView, cxGrid, cxCustomData, cxFilter,
-  cxData, StdCtrls;
+  cxClasses, cxControls, cxGridCustomView, cxGrid, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_pembelian = class(TForm)
@@ -38,12 +38,12 @@ type
     sButton3: TsButton;
     p2: TsPanel;
     sButton2: TsButton;
-    Q_daftar_beli: TmySQLQuery;
+    Q_daftar_beli: TMyQuery;
     ds_daftar_beli: TDataSource;
     ds_rinci_beli: TDataSource;
-    Q_rinci_beli: TmySQLQuery;
+    Q_rinci_beli: TMyQuery;
     ds_beli: TDataSource;
-    Q_beli: TmySQLQuery;
+    Q_beli: TMyQuery;
     sknprvdr1: TsSkinProvider;
     t_data0kd_receipt: TcxGridDBColumn;
     t_data0tgl_receipt: TcxGridDBColumn;

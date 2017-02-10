@@ -8,18 +8,18 @@ uses
   cxEdit, DB, cxDBData, cxCurrencyEdit, cxImageComboBox, cxGridLevel,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, sButton, Buttons, sSpeedButton,
-  ExtCtrls, sPanel, mySQLDbTables, sSkinProvider, cxCustomData, cxFilter,
-  cxData, StdCtrls;
+  ExtCtrls, sPanel, sSkinProvider, 
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
 
 type
   Tf_daftar_koreksi = class(TForm)
     sknprvdr1: TsSkinProvider;
     ds_rinci_koreksi: TDataSource;
-    Q_rinci_koreksi: TmySQLQuery;
+    Q_rinci_koreksi: TMyQuery;
     ds_koreksi: TDataSource;
-    Q_koreksi: TmySQLQuery;
+    Q_koreksi: TMyQuery;
     ds_daftar_koreksi: TDataSource;
-    Q_daftar_koreksi: TmySQLQuery;
+    Q_daftar_koreksi: TMyQuery;
     panel1: TsPanel;
     sb_1: TsSpeedButton;
     sb_2: TsSpeedButton;
