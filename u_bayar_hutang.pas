@@ -78,7 +78,7 @@ var
 implementation
 
 uses
-  u_dm, u_cari, u_utama, UFungsi;
+  u_dm, u_cari, UFungsi;
 
 {$R *.dfm}
 

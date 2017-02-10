@@ -267,7 +267,7 @@ begin
   application.CreateForm(Tf_login, f_login);
   f_login.sb.Panels[0].Text := dm.kd_perusahaan;
   f_login.sb.Panels[1].Text := sb.Panels[4].Text;
-  F_Login.sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  F_Login.sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
   f_login.ShowModal;
 end;
 
@@ -294,7 +294,7 @@ procedure Tf_utama.FormShow(Sender: TObject);
 begin
   sb.Panels[8].Text := 'Versi: ' + fungsi.GetVersiApp;
 
-  sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
   sb.Panels[3].Text := dm.kd_perusahaan;
   fungsi.SQLExec(dm.Q_temp, 'select * from tb_company where kd_perusahaan = "' +
     dm.kd_perusahaan + '"', true);
@@ -399,7 +399,7 @@ begin
   application.CreateForm(Tf_login, f_login);
   f_login.sb.Panels[0].Text := dm.kd_perusahaan;
   f_login.sb.Panels[1].Text := sb.Panels[4].Text;
-  F_Login.sb.Panels[2].Text := dm.db_conn.DatabaseName + '@' + dm.db_conn.Host;
+  F_Login.sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
   f_login.ShowModal;
 end;
 
@@ -1080,7 +1080,7 @@ begin
   versiDB := dm.Q_Show.FieldByName('versi_terbaru').AsString;
   URLDownload := dm.Q_Show.FieldByName('URLdownload').AsString;
   fileName := Copy(URLDownload, LastDelimiter('/', URLDownload) + 1, Length(URLDownload));
-  UrlDownloadLocal := 'http://' + dm.db_conn.Host + '/GainProfit/' + fileName;
+  UrlDownloadLocal := 'http://' + dm.db_conn.Server + '/GainProfit/' + fileName;
 
   if versiAPP < versiDB then
   begin
