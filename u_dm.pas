@@ -147,7 +147,7 @@ begin
   AppPath := GetAppData(CSIDL_COMMON_APPDATA);
   if not (DirectoryExists(AppPath)) then
     CreateDir(AppPath);
-  sm.SkinDirectory := AppPath + 'skins';
+  sm.SkinDirectory := Path + 'Tools\Skins';
 
   appINI := TIniFile.Create(AppPath + 'gain.ini');
   try

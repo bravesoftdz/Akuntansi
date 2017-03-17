@@ -30,12 +30,6 @@ object dm: Tdm
   object sm: TsSkinManager
     Active = False
     InternalSkins = <>
-    MenuSupport.IcoLineSkin = 'ICOLINE'
-    MenuSupport.ExtraLineFont.Charset = DEFAULT_CHARSET
-    MenuSupport.ExtraLineFont.Color = clWindowText
-    MenuSupport.ExtraLineFont.Height = -11
-    MenuSupport.ExtraLineFont.Name = 'MS Sans Serif'
-    MenuSupport.ExtraLineFont.Style = []
     SkinDirectory = 'c:\Skins'
     SkinName = 'WEB (internal)'
     SkinInfo = 'N/A'
@@ -60,6 +54,11 @@ object dm: Tdm
     ThirdParty.ThirdToolBar = 'TToolBar'#13#10
     ThirdParty.ThirdStatusBar = 'TStatusBar'#13#10
     ThirdParty.ThirdSpeedButton = 'TSpeedButton'#13#10'TNavButton'#13#10
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
     OnAfterChange = smAfterChange
     Left = 64
     Top = 296
