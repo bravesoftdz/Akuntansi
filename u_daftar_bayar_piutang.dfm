@@ -46,9 +46,8 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -70,9 +69,8 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -115,7 +113,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = t_data0debet
         end>
@@ -151,7 +149,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
         Caption = 'Nilai'
         DataBinding.FieldName = 'nilai'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         HeaderAlignmentHorz = taRightJustify
         Width = 87
       end
@@ -224,11 +222,6 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
     end
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 8

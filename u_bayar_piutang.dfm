@@ -26,8 +26,8 @@ object f_bayar_piutang: Tf_bayar_piutang
     Height = 21
     OnClick = sb_cariClick
     SkinData.SkinSection = 'SPEEDBUTTON'
-    ImageIndex = 0
     Images = dm.gambar
+    ImageIndex = 0
   end
   object Lbl6: TsLabel
     Left = 8
@@ -71,8 +71,8 @@ object f_bayar_piutang: Tf_bayar_piutang
       Height = 21
       OnClick = sSpeedButton1Click
       SkinData.SkinSection = 'SPEEDBUTTON'
-      ImageIndex = 0
       Images = dm.gambar
+      ImageIndex = 0
     end
     object Lbl1: TsLabel
       Left = 8
@@ -103,15 +103,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       ReadOnly = True
       TabOrder = 1
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_no_jurnal: TsEdit
       Left = 80
@@ -130,15 +121,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       TabOrder = 0
       OnKeyDown = ed_no_jurnalKeyDown
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
   object sPanel2: TsPanel
@@ -204,12 +186,12 @@ object f_bayar_piutang: Tf_bayar_piutang
           Column = ableViewColumn2
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.000;(###,###,##0.000);0.000'
           Kind = skSum
           Column = t_view_Qty
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.000;(###,###,##0.000);0.000'
           Kind = skSum
           OnGetText = tableviewTcxGridDataControllerTcxDataSummaryFooterSummaryItems3GetText
           Column = view_TableViewColumn1
@@ -254,7 +236,7 @@ object f_bayar_piutang: Tf_bayar_piutang
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.AssignedValues.MinValue = True
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         GroupSummaryAlignment = taRightJustify
         HeaderAlignmentHorz = taRightJustify
@@ -267,7 +249,7 @@ object f_bayar_piutang: Tf_bayar_piutang
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         GroupSummaryAlignment = taRightJustify
         HeaderAlignmentHorz = taRightJustify
@@ -295,15 +277,6 @@ object f_bayar_piutang: Tf_bayar_piutang
     OnKeyDown = ed_codeKeyDown
     OnKeyPress = ed_codeKeyPress
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object gb_1: TsGroupBox
     Left = 8
@@ -333,8 +306,8 @@ object f_bayar_piutang: Tf_bayar_piutang
       Height = 21
       OnClick = sb_1Click
       SkinData.SkinSection = 'SPEEDBUTTON'
-      ImageIndex = 0
       Images = dm.gambar
+      ImageIndex = 0
     end
     object Lbl4: TsLabel
       Left = 328
@@ -392,15 +365,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       TabOrder = 0
       OnKeyDown = ed_pihak_lainKeyDown
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_refrensi: TsEdit
       Left = 384
@@ -416,15 +380,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       ParentFont = False
       TabOrder = 1
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object de_tanggal: TsDateEdit
       Left = 384
@@ -443,15 +398,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       ParentFont = False
       TabOrder = 2
       Text = '  /  /    '
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'EDIT'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -470,15 +416,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       ParentFont = False
       TabOrder = 3
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_ket2: TsEdit
       Left = 56
@@ -495,15 +432,6 @@ object f_bayar_piutang: Tf_bayar_piutang
       ReadOnly = True
       TabOrder = 4
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
 end
