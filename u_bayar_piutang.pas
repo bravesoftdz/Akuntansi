@@ -344,7 +344,7 @@ begin
   tableview.DataController.RecordCount := baris_baru;
   TableView.DataController.SetValue(baris_baru - 1, 0, dm.Q_temp.fieldbyname('faktur').AsString);
   TableView.DataController.SetValue(baris_baru - 1, 1, dm.Q_temp.fieldbyname('tanggal').AsString);
-  TableView.DataController.SetValue(baris_baru - 1, 2, dm.Q_temp.fieldbyname('piutang').AsString);
+  TableView.DataController.SetValue(baris_baru - 1, 2, dm.Q_temp.fieldbyname('piutang').AsCurrency);
   TableView.DataController.SetValue(baris_baru - 1, 3, 0);
   tableview.DataController.ChangeFocusedRowIndex(baris_baru);
   update_ket2;
@@ -416,14 +416,14 @@ begin
 
     if (Length(kode) = 0) then
       Exit;
-    if strtoint(kode) > TableView.DataController.GetValue(b, 2) then
+    if StrToFloat(kode) > TableView.DataController.GetValue(b, 2) then
     begin
       TableView.DataController.SetValue(b, 3, TableView.DataController.GetValue(b,
         2)); //nilai
       Exit;
     end;
 
-    TableView.DataController.SetValue(b, 3, StrToIntDef(kode, 0)); //nilai
+    TableView.DataController.SetValue(b, 3, StrToFloat(kode)); //nilai
   end;
 end;
 

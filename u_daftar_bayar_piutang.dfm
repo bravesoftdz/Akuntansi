@@ -203,14 +203,14 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
         Caption = 'Debet'
         DataBinding.FieldName = 'debet'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         Width = 81
       end
       object t_data2Column5: TcxGridDBColumn
         Caption = 'Kredit'
         DataBinding.FieldName = 'kredit'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         Width = 86
       end
     end
