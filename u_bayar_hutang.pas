@@ -64,7 +64,7 @@ type
       TcxDataSummaryItem; const AValue: Variant; AIsFooter: Boolean; var AText: string);
     procedure ed_pihak_lainKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
-    dibayar: Real;
+    dibayar: Currency;
     kd_supplier: string;
     { Private declarations }
   public
@@ -197,7 +197,8 @@ end;
 procedure Tf_bayar_hutang.simpan;
 var
   x, ix_jurnal: integer;
-  jurnal_hutang, LJurnalDetail: string;
+  jurnal_hutang, LSQL, LJurnalDetail, LFakturs, LFaktur, LBayarHutang: string;
+  LBayar : Currency;
 begin
 
   if FormatDateTime('yyyyMM', de_tanggal.Date) <> dm.PeriodAktif then
@@ -219,50 +220,64 @@ begin
     exit;
   end;
 
+  LSQL := 'select IFNULL(max(no_ix),1) as jumlah from tb_jurnal_global';
+  fungsi.SQLExec(dm.Q_temp, LSQL, true);
+  ix_jurnal := (dm.Q_temp.fieldbyname('jumlah').AsInteger) + 1;
+
+  LSQL := 'select kd_akun from tb_konfig_akun where no_ix = 4 ';
+  fungsi.SQLExec(dm.Q_temp, LSQL, true);
+  jurnal_hutang := dm.Q_temp.fieldbyname('kd_akun').asstring;
+
+  for x := 0 to tableview.DataController.RecordCount - 1 do
+  begin
+    LBayar := TableView.DataController.GetValue(x, 3);
+    LFaktur := TableView.DataController.GetDisplayText(x, 0);
+    
+    LJurnalDetail := LJurnalDetail + Format('("%s", %d, %d, "%s", %g, "%s"), ',
+      [dm.kd_perusahaan, ix_jurnal, (x + 1), jurnal_hutang, LBayar, LFaktur]);
+
+    LBayarHutang := LBayarHutang + Format('WHEN "%s" THEN (dibayar + %g) ',
+      [LFaktur, LBayar]);
+
+    LFakturs := LFakturs + Format('"%s", ', [LFaktur]);
+  end;
+  SetLength(LJurnalDetail, length(LJurnalDetail) - 2);
+  SetLength(LBayarHutang, length(LBayarHutang) - 1);
+  SetLength(LFakturs, length(LFakturs) - 2);
+
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_temp,
-      'select IFNULL(max(no_ix),1) as jumlah from tb_jurnal_global', true);
-    ix_jurnal := (dm.Q_temp.fieldbyname('jumlah').AsInteger) + 1;
+    LSQL := Format('INSERT INTO tb_jurnal_global (kd_perusahaan, no_ix, tgl, '
+      + 'keterangan, no_refrensi, refr, nilai, kd_user) VALUES ("%s", %d, "%s", '
+      + '"%s untuk %s", "%s", "PH", %g, "%s")', [dm.kd_perusahaan, ix_jurnal,
+      MyDate(de_tanggal.Date), ed_keterangan.Text, ed_ket2.Text, ed_refrensi.Text,
+      dibayar, dm.kd_pengguna]);
 
-    fungsi.SQLExec(dm.Q_temp, 'select kd_akun from tb_konfig_akun where no_ix=4', true);
-    jurnal_hutang := dm.Q_temp.fieldbyname('kd_akun').asstring;
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
-    for x := 0 to tableview.DataController.RecordCount - 1 do
-    begin
-      LJurnalDetail := LJurnalDetail + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-        + '","' + inttostr(x + 1) + '","' + jurnal_hutang + '","' + floattostr(TableView.DataController.GetValue
-        (x, 3)) + '","' + TableView.DataController.GetDisplayText(x, 0) + '"), ';
+    LSQL := Format('INSERT INTO tb_jurnal_rinci (kd_perusahaan, ix_jurnal, no_urut, '+
+      'kd_akun, debet, rujukan) VALUES %s', [LJurnalDetail]);
 
-      fungsi.SQLExec(dm.Q_exe, 'update tb_hutang set dibayar=dibayar+' +
-        floattostr(TableView.DataController.GetValue(x, 3)) +
-        ',`update`=date(now()) where faktur="' + TableView.DataController.GetDisplayText
-        (x, 0) + '" and kd_perusahaan = "'+dm.kd_perusahaan+'"', false);
-    end;
-    SetLength(LJurnalDetail, length(LJurnalDetail) - 2);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai,kd_user) values ("' + dm.kd_perusahaan + '","' +
-      inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
-      + '","' + ed_keterangan.Text + ' untuk ' + ed_ket2.Text + '","' +
-      ed_refrensi.Text + '","PH","' + floattostr(dibayar) + '", "' + dm.kd_pengguna
-      + '")', false);
+    LSQL := Format('INSERT INTO tb_jurnal_rinci (kd_perusahaan, ix_jurnal, no_urut, '+
+      'kd_akun, kredit) VALUES ("%s", %d, %d, "%s", %g)', [dm.kd_perusahaan, (ix_jurnal),
+      (tableview.DataController.RecordCount + 1), ed_no_jurnal.Text, dibayar]);
 
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'debet,rujukan) values ' + LJurnalDetail, False);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'kredit) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
-      '","' + inttostr(tableview.DataController.RecordCount + 1) + '","' +
-      ed_no_jurnal.Text + '","' + floattostr(dibayar) + '")', false);
+    LSQL := Format('call sp_historical_balancing("%s", "%s")', [dm.kd_perusahaan,
+    MyDate(de_tanggal.Date)]);
 
-    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
-    + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
+
+    LSQL := Format('UPDATE tb_hutang SET dibayar = (CASE faktur %s END), '
+      + '`update` = CURDATE() WHERE kd_perusahaan = "%s" AND faktur IN (%s)',
+      [LBayarHutang, dm.kd_perusahaan, LFakturs]);
+
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
+
     dm.db_conn.Commit;
-
     showmessage('Penyimpanan Data Sukses...'#10#13'Tekan Enter Untuk Melakukan Transaksi Baru...');
     AWAL;
     ed_refrensi.SetFocus;
