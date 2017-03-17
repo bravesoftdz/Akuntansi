@@ -197,7 +197,7 @@ end;
 procedure Tf_bayar_hutang.simpan;
 var
   x, ix_jurnal: integer;
-  jurnal_hutang, isi_sql: string;
+  jurnal_hutang, LJurnalDetail: string;
 begin
 
   if FormatDateTime('yyyyMM', de_tanggal.Date) <> dm.PeriodAktif then
@@ -230,16 +230,16 @@ begin
 
     for x := 0 to tableview.DataController.RecordCount - 1 do
     begin
-      isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
+      LJurnalDetail := LJurnalDetail + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
         + '","' + inttostr(x + 1) + '","' + jurnal_hutang + '","' + floattostr(TableView.DataController.GetValue
-        (x, 3)) + '","' + TableView.DataController.GetDisplayText(x, 0) + '"),';
+        (x, 3)) + '","' + TableView.DataController.GetDisplayText(x, 0) + '"), ';
 
       fungsi.SQLExec(dm.Q_exe, 'update tb_hutang set dibayar=dibayar+' +
         floattostr(TableView.DataController.GetValue(x, 3)) +
         ',`update`=date(now()) where faktur="' + TableView.DataController.GetDisplayText
         (x, 0) + '" and kd_perusahaan = "'+dm.kd_perusahaan+'"', false);
     end;
-    delete(isi_sql, length(isi_sql), 1);
+    SetLength(LJurnalDetail, length(LJurnalDetail) - 2);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
@@ -251,7 +251,7 @@ begin
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-      'debet,rujukan) values ' + isi_sql, False);
+      'debet,rujukan) values ' + LJurnalDetail, False);
 
     fungsi.SQLExec(dm.Q_exe,
       'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
@@ -344,7 +344,7 @@ begin
   tableview.DataController.RecordCount := baris_baru;
   TableView.DataController.SetValue(baris_baru - 1, 0, dm.Q_temp.fieldbyname('faktur').AsString);
   TableView.DataController.SetValue(baris_baru - 1, 1, dm.Q_temp.fieldbyname('tanggal').AsString);
-  TableView.DataController.SetValue(baris_baru - 1, 2, dm.Q_temp.fieldbyname('hutang').AsString);
+  TableView.DataController.SetValue(baris_baru - 1, 2, dm.Q_temp.fieldbyname('hutang').AsCurrency);
   TableView.DataController.SetValue(baris_baru - 1, 3, 0);
   tableview.DataController.ChangeFocusedRowIndex(baris_baru);
   update_ket2;
@@ -416,14 +416,14 @@ begin
 
     if (Length(kode) = 0) then
       Exit;
-    if strtoint(kode) > TableView.DataController.GetValue(b, 2) then
+    if StrToFloat(kode) > TableView.DataController.GetValue(b, 2) then
     begin
       TableView.DataController.SetValue(b, 3, TableView.DataController.GetValue(b,
         2)); //nilai
       Exit;
     end;
 
-    TableView.DataController.SetValue(b, 3, StrToIntDef(kode, 0)); //nilai
+    TableView.DataController.SetValue(b, 3, StrToFloat(kode)); //nilai
   end;
 end;
 
