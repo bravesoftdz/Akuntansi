@@ -46,9 +46,8 @@ object f_daftar_hutang: Tf_daftar_hutang
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -70,9 +69,8 @@ object f_daftar_hutang: Tf_daftar_hutang
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -119,22 +117,22 @@ object f_daftar_hutang: Tf_daftar_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable0hutang_awal
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable0dibayar
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable0return_beli
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable0hutang
         end>
@@ -176,7 +174,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Hutang Awal'
         DataBinding.FieldName = 'hutang_awal'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         HeaderAlignmentHorz = taRightJustify
         Width = 86
       end
@@ -184,7 +182,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'diBayar'
         DataBinding.FieldName = 'dibayar'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         HeaderAlignmentHorz = taRightJustify
         Width = 63
       end
@@ -192,7 +190,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Return'
         DataBinding.FieldName = 'return_beli'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         HeaderAlignmentHorz = taRightJustify
         Width = 88
       end
@@ -200,7 +198,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Sisa Hutang'
         DataBinding.FieldName = 'hutang'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         HeaderAlignmentHorz = taRightJustify
         Width = 83
       end
@@ -216,7 +214,7 @@ object f_daftar_hutang: Tf_daftar_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable1Column4
         end
@@ -253,7 +251,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Nilai'
         DataBinding.FieldName = 'debet'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
         Width = 70
@@ -265,12 +263,12 @@ object f_daftar_hutang: Tf_daftar_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable2disk_rp
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.00;(###,###,##0.00);0.00'
           Kind = skSum
           Column = tvTable2nilai_faktur
         end>
@@ -297,7 +295,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Diskon'
         DataBinding.FieldName = 'disk_rp'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
@@ -308,7 +306,7 @@ object f_daftar_hutang: Tf_daftar_hutang
         Caption = 'Nilai'
         DataBinding.FieldName = 'nilai_faktur'
         PropertiesClassName = 'TcxCurrencyEditProperties'
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DisplayFormat = '###,###,##0.00;(###,###,##0.00);0.00'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
@@ -337,11 +335,6 @@ object f_daftar_hutang: Tf_daftar_hutang
     end
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 8
