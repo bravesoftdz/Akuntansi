@@ -33,6 +33,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     ParentFont = False
     TabOrder = 0
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object t_data0: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_jurnal_umum

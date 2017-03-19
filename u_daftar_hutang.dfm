@@ -109,6 +109,7 @@ object f_daftar_hutang: Tf_daftar_hutang
     LevelTabs.Slants.Positions = [spRight]
     LevelTabs.Style = 9
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     RootLevelOptions.DetailTabsPosition = dtpTop
     OnActiveTabChanged = gridActiveTabChanged
     object Table0: TcxGridDBTableView

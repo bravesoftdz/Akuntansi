@@ -33,6 +33,7 @@ object f_daftar_asset: Tf_daftar_asset
     ParentFont = False
     TabOrder = 0
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object t_data1: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       OnCellDblClick = t_data1CellDblClick

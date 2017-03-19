@@ -111,6 +111,7 @@ object f_daftar_akun: Tf_daftar_akun
     LevelTabs.Slants.Positions = [spRight]
     LevelTabs.Style = 6
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object t_data: TcxGridDBTableView
       PopupMenu = pm_akun
       NavigatorButtons.ConfirmDelete = False

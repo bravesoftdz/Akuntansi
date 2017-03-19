@@ -169,6 +169,7 @@ object f_bayar_hutang: Tf_bayar_hutang
     Height = 201
     TabOrder = 4
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object tableview: TcxGridTableView
       NavigatorButtons.ConfirmDelete = False
       NavigatorButtons.Append.Visible = False

@@ -102,6 +102,8 @@ object f_akun_penting: Tf_akun_penting
     Height = 441
     Align = alClient
     TabOrder = 0
+    LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object t_data: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       OnCellDblClick = t_dataCellDblClick

@@ -268,6 +268,7 @@ object F_GJurnal: TF_GJurnal
     Height = 201
     TabOrder = 3
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object tableview: TcxGridTableView
       NavigatorButtons.ConfirmDelete = False
       NavigatorButtons.Append.Visible = False

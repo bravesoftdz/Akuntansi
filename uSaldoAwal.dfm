@@ -250,6 +250,7 @@ object FSaldoAwal: TFSaldoAwal
         ParentFont = False
         TabOrder = 2
         LookAndFeel.Kind = lfOffice11
+        LookAndFeel.NativeStyle = False
         object TvNeraca: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = dsNeraca
@@ -477,6 +478,7 @@ object FSaldoAwal: TFSaldoAwal
         ParentFont = False
         TabOrder = 2
         LookAndFeel.Kind = lfOffice11
+        LookAndFeel.NativeStyle = False
         object TvLabaRugi: TcxGridDBTableView
           NavigatorButtons.ConfirmDelete = False
           DataController.DataSource = dsLabaRugi

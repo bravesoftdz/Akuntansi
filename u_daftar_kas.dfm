@@ -127,6 +127,7 @@ object f_daftar_kas: Tf_daftar_kas
     ParentFont = False
     TabOrder = 1
     LookAndFeel.Kind = lfOffice11
+    LookAndFeel.NativeStyle = False
     object t_data0: TcxGridDBTableView
       NavigatorButtons.ConfirmDelete = False
       DataController.DataSource = ds_kas
