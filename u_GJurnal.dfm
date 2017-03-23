@@ -40,8 +40,8 @@ object F_GJurnal: TF_GJurnal
     Height = 21
     OnClick = sb_cariClick
     SkinData.SkinSection = 'SPEEDBUTTON'
-    ImageIndex = 0
     Images = dm.gambar
+    ImageIndex = 0
   end
   object l_4: TsLabel
     Left = 8
@@ -97,15 +97,6 @@ object F_GJurnal: TF_GJurnal
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
     SkinData.SkinSection = 'EDIT'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False
@@ -170,15 +161,6 @@ object F_GJurnal: TF_GJurnal
       ParentFont = False
       TabOrder = 0
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object de_tanggal: TsDateEdit
       Left = 304
@@ -197,15 +179,6 @@ object F_GJurnal: TF_GJurnal
       ParentFont = False
       TabOrder = 1
       Text = '  /  /    '
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
       SkinData.SkinSection = 'EDIT'
       GlyphMode.Blend = 0
       GlyphMode.Grayed = False
@@ -224,15 +197,6 @@ object F_GJurnal: TF_GJurnal
       ParentFont = False
       TabOrder = 2
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
   object ed_code: TsEdit
@@ -251,15 +215,6 @@ object F_GJurnal: TF_GJurnal
     OnKeyDown = ed_codeKeyDown
     OnKeyPress = ed_codeKeyPress
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object Grid: TcxGrid
     Left = 8
@@ -270,8 +225,8 @@ object F_GJurnal: TF_GJurnal
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object tableview: TcxGridTableView
-      NavigatorButtons.ConfirmDelete = False
-      NavigatorButtons.Append.Visible = False
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.Append.Visible = False
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item

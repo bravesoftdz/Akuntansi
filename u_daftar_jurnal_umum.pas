@@ -9,7 +9,9 @@ uses
   cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, sSkinProvider, 
   sButton, StdCtrls, MemDS, DBAccess,
-  MyAccess, cxCustomData, cxFilter, cxData;
+  MyAccess, cxCustomData, cxFilter, cxData, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_jurnal_umum = class(TForm)

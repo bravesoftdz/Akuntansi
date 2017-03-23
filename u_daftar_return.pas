@@ -9,7 +9,9 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, sButton, Buttons, sSpeedButton,
   ExtCtrls, sPanel, sSkinProvider, 
-  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_return = class(TForm)

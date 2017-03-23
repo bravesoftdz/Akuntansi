@@ -30,8 +30,8 @@ object f_klasifikasi_akun: Tf_klasifikasi_akun
     object sLabel3: TsLabel
       Left = 8
       Top = 8
-      Width = 209
-      Height = 31
+      Width = 260
+      Height = 32
       Caption = 'Hirarki Akun (Level 2)'
       ParentFont = False
       Font.Charset = ANSI_CHARSET
@@ -62,7 +62,7 @@ object f_klasifikasi_akun: Tf_klasifikasi_akun
       Height = 185
       TabOrder = 0
       object t_sub_klas: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dm.ds_subklas
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
@@ -135,6 +135,7 @@ object f_klasifikasi_akun: Tf_klasifikasi_akun
       Top = 272
       Width = 88
       Height = 25
+      Buttons.CustomButtons = <>
       Buttons.First.Visible = False
       Buttons.PriorPage.Visible = False
       Buttons.Prior.Visible = False
@@ -273,8 +274,8 @@ object f_klasifikasi_akun: Tf_klasifikasi_akun
     object sLabel1: TsLabel
       Left = 8
       Top = 8
-      Width = 209
-      Height = 31
+      Width = 260
+      Height = 32
       Caption = 'Hirarki Akun (Level 1)'
       ParentFont = False
       Font.Charset = ANSI_CHARSET
@@ -305,7 +306,7 @@ object f_klasifikasi_akun: Tf_klasifikasi_akun
       Height = 169
       TabOrder = 0
       object t_data: TcxGridDBTableView
-        NavigatorButtons.ConfirmDelete = False
+        Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dm.ds_klas
         DataController.KeyFieldNames = 'no_klas'
         DataController.Summary.DefaultGroupSummaryItems = <>

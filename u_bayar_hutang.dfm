@@ -171,8 +171,8 @@ object f_bayar_hutang: Tf_bayar_hutang
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object tableview: TcxGridTableView
-      NavigatorButtons.ConfirmDelete = False
-      NavigatorButtons.Append.Visible = False
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.Append.Visible = False
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item

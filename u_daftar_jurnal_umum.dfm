@@ -35,7 +35,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object t_data0: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_jurnal_umum
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -82,7 +82,7 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
       end
     end
     object t_data2: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_rinci
       DataController.DetailKeyFieldNames = 'ix_jurnal'
       DataController.KeyFieldNames = 'ix_jurnal'
@@ -175,9 +175,8 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -199,9 +198,8 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -225,11 +223,6 @@ object f_daftar_jurnal_umum: Tf_daftar_jurnal_umum
     end
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 8

@@ -9,7 +9,9 @@ uses
   sPanel, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxClasses, cxControls, cxGridCustomView, cxGrid, cxMaskEdit, cxCurrencyEdit,
   sSpeedButton, sSkinProvider, cxImageComboBox, sButton,
-  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_penjualan = class(TForm)

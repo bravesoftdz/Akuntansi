@@ -46,9 +46,8 @@ object f_akun_penting: Tf_akun_penting
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -70,9 +69,8 @@ object f_akun_penting: Tf_akun_penting
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -105,7 +103,7 @@ object f_akun_penting: Tf_akun_penting
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object t_data: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       OnCellDblClick = t_dataCellDblClick
       DataController.DataSource = ds_akun_penting
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -143,7 +141,7 @@ object f_akun_penting: Tf_akun_penting
       end
     end
     object t_asset: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -214,11 +212,6 @@ object f_akun_penting: Tf_akun_penting
     end
   end
   object sSkinProvider1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 352

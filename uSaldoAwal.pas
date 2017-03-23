@@ -11,7 +11,9 @@ uses
   cxGrid, sCurrEdit, sCurrencyEdit,
   sSpeedButton, sSkinProvider, sPanel, 
   Mask, sMaskEdit, sCustomComboEdit, MemDS,
-  DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  DBAccess, MyAccess, cxCustomData, cxFilter, cxData, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 type
   TFSaldoAwal = class(TForm)

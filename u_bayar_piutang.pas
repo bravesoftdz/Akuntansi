@@ -9,7 +9,9 @@ uses
   sPanel, cxStyles, cxCustomData, cxGraphics, cxDataStorage,
   cxEdit, cxCurrencyEdit, sGroupBox, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid,
-  cxFilter, cxData, Mask, sMaskEdit, sCustomComboEdit, StdCtrls;
+  cxFilter, cxData, Mask, sMaskEdit, sCustomComboEdit, StdCtrls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_bayar_piutang = class(TForm)

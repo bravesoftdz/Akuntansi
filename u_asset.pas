@@ -9,7 +9,8 @@ uses
   cxGraphics, cxControls, cxContainer, cxEdit, cxTextEdit, cxMaskEdit,
   cxDropDownEdit, cxDBLookupComboBox, DB,
   cxLookupEdit, cxDBLookupEdit, StdCtrls, Mask, sMaskEdit,
-  sCustomComboEdit, MemDS, DBAccess, MyAccess;
+  sCustomComboEdit, MemDS, DBAccess, MyAccess, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters;
 
 type
   TF_asset = class(TForm)

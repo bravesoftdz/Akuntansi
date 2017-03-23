@@ -11,7 +11,8 @@ uses
   cxTextEdit, cxMaskEdit, cxDropDownEdit, 
   cxDBExtLookupComboBox, cxDBLookupComboBox, cxNavigator, cxDBNavigator,
   cxCurrencyEdit, cxCustomData, cxFilter, cxData, cxLookupEdit,
-  cxDBLookupEdit, StdCtrls;
+  cxDBLookupEdit, StdCtrls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter;
 
 type
   Tf_klasifikasi_akun = class(TForm)

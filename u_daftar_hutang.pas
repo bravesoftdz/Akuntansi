@@ -9,7 +9,9 @@ uses
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, sSkinProvider, sButton, Buttons, sSpeedButton,
   ExtCtrls, sPanel, uTerbilang, 
-  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_hutang = class(TForm)

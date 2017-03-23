@@ -46,9 +46,8 @@ object f_daftar_akun: Tf_daftar_akun
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -70,9 +69,8 @@ object f_daftar_akun: Tf_daftar_akun
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -114,7 +112,7 @@ object f_daftar_akun: Tf_daftar_akun
     LookAndFeel.NativeStyle = False
     object t_data: TcxGridDBTableView
       PopupMenu = pm_akun
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       OnCellDblClick = t_dataCellDblClick
       OnEditKeyDown = t_dataEditKeyDown
       DataController.DataSource = dm.ds_kiraan
@@ -152,7 +150,7 @@ object f_daftar_akun: Tf_daftar_akun
       end
     end
     object t_buku_besar: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -212,11 +210,6 @@ object f_daftar_akun: Tf_daftar_akun
     end
   end
   object sSkinProvider1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 352

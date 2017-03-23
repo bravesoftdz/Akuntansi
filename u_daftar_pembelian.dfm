@@ -39,7 +39,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     RootLevelOptions.DetailTabsPosition = dtpTop
     OnActiveTabChanged = gridActiveTabChanged
     object t_data1: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_daftar_beli
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -86,7 +86,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
       end
     end
     object t_data2: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_rinci_beli
       DataController.DetailKeyFieldNames = 'ix_jurnal'
       DataController.KeyFieldNames = 'ix_jurnal'
@@ -146,7 +146,7 @@ object f_daftar_pembelian: Tf_daftar_pembelian
       end
     end
     object t_data0: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       OnFocusedRecordChanged = t_data0FocusedRecordChanged
       DataController.DataSource = ds_beli
       DataController.Summary.DefaultGroupSummaryItems = <>
@@ -286,9 +286,8 @@ object f_daftar_pembelian: Tf_daftar_pembelian
       OnClick = sb_1Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 7
       Images = dm.image
+      ImageIndex = 7
       Reflected = True
     end
     object sb_2: TsSpeedButton
@@ -310,9 +309,8 @@ object f_daftar_pembelian: Tf_daftar_pembelian
       OnClick = sb_2Click
       Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 8
       Images = dm.image
+      ImageIndex = 8
       Reflected = True
     end
     object p1: TsPanel
@@ -404,11 +402,6 @@ object f_daftar_pembelian: Tf_daftar_pembelian
     Top = 64
   end
   object sknprvdr1: TsSkinProvider
-    AddedTitle.Font.Charset = DEFAULT_CHARSET
-    AddedTitle.Font.Color = clNone
-    AddedTitle.Font.Height = -11
-    AddedTitle.Font.Name = 'MS Sans Serif'
-    AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
     Left = 8

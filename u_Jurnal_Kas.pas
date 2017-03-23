@@ -10,7 +10,8 @@ uses
   cxDataStorage, cxEdit, cxCurrencyEdit, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, sGroupBox,
   ExtCtrls, sPanel, sComboBox, cxFilter, cxData, Mask, sMaskEdit,
-  sCustomComboEdit, StdCtrls;
+  sCustomComboEdit, StdCtrls, cxLookAndFeels, cxLookAndFeelPainters,
+  dxSkinsCore, dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_Jurnal_Kas = class(TForm)

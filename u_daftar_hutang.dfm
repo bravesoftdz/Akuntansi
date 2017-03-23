@@ -113,7 +113,7 @@ object f_daftar_hutang: Tf_daftar_hutang
     RootLevelOptions.DetailTabsPosition = dtpTop
     OnActiveTabChanged = gridActiveTabChanged
     object Table0: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -210,7 +210,7 @@ object f_daftar_hutang: Tf_daftar_hutang
       end
     end
     object Table1: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_bayar_hutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -259,7 +259,7 @@ object f_daftar_hutang: Tf_daftar_hutang
       end
     end
     object Table2: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_return
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <

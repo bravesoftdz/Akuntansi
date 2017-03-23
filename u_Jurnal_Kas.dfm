@@ -39,8 +39,8 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     Height = 21
     OnClick = sb_cariClick
     SkinData.SkinSection = 'SPEEDBUTTON'
-    ImageIndex = 0
     Images = dm.gambar
+    ImageIndex = 0
   end
   object l_ket: TsLabel
     Left = 8
@@ -103,8 +103,8 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object TableView: TcxGridTableView
-      NavigatorButtons.ConfirmDelete = False
-      NavigatorButtons.Append.Visible = False
+      Navigator.Buttons.CustomButtons = <>
+      Navigator.Buttons.Append.Visible = False
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
         item
@@ -192,15 +192,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     OnKeyDown = ed_codeKeyDown
     OnKeyPress = ed_codeKeyPress
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object gb_1: TsGroupBox
     Left = 8
@@ -217,8 +208,8 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       Height = 21
       OnClick = sb_jurnalClick
       SkinData.SkinSection = 'SPEEDBUTTON'
-      ImageIndex = 0
       Images = dm.gambar
+      ImageIndex = 0
     end
     object l_2: TsLabel
       Left = 8
@@ -273,15 +264,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       ParentFont = False
       TabOrder = 3
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_refrensi: TsEdit
       Left = 80
@@ -297,15 +279,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       ParentFont = False
       TabOrder = 2
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_nJurnal: TsEdit
       Left = 200
@@ -323,15 +296,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       ReadOnly = True
       TabOrder = 1
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
     object ed_no_jurnal: TsEdit
       Left = 80
@@ -351,15 +315,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       OnChange = ed_no_jurnalChange
       OnKeyDown = ed_no_jurnalKeyDown
       SkinData.SkinSection = 'EDIT'
-      BoundLabel.Indent = 0
-      BoundLabel.Font.Charset = DEFAULT_CHARSET
-      BoundLabel.Font.Color = clWindowText
-      BoundLabel.Font.Height = -11
-      BoundLabel.Font.Name = 'MS Sans Serif'
-      BoundLabel.Font.Style = []
-      BoundLabel.Layout = sclLeft
-      BoundLabel.MaxWidth = 0
-      BoundLabel.UseSkinColor = True
     end
   end
   object p1: TsPanel
@@ -405,20 +360,12 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     Left = 88
     Top = 8
     Width = 129
-    Height = 22
+    Height = 21
     Alignment = taLeftJustify
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
     SkinData.SkinSection = 'COMBOBOX'
+    VerticalAlignment = taAlignTop
     Style = csDropDownList
-    ItemHeight = 16
+    ItemHeight = 13
     ItemIndex = 0
     TabOrder = 0
     Text = 'Kas Masuk'
@@ -444,15 +391,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     ParentFont = False
     TabOrder = 1
     Text = '  /  /    '
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
     SkinData.SkinSection = 'EDIT'
     GlyphMode.Blend = 0
     GlyphMode.Grayed = False

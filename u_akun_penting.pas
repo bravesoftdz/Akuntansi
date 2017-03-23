@@ -9,7 +9,9 @@ uses
   cxGridDBTableView, cxClasses, cxControls, cxGridCustomView, cxGrid, 
   ExtCtrls, sPanel, sSkinProvider, Buttons, cxDBLookupComboBox,
   cxCurrencyEdit, sSpeedButton, sButton, 
-  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_akun_penting = class(TForm)

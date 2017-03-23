@@ -109,7 +109,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
     LookAndFeel.Kind = lfOffice11
     LookAndFeel.NativeStyle = False
     object t_data0: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_bayar_piutang
       DataController.Summary.DefaultGroupSummaryItems = <>
       DataController.Summary.FooterSummaryItems = <
@@ -156,7 +156,7 @@ object f_daftar_bayar_piutang: Tf_daftar_bayar_piutang
       end
     end
     object t_data2: TcxGridDBTableView
-      NavigatorButtons.ConfirmDelete = False
+      Navigator.Buttons.CustomButtons = <>
       DataController.DataSource = ds_rinci_bayar_piutang
       DataController.DetailKeyFieldNames = 'ix_jurnal'
       DataController.KeyFieldNames = 'ix_jurnal'

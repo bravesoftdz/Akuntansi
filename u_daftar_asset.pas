@@ -9,7 +9,9 @@ uses
   sSpeedButton, ExtCtrls, sPanel, cxGridLevel, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, sSkinProvider, 
-  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxCustomData, cxFilter, cxData,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_asset = class(TForm)

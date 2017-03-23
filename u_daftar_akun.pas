@@ -9,7 +9,9 @@ uses
   cxGridTableView, cxGridDBTableView, cxClasses, cxControls, cxGridCustomView,
   cxGrid, sSkinProvider, 
   Buttons, cxCurrencyEdit, Menus,
-  sSpeedButton, sButton, cxCustomData, cxFilter, cxData, StdCtrls;
+  sSpeedButton, sButton, cxCustomData, cxFilter, cxData, StdCtrls,
+  cxLookAndFeels, cxLookAndFeelPainters, dxSkinsCore,
+  dxSkinsDefaultPainters, dxSkinscxPCPainter, cxNavigator;
 
 type
   Tf_daftar_akun = class(TForm)

@@ -8,7 +8,9 @@ uses
   cxCustomData, cxGraphics, cxDataStorage, cxEdit, DB, cxDBData, cxGridLevel,
   cxClasses, cxControls, cxGridCustomView, cxGridCustomTableView,
   cxGridTableView, cxGridDBTableView, cxGrid, cxStyles, 
-  StdCtrls, MemDS, DBAccess, MyAccess, cxFilter, cxData;
+  StdCtrls, MemDS, DBAccess, MyAccess, cxFilter, cxData, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 type
   NewControl = class(TControl);

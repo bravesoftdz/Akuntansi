@@ -9,7 +9,9 @@ uses
   cxStyles, cxCustomData, cxGraphics, cxDataStorage, cxEdit,
   cxCurrencyEdit, cxGridLevel, cxGridCustomTableView, cxGridTableView, cxClasses,
   cxControls, cxGridCustomView, cxGrid, ExtCtrls, sPanel, cxFilter, cxData,
-  StdCtrls, Mask, sMaskEdit, sCustomComboEdit;
+  StdCtrls, Mask, sMaskEdit, sCustomComboEdit, cxLookAndFeels,
+  cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
+  dxSkinscxPCPainter, cxNavigator;
 
 type
   TF_GJurnal = class(TForm)
