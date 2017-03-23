@@ -22,8 +22,8 @@ object F_Login: TF_Login
   object sLabel4: TsLabel
     Left = 8
     Top = 8
-    Width = 76
-    Height = 19
+    Width = 75
+    Height = 18
     Caption = 'Kode User'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
@@ -35,8 +35,8 @@ object F_Login: TF_Login
   object sLabel5: TsLabel
     Left = 8
     Top = 64
-    Width = 82
-    Height = 19
+    Width = 79
+    Height = 18
     Caption = 'Nama User'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
@@ -49,7 +49,7 @@ object F_Login: TF_Login
     Left = 8
     Top = 120
     Width = 70
-    Height = 19
+    Height = 18
     Caption = 'Password'
     ParentFont = False
     Font.Charset = DEFAULT_CHARSET
@@ -110,7 +110,7 @@ object F_Login: TF_Login
     Left = 32
     Top = 32
     Width = 353
-    Height = 27
+    Height = 26
     CharCase = ecUpperCase
     Color = 16513526
     Font.Charset = DEFAULT_CHARSET
@@ -123,21 +123,12 @@ object F_Login: TF_Login
     OnChange = Ed_Kd_UserChange
     OnKeyDown = Ed_Kd_UserKeyDown
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object Ed_N_User: TsEdit
     Left = 32
     Top = 88
     Width = 353
-    Height = 27
+    Height = 26
     Color = 16513526
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -149,21 +140,12 @@ object F_Login: TF_Login
     TabOrder = 1
     OnEnter = Ed_N_UserEnter
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object Ed_Password: TsEdit
     Left = 32
     Top = 144
     Width = 353
-    Height = 27
+    Height = 26
     Color = 16513526
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
@@ -176,15 +158,6 @@ object F_Login: TF_Login
     TabOrder = 2
     OnKeyDown = Ed_PasswordKeyDown
     SkinData.SkinSection = 'EDIT'
-    BoundLabel.Indent = 0
-    BoundLabel.Font.Charset = DEFAULT_CHARSET
-    BoundLabel.Font.Color = clWindowText
-    BoundLabel.Font.Height = -11
-    BoundLabel.Font.Name = 'MS Sans Serif'
-    BoundLabel.Font.Style = []
-    BoundLabel.Layout = sclLeft
-    BoundLabel.MaxWidth = 0
-    BoundLabel.UseSkinColor = True
   end
   object sb: TsStatusBar
     Left = 0

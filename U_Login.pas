@@ -193,7 +193,8 @@ begin
     tblCap[1] := 'Deskripsi';
     if ShowModal = mrOk then
     begin
-      sb.Panels[0].Text := TblVal[0];
+      dm.kd_perusahaan := TblVal[0];
+      sb.Panels[0].Text := dm.kd_perusahaan;
       sb.Panels[1].Text := TblVal[1];
       Ed_Kd_User.Clear;
       Ed_Kd_User.SetFocus;
