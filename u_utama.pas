@@ -7,7 +7,7 @@ uses
   Dialogs, sSkinProvider, ComCtrls, sStatusBar, 
   Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan, Buttons,
   sSpeedButton, ExtCtrls, sPanel, StdCtrls, inifiles, shellapi,
-  sTabControl;
+  sTabControl, UFungsi;
 
 const
   WM_AFTER_SHOW = WM_USER + 300; // custom message
@@ -204,6 +204,7 @@ type
     procedure cek_update;
     procedure BuatSaldoAwalAkun;
   private
+    FVersion : TVersion;
     procedure WmAfterShow(var Msg: TMessage); message WM_AFTER_SHOW;
     { Private declarations }
   public
@@ -221,7 +222,7 @@ uses
   U_Login, acselectskin, u_daftar_jurnal_umum, u_daftar_penjualan,
   u_daftar_pembelian, u_daftar_return, u_daftar_return_kirim, u_daftar_kirim,
   u_daftar_koreksi, u_daftar_bayar_hutang, u_daftar_hutang,
-  u_daftar_bayar_piutang, u_daftar_kas, u_daftar_piutang, UFungsi;
+  u_daftar_bayar_piutang, u_daftar_kas, u_daftar_piutang;
 
 {$R *.dfm}
 
@@ -292,7 +293,7 @@ end;
 
 procedure Tf_utama.FormShow(Sender: TObject);
 begin
-  sb.Panels[8].Text := 'Versi: ' + fungsi.GetVersiApp;
+  sb.Panels[8].Text := 'Versi: ' + FVersion.AsString;
 
   sb.Panels[2].Text := dm.db_conn.Database + '@' + dm.db_conn.Server;
   sb.Panels[3].Text := dm.kd_perusahaan;
@@ -363,6 +364,7 @@ procedure Tf_utama.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   appINI: TIniFile;
 begin
+  FVersion.Free;
   dm.metu_kabeh := True;
   appINI := TIniFile.Create(dm.AppPath + 'gain.ini');
   try
@@ -803,6 +805,7 @@ procedure Tf_utama.FormCreate(Sender: TObject);
 begin
   DecimalSeparator := '.';
   ThousandSeparator := ',';
+  FVersion := TAppVersion.Create(Application.ExeName);
   cek_update;
 end;
 
@@ -1068,28 +1071,22 @@ end;
 
 procedure Tf_utama.cek_update;
 var
-  versiDB, versiAPP, URLDownload: string;
-  fileName, UrlDownloadLocal: string;
+  LVersiDB, LVersiAPP: TVersion;
+  LSql :string;
 begin
+  LVersiAPP := FVersion;
+  LSql := 'SELECT versi_terbaru FROM app_versi WHERE kode="accounting.exe"';
+  fungsi.SQLExec(dm.Q_Show, LSql, true);
+  LVersiDB := TVersion.Create(dm.Q_Show.FieldByName('versi_terbaru').AsString);
 
-  versiAPP := fungsi.GetVersiApp;
-
-  fungsi.SQLExec(dm.Q_Show,
-    'select versi_terbaru, URLdownload from  app_versi where kode="accounting.exe"',
-    true);
-  versiDB := dm.Q_Show.FieldByName('versi_terbaru').AsString;
-  URLDownload := dm.Q_Show.FieldByName('URLdownload').AsString;
-  fileName := Copy(URLDownload, LastDelimiter('/', URLDownload) + 1, Length(URLDownload));
-  UrlDownloadLocal := 'http://' + dm.db_conn.Server + '/GainProfit/' + fileName;
-
-  if versiAPP < versiDB then
+  if CompareVersion(LVersiDB, LVersiAPP) = vHigher then
   begin
     ShowMessage('APLIKASI AKUNTANSI TIDAK DAPAT DIJALANKAN' + #13#10 +
-      'aplikasi terbaru dengan versi : ' + versiDB + #13#10 + 'SUDAH DIRILIS...');
+      'aplikasi terbaru dengan versi : ' + LVersiDB.AsString + #13#10 + 'SUDAH DIRILIS...');
 
     Application.Terminate;
-    Exit;
   end;
+  LVersiDB.Free;
 end;
 
 procedure Tf_utama.BuatSaldoAwalAkun;
