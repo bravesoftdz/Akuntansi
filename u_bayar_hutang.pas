@@ -135,7 +135,7 @@ begin
     begin
       kd_supplier := TblVal[0];
       ed_pihak_lain.Text := TblVal[1];
-      ed_keterangan.Text:= 'Pembayaran Piutang oleh ' +
+      ed_keterangan.Text:= 'Pembayaran Hutang pada ' +
         ed_pihak_lain.text;
     end;
   finally
