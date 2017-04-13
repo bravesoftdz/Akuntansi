@@ -4,7 +4,7 @@ object f_bayar_piutang: Tf_bayar_piutang
   BorderStyle = bsDialog
   Caption = 'Bayar'
   ClientHeight = 464
-  ClientWidth = 531
+  ClientWidth = 529
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -58,7 +58,7 @@ object f_bayar_piutang: Tf_bayar_piutang
   object sPanel1: TsPanel
     Left = 0
     Top = 0
-    Width = 531
+    Width = 529
     Height = 49
     Align = alTop
     TabOrder = 0
@@ -126,7 +126,7 @@ object f_bayar_piutang: Tf_bayar_piutang
   object sPanel2: TsPanel
     Left = 0
     Top = 423
-    Width = 531
+    Width = 529
     Height = 41
     Align = alBottom
     TabOrder = 3
@@ -222,14 +222,14 @@ object f_bayar_piutang: Tf_bayar_piutang
         Caption = 'Refrensi'
         GroupSummaryAlignment = taCenter
         Options.Editing = False
-        Width = 294
+        Width = 184
       end
       object ableViewColumn2: TcxGridColumn
         Caption = 'Tanggal'
         DataBinding.ValueType = 'DateTime'
         GroupSummaryAlignment = taCenter
         Options.Editing = False
-        Width = 144
+        Width = 120
       end
       object t_view_Qty: TcxGridColumn
         Caption = 'Saldo'
@@ -237,25 +237,29 @@ object f_bayar_piutang: Tf_bayar_piutang
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
         Properties.AssignedValues.MinValue = True
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
+        FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
         HeaderAlignmentHorz = taRightJustify
         HeaderGlyphAlignmentHorz = taCenter
         Options.IncSearch = False
-        Width = 116
+        Width = 97
       end
       object view_TableViewColumn1: TcxGridColumn
         Caption = 'di Bayar'
         DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
+        Properties.DecimalPlaces = 3
         Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
+        FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
         HeaderAlignmentHorz = taRightJustify
         HeaderGlyphAlignmentHorz = taCenter
-        Width = 120
+        Width = 100
       end
     end
     object Level: TcxGridLevel
