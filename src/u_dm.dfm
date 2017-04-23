@@ -1,8 +1,6 @@
 object dm: Tdm
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 270
-  Top = 51
   Height = 649
   Width = 967
   object db_conn: TMyConnection
@@ -8802,7 +8800,12 @@ object dm: Tdm
       end>
     Left = 104
     Top = 296
-    Bitmap = {}
+    Bitmap = {
+      494C010100000800080001000100FFFFFFFF0400FFFFFFFFFFFFFFFF424D7600
+      0000000000007600000028000000040000000100000001000400000000000400
+      0000000000000000000000000000000000000000000000008000008000000080
+      8000800000008000800080800000C0C0C000808080000000FF0000FF000000FF
+      FF00FF000000FF00FF00FFFF0000FFFFFF0000000000}
   end
   object Q_buku_besar: TMyQuery
     Connection = db_conn
@@ -8820,7 +8823,7 @@ object dm: Tdm
     Top = 112
   end
   object Laporan: TfrxReport
-    Version = '4.9.35'
+    Version = '5.3.14'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -8858,6 +8861,7 @@ object dm: Tdm
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
         Height = 60.472480000000000000
         Top = 18.897650000000000000
         Width = 1046.929810000000000000
@@ -8866,14 +8870,13 @@ object dm: Tdm
           Top = 18.897650000000000000
           Width = 1043.150280000000000000
           Height = 26.456710000000000000
-          ShowHint = False
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -21
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           HAlign = haCenter
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'DAFTAR AKTIVA TETAP')
           ParentFont = False
         end
@@ -8882,7 +8885,6 @@ object dm: Tdm
           Top = 3.779530000000000000
           Width = 415.748300000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -8890,12 +8892,13 @@ object dm: Tdm
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = []
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '| [db_laporan."kd_perusahaan"] |')
           ParentFont = False
         end
       end
       object MasterData1: TfrxMasterData
+        FillType = ftBrush
         Height = 18.897650000000000000
         Top = 185.196970000000000000
         Width = 1046.929810000000000000
@@ -8906,43 +8909,40 @@ object dm: Tdm
         object Memo26: TfrxMemoView
           Width = 1046.929810000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSetName = 'Customers'
           Highlight.Font.Charset = DEFAULT_CHARSET
           Highlight.Font.Color = -370606080
           Highlight.Font.Height = -13
           Highlight.Font.Name = 'Arial'
           Highlight.Font.Style = []
-          Highlight.Color = 15790320
           Highlight.Condition = '<Line#> mod 2'
+          Highlight.FillType = ftBrush
+          Highlight.Fill.BackColor = 15790320
           WordWrap = False
         end
         object db_laporantgl: TfrxMemoView
           Width = 287.244280000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Nm_asset'
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."Nm_asset"]')
         end
         object db_laporanno_refrensi: TfrxMemoView
           Left = 287.244280000000000000
           Width = 71.811070000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'tgl_perolehan'
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."tgl_perolehan"]')
         end
         object db_laporanketerangan: TfrxMemoView
           Left = 566.929500000000000000
           Width = 56.692950000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -8951,7 +8951,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."umur_ekonomis"] Th')
           ParentFont = False
         end
@@ -8959,7 +8959,6 @@ object dm: Tdm
           Left = 941.102970000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 '
@@ -8970,7 +8969,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[IIF(<db_laporan."nilai_buku"> <0,0,<db_laporan."nilai_buku">)]')
           ParentFont = False
         end
@@ -8978,7 +8977,6 @@ object dm: Tdm
           Left = 729.449290000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -8989,7 +8987,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."akum_penyusutan"]')
           ParentFont = False
         end
@@ -8997,7 +8995,6 @@ object dm: Tdm
           Left = 623.622450000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9008,7 +9005,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."susut_bulan"]')
           ParentFont = False
         end
@@ -9016,7 +9013,6 @@ object dm: Tdm
           Left = 461.102660000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9027,7 +9023,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."jumlah_nilai"]')
           ParentFont = False
         end
@@ -9035,7 +9031,6 @@ object dm: Tdm
           Left = 427.086890000000000000
           Width = 34.015770000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataField = 'Q_asset'
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
@@ -9045,7 +9040,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."Q_asset"]')
           ParentFont = False
         end
@@ -9053,7 +9048,6 @@ object dm: Tdm
           Left = 359.055350000000000000
           Width = 68.031540000000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9062,7 +9056,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             
               '[IIF(((<db_laporan."umur_ekonomis">*12)-<db_laporan."umur_bulan"' +
               '>)<0,0,(<db_laporan."umur_ekonomis">*12)-<db_laporan."umur_bulan' +
@@ -9073,7 +9067,6 @@ object dm: Tdm
           Left = 835.276130000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9084,20 +9077,19 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[db_laporan."nilai_residu"]')
           ParentFont = False
         end
       end
       object Header1: TfrxHeader
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 139.842610000000000000
         Width = 1046.929810000000000000
         object Memo4: TfrxMemoView
           Width = 287.244280000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9106,7 +9098,8 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Fill.BackColor = clSilver
+          Memo.UTF8W = (
             'Nama Asset')
           ParentFont = False
         end
@@ -9114,8 +9107,6 @@ object dm: Tdm
           Left = 287.244280000000000000
           Width = 71.811070000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9124,7 +9115,8 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Fill.BackColor = clSilver
+          Memo.UTF8W = (
             'Tanggal')
           ParentFont = False
         end
@@ -9132,8 +9124,6 @@ object dm: Tdm
           Left = 623.622450000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9142,8 +9132,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Peny. Bulan ini')
           ParentFont = False
         end
@@ -9151,8 +9142,6 @@ object dm: Tdm
           Left = 427.086890000000000000
           Width = 34.015770000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9161,8 +9150,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Qty')
           ParentFont = False
         end
@@ -9170,8 +9160,6 @@ object dm: Tdm
           Left = 461.102660000000000000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9180,8 +9168,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Jumlah Nilai')
           ParentFont = False
         end
@@ -9189,8 +9178,6 @@ object dm: Tdm
           Left = 566.929500000000000000
           Width = 56.692950000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9199,8 +9186,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Umur Ek')
           ParentFont = False
         end
@@ -9208,8 +9196,6 @@ object dm: Tdm
           Left = 729.449290000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9218,8 +9204,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Akum. Penyusutan')
           ParentFont = False
         end
@@ -9227,8 +9214,6 @@ object dm: Tdm
           Left = 941.102970000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9237,8 +9222,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Nilai Buku')
           ParentFont = False
         end
@@ -9246,8 +9232,6 @@ object dm: Tdm
           Left = 359.055350000000000000
           Width = 68.031540000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9256,8 +9240,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'Sisa Umur')
           ParentFont = False
         end
@@ -9265,8 +9250,6 @@ object dm: Tdm
           Left = 835.276130000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9275,21 +9258,21 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = []
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             'NIlai Residu')
           ParentFont = False
         end
       end
       object Footer1: TfrxFooter
+        FillType = ftBrush
         Height = 22.677180000000000000
         Top = 226.771800000000000000
         Width = 1046.929810000000000000
         object Memo1: TfrxMemoView
           Width = 427.086890000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9298,7 +9281,8 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
-          Memo.UTF8 = (
+          Fill.BackColor = clSilver
+          Memo.UTF8W = (
             'Total')
           ParentFont = False
         end
@@ -9306,8 +9290,6 @@ object dm: Tdm
           Left = 566.929500000000000000
           Width = 56.692950000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9316,6 +9298,7 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
           ParentFont = False
         end
@@ -9323,8 +9306,6 @@ object dm: Tdm
           Left = 941.102970000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9335,8 +9316,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(db_laporandebet.value)]')
           ParentFont = False
         end
@@ -9344,8 +9326,6 @@ object dm: Tdm
           Left = 729.449290000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9356,8 +9336,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."akum_penyusutan">)]')
           ParentFont = False
         end
@@ -9365,8 +9346,6 @@ object dm: Tdm
           Left = 623.622450000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9377,8 +9356,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."susut_bulan">)]')
           ParentFont = False
         end
@@ -9386,8 +9366,6 @@ object dm: Tdm
           Left = 461.102660000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9398,8 +9376,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."jumlah_nilai">)]')
           ParentFont = False
         end
@@ -9407,8 +9386,6 @@ object dm: Tdm
           Left = 427.086890000000000000
           Width = 34.015770000000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           Font.Charset = DEFAULT_CHARSET
@@ -9417,8 +9394,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."Q_asset">)]')
           ParentFont = False
         end
@@ -9426,8 +9404,6 @@ object dm: Tdm
           Left = 835.276130000000000000
           Width = 105.826771650000000000
           Height = 18.897650000000000000
-          ShowHint = False
-          Color = clSilver
           DataSet = db_Laporan
           DataSetName = 'db_laporan'
           DisplayFormat.FormatStr = '###,###,##0.00 ;(###,###,##0.00);0.00 '
@@ -9438,8 +9414,9 @@ object dm: Tdm
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           Frame.Typ = [ftTop, ftBottom]
+          Fill.BackColor = clSilver
           HAlign = haRight
-          Memo.UTF8 = (
+          Memo.UTF8W = (
             '[sum(<db_laporan."nilai_residu">)]')
           ParentFont = False
         end
@@ -9808,7 +9785,12 @@ object dm: Tdm
       end>
     Left = 24
     Top = 296
-    Bitmap = {}
+    Bitmap = {
+      494C010100000800080001000100FFFFFFFF0400FFFFFFFFFFFFFFFF424D7600
+      0000000000007600000028000000040000000100000001000400000000000400
+      0000000000000000000000000000000000000000000000008000008000000080
+      8000800000008000800080800000C0C0C000808080000000FF0000FF000000FF
+      FF00FF000000FF00FF00FFFF0000FFFFFF0000000000}
   end
   object ds_TShow: TDataSource
     DataSet = Q_tampil

@@ -7,7 +7,7 @@ uses
   Dialogs, sSkinProvider, ComCtrls, sStatusBar, 
   Menus, ActnList, StdActns, XPStyleActnCtrls, ActnMan, Buttons,
   sSpeedButton, ExtCtrls, sPanel, StdCtrls, inifiles, shellapi,
-  sTabControl, UFungsi;
+  sTabControl, UFungsi, System.Actions;
 
 const
   WM_AFTER_SHOW = WM_USER + 300; // custom message
@@ -803,8 +803,17 @@ end;
 
 procedure Tf_utama.FormCreate(Sender: TObject);
 begin
-  DecimalSeparator := '.';
-  ThousandSeparator := ',';
+  {$IFDEF VER150}
+    DecimalSeparator := '.';
+    ThousandSeparator := ',';
+    ShortDateFormat := 'dd/mm/yyyy';
+    ShortTimeFormat := 'hh:nn:ss';
+  {$ELSE}
+    FormatSettings.DecimalSeparator := '.';
+    FormatSettings.ThousandSeparator := ',';
+    FormatSettings.ShortDateFormat := 'dd/mm/yyyy';
+    FormatSettings.ShortTimeFormat := 'hh:nn:ss';
+  {$ENDIF}
   FVersion := TAppVersion.Create(Application.ExeName);
   cek_update;
 end;

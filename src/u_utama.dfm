@@ -1,9 +1,9 @@
 object f_utama: Tf_utama
   Left = 62
   Top = 148
-  Width = 830
-  Height = 500
   Caption = 'Account Of Profit'
+  ClientHeight = 0
+  ClientWidth = 120
   Color = clBtnFace
   Constraints.MinHeight = 500
   Constraints.MinWidth = 830
@@ -24,8 +24,8 @@ object f_utama: Tf_utama
   TextHeight = 13
   object sb: TsStatusBar
     Left = 0
-    Top = 416
-    Width = 814
+    Top = -25
+    Width = 120
     Height = 25
     Hint = 'Double Klick Untuk Mengganti Periode Akun'
     Panels = <
@@ -76,24 +76,27 @@ object f_utama: Tf_utama
     ShowHint = True
     OnDblClick = sbDblClick
     SkinData.SkinSection = 'STATUSBAR'
+    ExplicitTop = 416
+    ExplicitWidth = 814
   end
   object sCoolBar1: TsPanel
     Left = 0
     Top = 0
-    Width = 814
+    Width = 120
     Height = 81
     Align = alTop
     BorderWidth = 5
-    ParentBackground = True
     ParentColor = True
     TabOrder = 1
     SkinData.SkinSection = 'TOOLBAR'
+    ExplicitWidth = 814
     object sb_penyesuaian: TsSpeedButton
       Left = 526
       Top = 6
       Width = 130
       Height = 69
       Cursor = crHandPoint
+      Align = alLeft
       Caption = 'Laporan'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -104,12 +107,11 @@ object f_utama: Tf_utama
       Layout = blGlyphTop
       ParentFont = False
       Spacing = 0
-      Align = alLeft
       ButtonStyle = tbsDropDown
       SkinData.SkinSection = 'TOOLBUTTON'
       DropdownMenu = pm_laporan
-      ImageIndex = 4
       Images = dm.image
+      ImageIndex = 4
       Reflected = True
     end
     object sBitBtn1: TsSpeedButton
@@ -118,6 +120,7 @@ object f_utama: Tf_utama
       Width = 146
       Height = 69
       Cursor = crHandPoint
+      Align = alRight
       Caption = 'Keluar'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -129,11 +132,9 @@ object f_utama: Tf_utama
       ParentFont = False
       Spacing = 0
       OnClick = sBitBtn1Click
-      Align = alRight
       SkinData.SkinSection = 'TOOLBUTTON'
-      DisabledGlyphKind = []
-      ImageIndex = 6
       Images = dm.image
+      ImageIndex = 6
       Reflected = True
     end
     object sSpeedButton1: TsSpeedButton
@@ -142,6 +143,7 @@ object f_utama: Tf_utama
       Width = 130
       Height = 69
       Cursor = crHandPoint
+      Align = alLeft
       Caption = 'Jurnal Umum'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -152,12 +154,11 @@ object f_utama: Tf_utama
       Layout = blGlyphTop
       ParentFont = False
       Spacing = 0
-      Align = alLeft
       ButtonStyle = tbsDropDown
       SkinData.SkinSection = 'TOOLBUTTON'
       DropdownMenu = pm_Buku_besar
-      ImageIndex = 5
       Images = dm.image
+      ImageIndex = 5
       Reflected = True
     end
     object sSpeedButton2: TsSpeedButton
@@ -166,6 +167,7 @@ object f_utama: Tf_utama
       Width = 130
       Height = 69
       Cursor = crHandPoint
+      Align = alLeft
       Caption = 'Penjualan'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -176,12 +178,11 @@ object f_utama: Tf_utama
       Layout = blGlyphTop
       ParentFont = False
       Spacing = 0
-      Align = alLeft
       ButtonStyle = tbsDropDown
       SkinData.SkinSection = 'TOOLBUTTON'
       DropdownMenu = pm_penjualan
-      ImageIndex = 0
       Images = dm.image
+      ImageIndex = 0
       Reflected = True
     end
     object sSpeedButton3: TsSpeedButton
@@ -190,6 +191,7 @@ object f_utama: Tf_utama
       Width = 130
       Height = 69
       Cursor = crHandPoint
+      Align = alLeft
       Caption = 'Pembelian'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -200,12 +202,11 @@ object f_utama: Tf_utama
       Layout = blGlyphTop
       ParentFont = False
       Spacing = 0
-      Align = alLeft
       ButtonStyle = tbsDropDown
       SkinData.SkinSection = 'TOOLBUTTON'
       DropdownMenu = pm_pembelian
-      ImageIndex = 1
       Images = dm.image
+      ImageIndex = 1
       Reflected = True
     end
     object sSpeedButton4: TsSpeedButton
@@ -214,6 +215,7 @@ object f_utama: Tf_utama
       Width = 130
       Height = 69
       Cursor = crHandPoint
+      Align = alLeft
       Caption = 'Kas dan Bank'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -224,19 +226,18 @@ object f_utama: Tf_utama
       Layout = blGlyphTop
       ParentFont = False
       Spacing = 0
-      Align = alLeft
       ButtonStyle = tbsDropDown
       SkinData.SkinSection = 'TOOLBUTTON'
       DropdownMenu = pm_kas
-      ImageIndex = 3
       Images = dm.image
+      ImageIndex = 3
       Reflected = True
     end
   end
   object tc_child: TsTabControl
     Left = 0
     Top = 81
-    Width = 814
+    Width = 120
     Height = 24
     Cursor = crHandPoint
     Align = alTop
