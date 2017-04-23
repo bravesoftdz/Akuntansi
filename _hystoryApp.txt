@@ -1,3 +1,0 @@
-2014-04-07
-* merubah saldo awal akun ke metode baru
-* merubah daftar akun (hapus daftar buku besar, terlalu berat)
