@@ -2,8 +2,8 @@ object f_utama: Tf_utama
   Left = 62
   Top = 148
   Caption = 'Account Of Profit'
-  ClientHeight = 0
-  ClientWidth = 120
+  ClientHeight = 441
+  ClientWidth = 814
   Color = clBtnFace
   Constraints.MinHeight = 500
   Constraints.MinWidth = 830
@@ -24,8 +24,8 @@ object f_utama: Tf_utama
   TextHeight = 13
   object sb: TsStatusBar
     Left = 0
-    Top = -25
-    Width = 120
+    Top = 416
+    Width = 814
     Height = 25
     Hint = 'Double Klick Untuk Mengganti Periode Akun'
     Panels = <
@@ -76,20 +76,17 @@ object f_utama: Tf_utama
     ShowHint = True
     OnDblClick = sbDblClick
     SkinData.SkinSection = 'STATUSBAR'
-    ExplicitTop = 416
-    ExplicitWidth = 814
   end
   object sCoolBar1: TsPanel
     Left = 0
     Top = 0
-    Width = 120
+    Width = 814
     Height = 81
     Align = alTop
     BorderWidth = 5
     ParentColor = True
     TabOrder = 1
     SkinData.SkinSection = 'TOOLBAR'
-    ExplicitWidth = 814
     object sb_penyesuaian: TsSpeedButton
       Left = 526
       Top = 6
@@ -237,7 +234,7 @@ object f_utama: Tf_utama
   object tc_child: TsTabControl
     Left = 0
     Top = 81
-    Width = 120
+    Width = 814
     Height = 24
     Cursor = crHandPoint
     Align = alTop

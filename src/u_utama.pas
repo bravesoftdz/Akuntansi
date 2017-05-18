@@ -373,8 +373,6 @@ begin
     appINI.Free;
   end;
 
-  dm.db_conn.Connected := false;
-
   action := cafree;
   f_utama := nil;
 end;
