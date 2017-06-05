@@ -1,9 +1,9 @@
 object FSaldoAwal: TFSaldoAwal
   Left = 359
   Top = 205
-  Width = 786
-  Height = 488
   Caption = 'Saldo Awal Akun'
+  ClientHeight = 449
+  ClientWidth = 770
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -184,6 +184,7 @@ object FSaldoAwal: TFSaldoAwal
         Top = 0
         Width = 612
         Height = 21
+        Align = alTop
         Color = 16513526
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -197,7 +198,6 @@ object FSaldoAwal: TFSaldoAwal
         OnExit = edUbahNeracaExit
         OnKeyDown = edUbahNeracaKeyDown
         OnKeyPress = edUbahNeracaKeyPress
-        Align = alTop
         SkinData.SkinSection = 'EDIT'
       end
       object GridNeraca: TcxGrid
@@ -376,6 +376,7 @@ object FSaldoAwal: TFSaldoAwal
         Top = 0
         Width = 612
         Height = 21
+        Align = alTop
         Color = 16513526
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -389,7 +390,6 @@ object FSaldoAwal: TFSaldoAwal
         OnExit = edUbahNeracaExit
         OnKeyDown = edUbahNeracaKeyDown
         OnKeyPress = edUbahLabaRugiKeyPress
-        Align = alTop
         SkinData.SkinSection = 'EDIT'
       end
       object GridLabaRugi: TcxGrid
@@ -459,6 +459,7 @@ object FSaldoAwal: TFSaldoAwal
       Width = 148
       Height = 90
       Cursor = crHandPoint
+      Align = alTop
       Caption = 'Selesai'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -470,7 +471,6 @@ object FSaldoAwal: TFSaldoAwal
       ParentFont = False
       Spacing = 0
       OnClick = sb_1Click
-      Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
       Images = dm.image
       ImageIndex = 7
@@ -482,6 +482,7 @@ object FSaldoAwal: TFSaldoAwal
       Width = 148
       Height = 90
       Cursor = crHandPoint
+      Align = alTop
       Caption = 'Refresh'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -493,7 +494,6 @@ object FSaldoAwal: TFSaldoAwal
       ParentFont = False
       Spacing = 0
       OnClick = sb_2Click
-      Align = alTop
       SkinData.SkinSection = 'TOOLBUTTON'
       Images = dm.image
       ImageIndex = 8

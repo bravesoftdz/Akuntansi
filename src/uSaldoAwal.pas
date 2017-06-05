@@ -144,22 +144,21 @@ begin
 end;
 
 procedure TFSaldoAwal.ubahData(nilai: Integer; neraca: Boolean);
+var
+  LSql, LKdKiraan: string;
 begin
   if neraca then
-  begin
-    ZqNeraca.Edit;
-    ZqNeraca.FieldByName('saldo_awal').AsFloat := nilai;
-    ZqNeraca.Post;
-    HitungNeraca;
-  end
-  else
-  begin
-    ZqLabaRugi.Edit;
-    ZqLabaRugi.FieldByName('saldo_awal').AsFloat := nilai;
-    ZqLabaRugi.Post;
-    HitungLabaRugi;
-  end;
+    LKdKiraan := ZqNeraca.FieldByName('kd_kiraan').AsString else
+    LKdKiraan := ZqLabaRugi.FieldByName('kd_kiraan').AsString;
+
+  LSql := Format('UPDATE tb_jurnal_history SET saldo_awal = %d ' +
+                 'WHERE kd_perusahaan = "%s" AND ' +
+                 'kd_kiraan = "%s" AND tahun = %d AND bulan = %d',
+                 [ nilai, dm.kd_perusahaan, LKdKiraan, StrToInt(dm.Tahun),
+                 StrToInt(dm.Bulan) ]);
+  fungsi.SQLExec(dm.Q_Exe, LSql, False);
   F_Utama.historical_balancing;
+  segarkan;
 end;
 
 procedure TFSaldoAwal.edUbahNeracaKeyDown(Sender: TObject; var Key: Word; Shift:
