@@ -75,6 +75,8 @@ type
     procedure sb_2Click(Sender: TObject);
     procedure sb_1Click(Sender: TObject);
   private
+    procedure SegarkanNeraca;
+    procedure SegarkanLabaRugi;
     { Private declarations }
   public
     { Public declarations }
@@ -166,7 +168,9 @@ begin
                  StrToInt(dm.Bulan) ]);
   fungsi.SQLExec(dm.Q_Exe, LSql, False);
   F_Utama.historical_balancing;
-  segarkan;
+  if neraca then
+    SegarkanNeraca else
+    SegarkanLabaRugi;
 end;
 
 procedure TFSaldoAwal.edUbahNeracaKeyDown(Sender: TObject; var Key: Word; Shift:
@@ -283,11 +287,10 @@ end;
 
 procedure TFSaldoAwal.HitungLabaRugi;
 var
-  I, posisi: Integer;
+  I: Integer;
   LIn, LOut: Currency;
 begin
 //laba rugi
-  posisi := ZqLabaRugi.RecNo;
   LIn := 0;
   LOut := 0;
 
@@ -306,17 +309,14 @@ begin
   edMasuk.Value := LIn;
   edKeluar.Value := LOut;
   edLabaRugi.Value := LIn + LOut;
-
-  ZqLabaRugi.RecNo := posisi;
 end;
 
 procedure TFSaldoAwal.HitungNeraca;
 var
-  I, posisi: Integer;
+  I: Integer;
   LAktiva, LPasiva: Currency;
 begin
 //hitung neraca
-  posisi := ZqNeraca.RecNo;
   LAktiva := 0;
   LPasiva := 0;
 
@@ -338,24 +338,42 @@ begin
     lblNotBalance.Visible := True
   else
     lblNotBalance.Visible := false;
-
-  ZqNeraca.RecNo := posisi;
 end;
 
 procedure TFSaldoAwal.segarkan;
 begin
-  fungsi.SQLExec(zqNeraca,
-    'select * from vw_saldo_awal_akun where kd_perusahaan="' + 
-    dm.kd_perusahaan + '" and bulan=' + dm.Bulan + ' and tahun=' +
-    dm.Tahun + ' and kd_kiraan <40000 and kd_kiraan <>32999', true);
+  SegarkanNeraca;
+  SegarkanLabaRugi;
+end;
+
+procedure TFSaldoAwal.SegarkanLabaRugi;
+var
+  LPosisi: Integer;
+begin
+  LPosisi := ZqLabaRugi.RecNo;
 
   fungsi.SQLExec(ZqLabaRugi,
     'select * from vw_saldo_awal_akun where kd_perusahaan="' + 
     dm.Kd_perusahaan + '" and bulan=' + dm.Bulan + ' and tahun=' +
     dm.Tahun + ' and kd_kiraan >=40000', true);
-
-  HitungNeraca;
   HitungLabaRugi;
+
+  ZqLabaRugi.RecNo := LPosisi;
+end;
+
+procedure TFSaldoAwal.SegarkanNeraca;
+var
+  LPosisi: Integer;
+begin
+  LPosisi := ZqNeraca.RecNo;
+
+  fungsi.SQLExec(zqNeraca,
+    'select * from vw_saldo_awal_akun where kd_perusahaan="' + 
+    dm.kd_perusahaan + '" and bulan=' + dm.Bulan + ' and tahun=' +
+    dm.Tahun + ' and kd_kiraan <40000 and kd_kiraan <>32999', true);
+  HitungNeraca;
+
+  ZqNeraca.RecNo := LPosisi;
 end;
 
 procedure TFSaldoAwal.sb_2Click(Sender: TObject);
