@@ -13,7 +13,7 @@ uses
   Mask, sMaskEdit, sCustomComboEdit, MemDS,
   DBAccess, MyAccess, cxCustomData, cxFilter, cxData, cxLookAndFeels,
   cxLookAndFeelPainters, dxSkinsCore, dxSkinsDefaultPainters,
-  dxSkinscxPCPainter, cxNavigator;
+  dxSkinscxPCPainter, cxNavigator, cxCurrencyEdit;
 
 type
   TFSaldoAwal = class(TForm)
@@ -58,7 +58,7 @@ type
     panel1: TsPanel;
     sb_1: TsSpeedButton;
     sb_2: TsSpeedButton;
-    procedure ubahData(nilai: Integer; neraca: Boolean);
+    procedure ubahData(nilai: Currency; neraca: Boolean);
     procedure segarkan;
     procedure btnCloseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -98,10 +98,8 @@ end;
 procedure TFSaldoAwal.edUbahLabaRugiKeyPress(Sender: TObject; var Key: Char);
 var
   kode: string;
+  LValue: Currency;
 begin
-  if not (Key in [#8, '0'..'9', #13, #43, #45]) then
-    Key := #0;
-
   kode := edUbahLabaRugi.Text;
 
   if key = #43 then // tanda + (debet)
@@ -113,7 +111,12 @@ begin
     if (Length(kode) = 0) then
       Exit;
 
-    ubahData(StrToIntDef(kode, 0), False);
+    try
+      LValue := StrToCurr(kode);
+      ubahData(LValue, False);
+    except on E: Exception do
+      ShowMessage(e.Message);
+    end;
   end;
 
   if key = #45 then // tanda - (kredit)
@@ -125,7 +128,12 @@ begin
     if Length(kode) = 0 then
       Exit;
 
-    ubahData(StrToIntDef('-' + kode, 0), False);
+    try
+      LValue := StrToCurr('-' + kode);
+      ubahData(LValue, False);
+    except on E: Exception do
+      ShowMessage(e.Message);
+    end;
   end;
 end;
 
@@ -143,7 +151,7 @@ begin
       'Masukkan Angka Kemudian tekan + atau - untuk merubah Nilai Saldo';
 end;
 
-procedure TFSaldoAwal.ubahData(nilai: Integer; neraca: Boolean);
+procedure TFSaldoAwal.ubahData(nilai: Currency; neraca: Boolean);
 var
   LSql, LKdKiraan: string;
 begin
@@ -151,7 +159,7 @@ begin
     LKdKiraan := ZqNeraca.FieldByName('kd_kiraan').AsString else
     LKdKiraan := ZqLabaRugi.FieldByName('kd_kiraan').AsString;
 
-  LSql := Format('UPDATE tb_jurnal_history SET saldo_awal = %d ' +
+  LSql := Format('UPDATE tb_jurnal_history SET saldo_awal = %g ' +
                  'WHERE kd_perusahaan = "%s" AND ' +
                  'kd_kiraan = "%s" AND tahun = %d AND bulan = %d',
                  [ nilai, dm.kd_perusahaan, LKdKiraan, StrToInt(dm.Tahun),
@@ -184,10 +192,8 @@ end;
 procedure TFSaldoAwal.edUbahNeracaKeyPress(Sender: TObject; var Key: Char);
 var
   kode: string;
+  LValue: Currency;
 begin
-  if not (Key in [#8, '0'..'9', #13, #43, #45]) then
-    Key := #0;
-
   kode := edUbahNeraca.Text;
 
   if key = #43 then // tanda + (debet)
@@ -199,7 +205,12 @@ begin
     if (Length(kode) = 0) then
       Exit;
 
-    ubahData(StrToIntDef(kode, 0), True);
+    try
+      LValue := StrToCurr(kode);
+      ubahData(LValue, True);
+    except on E: Exception do
+      ShowMessage(e.Message);
+    end;
   end;
 
   if key = #45 then // tanda - (kredit)
@@ -211,7 +222,12 @@ begin
     if Length(kode) = 0 then
       Exit;
 
-    ubahData(StrToIntDef('-' + kode, 0), True);
+    try
+      LValue := StrToCurr('-' + kode);
+      ubahData(LValue, True);
+    except on E: Exception do
+      ShowMessage(e.Message);
+    end;
   end;
 end;
 
@@ -267,54 +283,56 @@ end;
 
 procedure TFSaldoAwal.HitungLabaRugi;
 var
-  I, posisi, masuk, keluar: Integer;
+  I, posisi: Integer;
+  LIn, LOut: Currency;
 begin
 //laba rugi
   posisi := ZqLabaRugi.RecNo;
-  masuk := 0;
-  keluar := 0;
+  LIn := 0;
+  LOut := 0;
 
   ZqLabaRugi.First;
   for I := 0 to ZqLabaRugi.RecordCount - 1 do
   begin
     if (LeftStr(ZqLabaRugi.FieldByName('kd_kiraan').AsString, 1) = '4') or (LeftStr
       (ZqLabaRugi.FieldByName('kd_kiraan').AsString, 1) = '8') then
-      masuk := masuk + ZqLabaRugi.FieldByName('saldo_awal').AsInteger
+      LIn := LIn + ZqLabaRugi.FieldByName('saldo_awal').AsCurrency
     else
-      keluar := keluar + ZqLabaRugi.FieldByName('saldo_awal').AsInteger;
+      LOut := LOut + ZqLabaRugi.FieldByName('saldo_awal').AsCurrency;
 
     ZqLabaRugi.Next;
   end;
 
-  edMasuk.Value := masuk;
-  edKeluar.Value := keluar;
-  edLabaRugi.Value := masuk + keluar;
+  edMasuk.Value := LIn;
+  edKeluar.Value := LOut;
+  edLabaRugi.Value := LIn + LOut;
 
   ZqLabaRugi.RecNo := posisi;
 end;
 
 procedure TFSaldoAwal.HitungNeraca;
 var
-  I, posisi, aktiv, pasiv: Integer;
+  I, posisi: Integer;
+  LAktiva, LPasiva: Currency;
 begin
 //hitung neraca
   posisi := ZqNeraca.RecNo;
-  aktiv := 0;
-  pasiv := 0;
+  LAktiva := 0;
+  LPasiva := 0;
 
   ZqNeraca.First;
   for I := 0 to ZqNeraca.RecordCount - 1 do
   begin
     if LeftStr(ZqNeraca.FieldByName('kd_kiraan').AsString, 1) = '1' then
-      aktiv := aktiv + ZqNeraca.FieldByName('saldo_awal').AsInteger
+      LAktiva := LAktiva + ZqNeraca.FieldByName('saldo_awal').AsCurrency
     else
-      pasiv := pasiv + ZqNeraca.FieldByName('saldo_awal').AsInteger;
+      LPasiva := LPasiva + ZqNeraca.FieldByName('saldo_awal').AsCurrency;
 
     ZqNeraca.Next;
   end;
-  edAKtiva.Value := aktiv;
-  edPasiva.Value := pasiv;
-  edBalance.Value := aktiv + pasiv;
+  edAKtiva.Value := LAktiva;
+  edPasiva.Value := LPasiva;
+  edBalance.Value := LAktiva + LPasiva;
 
   if edBalance.Text <> '0' then
     lblNotBalance.Visible := True
@@ -338,9 +356,6 @@ begin
 
   HitungNeraca;
   HitungLabaRugi;
-
-  TFloatField(ZqLabaRugi.fieldbyname('saldo_awal')).DisplayFormat := '#,#0;(#,#0);#,#0';
-  TFloatField(ZqNeraca.fieldbyname('saldo_awal')).DisplayFormat := '#,#0;(#,#0);#,#0';
 end;
 
 procedure TFSaldoAwal.sb_2Click(Sender: TObject);
