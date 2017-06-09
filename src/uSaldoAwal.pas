@@ -334,7 +334,7 @@ begin
   edPasiva.Value := LPasiva;
   edBalance.Value := LAktiva + LPasiva;
 
-  if edBalance.Text <> '0' then
+  if edBalance.Value <> 0 then
     lblNotBalance.Visible := True
   else
     lblNotBalance.Visible := false;
