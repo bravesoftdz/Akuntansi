@@ -119,9 +119,9 @@ object FSaldoAwal: TFSaldoAwal
           Visible = False
         end
         object edBalance: TsCurrencyEdit
-          Left = 424
-          Top = 4
-          Width = 120
+          Left = 416
+          Top = 6
+          Width = 145
           Height = 21
           AutoSize = False
           Color = 16513526
@@ -136,12 +136,12 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
         object edPasiva: TsCurrencyEdit
-          Left = 232
-          Top = 4
-          Width = 120
+          Left = 224
+          Top = 6
+          Width = 145
           Height = 21
           AutoSize = False
           Color = 16513526
@@ -156,12 +156,12 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
         object edAktiva: TsCurrencyEdit
-          Left = 48
-          Top = 4
-          Width = 120
+          Left = 40
+          Top = 6
+          Width = 145
           Height = 21
           AutoSize = False
           Color = 16513526
@@ -176,7 +176,7 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
       end
       object edUbahNeraca: TsEdit
@@ -245,6 +245,10 @@ object FSaldoAwal: TFSaldoAwal
           object cxGridDBColumn3: TcxGridDBColumn
             Caption = 'Saldo Awal'
             DataBinding.FieldName = 'saldo_awal'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            Properties.DecimalPlaces = 3
+            Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
+            Properties.EditFormat = '###,###,##0.000;(###,###,##0.000);0.000'
             Options.Editing = False
           end
         end
@@ -272,7 +276,7 @@ object FSaldoAwal: TFSaldoAwal
         ParentFont = False
         TabOrder = 0
         object lbl4: TLabel
-          Left = 368
+          Left = 406
           Top = 6
           Width = 54
           Height = 13
@@ -298,7 +302,7 @@ object FSaldoAwal: TFSaldoAwal
           ParentFont = False
         end
         object lbl6: TLabel
-          Left = 199
+          Left = 223
           Top = 6
           Width = 26
           Height = 13
@@ -311,9 +315,9 @@ object FSaldoAwal: TFSaldoAwal
           ParentFont = False
         end
         object edMasuk: TsCurrencyEdit
-          Left = 80
-          Top = 4
-          Width = 113
+          Left = 72
+          Top = 6
+          Width = 145
           Height = 21
           AutoSize = False
           Color = 16513526
@@ -328,12 +332,12 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
         object edKeluar: TsCurrencyEdit
-          Left = 232
-          Top = 4
-          Width = 120
+          Left = 255
+          Top = 6
+          Width = 145
           Height = 21
           AutoSize = False
           Color = 16513526
@@ -348,12 +352,12 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
         object edLabaRugi: TsCurrencyEdit
-          Left = 441
-          Top = 4
-          Width = 120
+          Left = 466
+          Top = 6
+          Width = 145
           Height = 20
           AutoSize = False
           Color = 16513526
@@ -368,7 +372,7 @@ object FSaldoAwal: TFSaldoAwal
           SkinData.SkinSection = 'EDIT'
           GlyphMode.Blend = 0
           GlyphMode.Grayed = False
-          DisplayFormat = '###,###,##0;(###,###,##0);0'
+          DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         end
       end
       object edUbahLabaRugi: TsEdit
@@ -437,6 +441,10 @@ object FSaldoAwal: TFSaldoAwal
           object tTvLabaRugisaldo_awal: TcxGridDBColumn
             Caption = 'Saldo Awal'
             DataBinding.FieldName = 'saldo_awal'
+            PropertiesClassName = 'TcxCurrencyEditProperties'
+            Properties.DecimalPlaces = 3
+            Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
+            Properties.EditFormat = '###,###,##0.000;(###,###,##0.000);0.000'
           end
         end
         object LvLabaRugi: TcxGridLevel
