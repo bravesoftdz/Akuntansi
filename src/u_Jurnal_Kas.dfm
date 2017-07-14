@@ -119,7 +119,7 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
           Column = ableViewColumn2
         end
         item
-          Format = '###,###,##0;(###,###,##0);0'
+          Format = '###,###,##0.000;(###,###,##0.000);0.000'
           Kind = skSum
           OnGetText = TableViewTcxGridDataControllerTcxDataSummaryFooterSummaryItems2GetText
           Column = t_view_Qty
@@ -159,17 +159,19 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
       end
       object t_view_Qty: TcxGridColumn
         Caption = 'Nilai'
-        DataBinding.ValueType = 'Integer'
+        DataBinding.ValueType = 'Currency'
         PropertiesClassName = 'TcxCurrencyEditProperties'
         Properties.Alignment.Horz = taRightJustify
-        Properties.DisplayFormat = '###,###,##0;(###,###,##0);0'
+        Properties.DecimalPlaces = 3
+        Properties.DisplayFormat = '###,###,##0.000;(###,###,##0.000);0.000'
         Properties.EditFormat = '###,###,##0;(###,###,##0);0'
         Properties.MinValue = 1.000000000000000000
+        FooterAlignmentHorz = taRightJustify
         GroupSummaryAlignment = taRightJustify
         HeaderAlignmentHorz = taRightJustify
         HeaderGlyphAlignmentHorz = taCenter
         Options.IncSearch = False
-        Width = 105
+        Width = 150
       end
     end
     object Level: TcxGridLevel
@@ -365,7 +367,6 @@ object f_Jurnal_Kas: Tf_Jurnal_Kas
     SkinData.SkinSection = 'COMBOBOX'
     VerticalAlignment = taAlignTop
     Style = csDropDownList
-    ItemHeight = 13
     ItemIndex = 0
     TabOrder = 0
     Text = 'Kas Masuk'

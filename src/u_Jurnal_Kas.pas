@@ -63,10 +63,9 @@ type
     procedure ed_no_jurnalChange(Sender: TObject);
     procedure cb_jenisChange(Sender: TObject);
   private
-    { Private declarations }
-  public
     jenis_jurnal: string;
     total_value: Real;
+  public
     { Public declarations }
   end;
 
@@ -156,7 +155,8 @@ end;
 procedure Tf_Jurnal_Kas.simpan;
 var
   x, ix_jurnal: integer;
-  isi_sql: string;
+  LAkun, LSQL, isi_sql, LKiri, LKanan: string;
+  LValue: Currency;
 begin
   if FormatDateTime('yyyyMM', de_tanggal.Date) <> dm.PeriodAktif then
   begin
@@ -171,63 +171,57 @@ begin
     exit;
   end;
 
+  if cb_jenis.ItemIndex = 0 then
+  begin
+    LKiri := 'debet';
+    LKanan:= 'kredit';
+  end else
+  begin
+    LKiri := 'kredit';
+    LKanan:= 'debet';
+  end;
+
+  LSQL := 'SELECT IFNULL(max(no_ix), 0) as jumlah FROM tb_jurnal_global';
+
+  fungsi.SQLExec(dm.Q_temp, LSQL, False);
+
+  ix_jurnal := (dm.Q_temp.fieldbyname('jumlah').AsInteger) + 1;
+
+  for x := 0 to tableview.DataController.RecordCount - 1 do
+  begin
+    LAkun := TableView.DataController.GetDisplayText(x, 0);
+    LValue := TableView.DataController.GetValue(x,2);
+
+    isi_sql := isi_sql + Format('("%s", %d, %d, "%s", %g), ', [dm.kd_perusahaan,
+      ix_jurnal, (x + 2), LAkun, LValue]);
+  end;
+  SetLength(isi_sql, length(isi_sql) - 2);
+
   dm.db_conn.StartTransaction;
   try
-    fungsi.SQLExec(dm.Q_temp,
-      'select IFNULL(max(no_ix),1) as jumlah from tb_jurnal_global', true);
-    ix_jurnal := (dm.Q_temp.fieldbyname('jumlah').AsInteger) + 1;
+    LSQL := Format('INSERT INTO tb_jurnal_global(kd_perusahaan, no_ix, tgl, ' +
+      'keterangan, no_refrensi, refr, nilai, kd_user) VALUES ("%s", %d, "%s", ' +
+      '"%s", "%s", "%s", %g, "%s")', [dm.kd_perusahaan, ix_jurnal,
+      formatdatetime('yyyy-MM-dd', de_tanggal.Date), ed_keterangan.Text,
+      ed_refrensi.Text, jenis_jurnal, total_value, dm.kd_pengguna]);
 
-    fungsi.SQLExec(dm.Q_exe,
-      'insert into tb_jurnal_global(kd_perusahaan,no_ix,tgl,keterangan, ' +
-      'no_refrensi,refr,nilai, kd_user) values ("' + dm.kd_perusahaan + '","' +
-      inttostr(ix_jurnal) + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date)
-      + '","' + ed_keterangan.Text + '","' + ed_refrensi.Text + '","' +
-      jenis_jurnal + '","' + floattostr(total_value) + '", "' + dm.kd_pengguna +
-      '")', false);
+    fungsi.SQLExec(dm.Q_exe, LSQL, False);
 
-    if cb_jenis.ItemIndex = 0 then
-    begin
-      fungsi.SQLExec(dm.Q_exe,
-        'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'debet) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
-        '",1,"' + ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
+    LSQL:= Format('INSERT INTO tb_jurnal_rinci (kd_perusahaan, ix_jurnal, no_urut, ' +
+      'kd_akun, %s) VALUES ("%s", %d, 1, "%s", %g)', [LKiri, dm.kd_perusahaan,
+      ix_jurnal, ed_no_jurnal.Text, total_value]);
 
-      for x := 0 to tableview.DataController.RecordCount - 1 do
-      begin
-        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-          + '","' + inttostr(x + 2) + '","' + TableView.DataController.GetDisplayText
-          (x, 0) + '","' + floattostr(TableView.DataController.GetValue(x, 2)) + '"),';
-      end;
-      delete(isi_sql, length(isi_sql), 1);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
-      fungsi.SQLExec(dm.Q_exe,
-        'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'kredit) values ' + isi_sql, false);
+    LSQL := Format('INSERT INTO tb_jurnal_rinci(kd_perusahaan, ix_jurnal, no_urut, ' +
+      'kd_akun, %s) VALUES %s ', [LKanan, isi_sql]);
 
-    end
-    else
-    begin
-      for x := 0 to tableview.DataController.RecordCount - 1 do
-      begin
-        isi_sql := isi_sql + '("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal)
-          + '","' + inttostr(x + 1) + '","' + TableView.DataController.GetDisplayText
-          (x, 0) + '","' + floattostr(TableView.DataController.GetValue(x, 2)) + '"),';
-      end;
-      delete(isi_sql, length(isi_sql), 1);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
-      fungsi.SQLExec(dm.Q_exe,
-        'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'debet) values ' + isi_sql, false);
+    LSQL := Format('call sp_historical_balancing("%s", "%s")', [dm.kd_perusahaan,
+      formatdatetime('yyyy-MM-dd', de_tanggal.Date)]);
 
-      fungsi.SQLExec(dm.Q_exe,
-        'insert into tb_jurnal_rinci(kd_perusahaan,ix_jurnal,no_urut,kd_akun, ' +
-        'kredit) values ("' + dm.kd_perusahaan + '","' + inttostr(ix_jurnal) +
-        '","' + inttostr(tableview.DataController.RecordCount + 1) + '","' +
-        ed_no_jurnal.Text + '","' + floattostr(total_value) + '")', false);
-    end;
-
-    fungsi.SQLExec(dm.Q_exe, 'call sp_historical_balancing("' + dm.kd_perusahaan
-    + '","' + formatdatetime('yyyy-MM-dd', de_tanggal.Date) + '")', false);
+    fungsi.SQLExec(dm.Q_exe, LSQL, false);
 
     dm.db_conn.Commit;
 
@@ -389,7 +383,7 @@ begin
     if (Length(kode) = 0) then
       Exit;
 
-    TableView.DataController.SetValue(b, 2, StrToIntDef(kode, 0)); //nilai
+    TableView.DataController.SetValue(b, 2, StrToFloat(kode)); //nilai
   end;
 end;
 
