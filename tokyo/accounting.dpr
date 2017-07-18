@@ -2,6 +2,7 @@ program accounting;
 
 uses
   Vcl.Forms,
+  UTerbilang in '..\..\tools\pascal\UTerbilang.pas',
   u_akun_penting in '..\src\u_akun_penting.pas' {f_akun_penting},
   u_asset in '..\src\u_asset.pas' {F_asset},
   u_bayar_hutang in '..\src\u_bayar_hutang.pas' {f_bayar_hutang},
