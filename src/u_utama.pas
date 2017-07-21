@@ -326,8 +326,7 @@ procedure Tf_utama.ac_bk_besarExecute(Sender: TObject);
 begin
   fungsi.SQLExec(dm.Q_buku_besar,
     'select * from vw_buku_besar where kd_perusahaan= "' + dm.kd_perusahaan +
-    '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun +
-    '" order by kd_kiraan', true);
+    '" and bulan= "' + dm.Bulan + '" and tahun="' + dm.Tahun + '"', true);
   dm.laporan.LoadFromFile(dm.Path + 'laporan\a_buku_besar.fr3');
   dm.laporan.ShowReport;
 end;
